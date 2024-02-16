@@ -15,10 +15,10 @@
 
 ### Minimum Viable Product 
 - Log in page (Theo) 
-- Home page (Amelie) 
-- Uni sustainability goals 
-- Challenges (?) 
-- Profile page (Matylda) 
+- Home page (Amelie)
+ - Uni sustainability goals 
+ - Challenges (?) 
+- Profile page (Matylda)
   - Avatar 
   - Points 
   - Coins 
