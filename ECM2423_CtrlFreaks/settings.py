@@ -54,7 +54,7 @@ ROOT_URLCONF = "ECM2423_CtrlFreaks.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ["app/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
