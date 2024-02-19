@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Treasure Map</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css' rel='stylesheet' />
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }  
+    
+    body{
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    main {
+        background-image: url("app/static/app/images/map_BG.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+</style>
+<body>
+<div id="main">
+    <div id='map' style='width: 400px; height: 300px;'></div>
+    <button id="qr-scanner">QR</button>
+</div>
+<script>
+    var bounds = [[-3.534948, 50.714066],[-3.518578, 50.733385]]
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHAtMjcxMCIsImEiOiJjbHNwODRieXcwa3VxMmhwc2t2b3U1N2d2In0.yt1JEodDrxPJ21crpBXK1Q';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/dp-2710/clsp877t300jr01qw7i5ca2o3', // style URL
+	    center: [-74.5, 40], // starting position [lng, lat]
+	    zoom: 5, // starting zoom
+    });
+    map.fitBounds(bounds, {padding: 20});
+    navigator.geolocation.getCurrentPosition(position => {
+        const { latitude, longitude } = position.coords;
+
+        // Center the map on the user's current location
+        map.setCenter([longitude, latitude]);
+
+        // Create a marker at the user's current location
+        new mapboxgl.Marker()
+            .setLngLat([longitude, latitude])
+            .addTo(map);
+    }, error => {
+        console.error('Error getting user location:', error);
+    });
+</script>
+</body>
+</html>

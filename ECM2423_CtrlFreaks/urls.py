@@ -20,6 +20,4 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('app.urls')),
-    path('qr-generator/', include('app.urls')),  # Include app-specific URLs
-    path('qr-scanner/', include('app.urls')),    # Include app-specific URLs
 ]

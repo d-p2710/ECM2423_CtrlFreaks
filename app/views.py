@@ -23,3 +23,6 @@ def qr_generator(request):
 def qr_scanner(request):
     return render(request, 'app/qrScanner.html')
 
+
+def geolocation_map(request):
+    return render(request, 'app/geolocationMap.html')
