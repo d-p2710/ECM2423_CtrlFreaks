@@ -18,6 +18,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="mapbox-gl" level="application" />
+    <orderEntry type="library" name="html5-qrcode" level="application" />
+    <orderEntry type="library" name="jsQR" level="application" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />

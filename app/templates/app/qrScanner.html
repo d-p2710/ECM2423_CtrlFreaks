@@ -1,10 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>qrScanner</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        #reader {
+            width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+        .result {
+            background-color: green;
+            color: #fff;
+            padding: 20px;
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+        #reader__scan_region {
+            background: white;
+        }
+    </style>
 </head>
 <body>
+<h1>QR Scanner</h1>
+<div class="row">
+    <div id="reader"></div>
+</div>
+<div id="result"></div>
+<script src="https://rawgit.com/cozmo/jsQR/master/dist/jsQR.js"></script>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script>
+    // Used to start scanning
+    Html5Qrcode.getCameras().then(devices => {
+        if (devices && devices.length) {
+            var cameraId = devices[0].id;
+        }
+    }).catch(err => {
+        // handle err
+    });
+    const html5QrCode = new Html5Qrcode("reader");
+    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+        /* handle success */
+    };
+    const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+    //For thr back camera
+    html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+    // Select back camera or fail with `OverconstrainedError`.
+    html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
+    html5QrCode.stop().then((ignore) => {
+        // QR Code scanning is stopped.
+    }).catch((err) => {
+        // Stop failed, handle it.
+    });
+    
+    
+    
+    
+    
+    Html5Qrcode.getCameras().then(devices => {
+            if (devices && devices.length) {
+                // Start QR code scanning
+                const html5QrCode = new Html5Qrcode("video");
+                const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                    console.log('QR Code detected:', decodedText);
+                    // Implement redirection logic or other actions based on the QR code data
+                    window.location.href = decodedText; // Redirect to the URL encoded in the QR code
+                };
+                const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+                // Start scanning with the preferred camera
+                html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+            } else {
+                alert('No camera found. Please make sure your camera is enabled and try again.');
+            }
+        }).catch(err => {
+            console.error('Error accessing media:', err);
+            alert('Error accessing user media. Please make sure your camera is enabled and try again.');
+        });
+</script>
 
 </body>
 </html>
