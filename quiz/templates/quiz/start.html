@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1>{{ quiz.title }}</h1>
+    <!-- COULD HAVE topic tags system with assigned colours -->
+    {% if quiz.topics %}
+        <p>Topics: {{ topics }}</p>
+    {% endif %}        
+    <h3>This quiz has {{ quiz.question_set.count }} question(s)</h3>
+    <button onclick="window.location.href='/quiz/{{ quiz.id }}/q1';">Start &rarr;</button>
+  </body>
+</html>
