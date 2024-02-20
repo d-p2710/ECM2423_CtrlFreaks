@@ -11,6 +11,6 @@
     {% endif %}        
     <h3>This quiz has {{ quiz.question_set.count }} question(s)</h3>
     <!-- Button redirects to first question in the quiz -->
-    <button onclick="window.location.href='/quiz/{{ quiz.id }}/q1';">Start &rarr;</button>
+    <button onclick="window.location.href='{% url 'quiz:question' quiz.id 1 %}';">Start &rarr;</button>
   </body>
 </html>
