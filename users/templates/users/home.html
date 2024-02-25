@@ -1,0 +1,26 @@
+{% extends "users/base.html" %}
+{% block title %} Home Page {% endblock title%}
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome</h1>
+    <p class="lead">
+        {% if user.is_authenticated %}
+            Hello {{ user.username }}! You current have {{ Profile.points_amount }} points!
+            Why not do some tasks to earn some more?
+        {% else %}
+            Welcome to CtrlFreaks! Please Sign In!
+        {% endif %}
+    </p>
+    <hr class="my-4">
+    <p class="lead">
+        <form id="frm_logout" method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+            <a class="btn btn-primary btn-lg" href="javascript:$('#frm_logout').submit();" >Logout</a> </form>
+        {% else %}
+            <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Sign in</a>
+        {% endif %}
+    </p>
+</div>
+
+{% endblock content %}
