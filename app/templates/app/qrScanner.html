@@ -45,15 +45,15 @@
     });
     const html5QrCode = new Html5Qrcode("reader");
     const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-    // Check if the decoded text starts with "http://" or "https://"
-    if (decodedText.startsWith("http://") || decodedText.startsWith("https://")) {
-        // If it does, directly assign it to window.location.href
-        window.location.href = decodedText;
-    } else {
-        // If not, prepend "http://" before assigning
-        window.location.href = "http://" + decodedText;
+        // Check if the decoded text starts with "http://" or "https://"
+        if (decodedText.startsWith("https://") || decodedText.startsWith("https://")) {
+            // If it does, directly assign it to window.location.href
+            window.location.href = decodedText;
+        } else {
+            // If not, prepend "http://" before assigning
+            window.location.href = "https://" + decodedText;
+        }
     }
-};
     const config = { fps: 10, qrbox: { width: 250, height: 250 } };
     //For thr back camera
     html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
@@ -64,6 +64,7 @@
     }).catch((err) => {
         // Stop failed, handle it.
     });
+    
 </script>
 
 </body>
