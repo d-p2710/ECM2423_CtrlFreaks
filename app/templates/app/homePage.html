@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
+</head>
+<div class="topnav">
+    <a class="active" href="/homePage">Home</a>
+    <a href="/profile">Profile</a>
+    <a href="#challenges">Challenges</a>
+    <a href="#activites">Activites</a>
+    <a href="#logout">Log Out</a>
+</div>
+
+<body>
+    <header>
+        <h2><b>Challenges</b></h2>
+    </header>
+    <p>Check out the challenges currently happening on campus!
+
+    </p>
+    <div class="w3-content w3-diplay-container">
+        <img class="mySlides" src="{% static 'app/images/recycling.jpg' %}" style="width:50%">
+        <div class="w3-display-bottomleft w3-container w3-padding-16 w3-black"><a href="#challenges">Recycling challenges</a></div>
+        <img class="mySlides" src="{% static 'app/images/wed.jpg' %}" style="width:50%">
+        <div class="w3-display-bottomleft w3-container w3-padding-16 w3-black"><a href="#challenges">World Environment Day</a></div>
+        <img class="mySlides" src="{% static 'app/images/meals.jpg' %}" style="width:50%">
+        <div class="w3-display-bottomleft w3-container w3-padding-16 w3-black"><a href="#challenges">£2 Campus Meals</a></div>
+    
+        <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094</button>
+        <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095</button>
+    </div>
+
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+            
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+            
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = x.length}
+            for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+            }
+            x[slideIndex-1].style.display = "block";  
+        }
+    </script>
+</body>
+</html>
