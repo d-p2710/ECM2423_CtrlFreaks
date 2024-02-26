@@ -45,8 +45,15 @@
     });
     const html5QrCode = new Html5Qrcode("reader");
     const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-        /* handle success */
-    };
+    // Check if the decoded text starts with "http://" or "https://"
+    if (decodedText.startsWith("http://") || decodedText.startsWith("https://")) {
+        // If it does, directly assign it to window.location.href
+        window.location.href = decodedText;
+    } else {
+        // If not, prepend "http://" before assigning
+        window.location.href = "http://" + decodedText;
+    }
+};
     const config = { fps: 10, qrbox: { width: 250, height: 250 } };
     //For thr back camera
     html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
@@ -57,30 +64,6 @@
     }).catch((err) => {
         // Stop failed, handle it.
     });
-    
-    
-    
-    
-    
-    Html5Qrcode.getCameras().then(devices => {
-            if (devices && devices.length) {
-                // Start QR code scanning
-                const html5QrCode = new Html5Qrcode("video");
-                const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-                    console.log('QR Code detected:', decodedText);
-                    // Implement redirection logic or other actions based on the QR code data
-                    window.location.href = decodedText; // Redirect to the URL encoded in the QR code
-                };
-                const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-                // Start scanning with the preferred camera
-                html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
-            } else {
-                alert('No camera found. Please make sure your camera is enabled and try again.');
-            }
-        }).catch(err => {
-            console.error('Error accessing media:', err);
-            alert('Error accessing user media. Please make sure your camera is enabled and try again.');
-        });
 </script>
 
 </body>

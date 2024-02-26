@@ -26,3 +26,7 @@ def qr_scanner(request):
 
 def geolocation_map(request):
     return render(request, 'app/geolocationMap.html')
+
+
+def game_map(request):
+    return render(request, 'app/gameMap.html')
