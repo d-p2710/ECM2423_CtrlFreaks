@@ -1,0 +1,33 @@
+{% extends "users/base.html" %}
+{% block title %} Home Page {% endblock title%}
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome</h1>
+    <p class="lead">
+        <!-- Different views depending on whether the user is logged in or not -->
+        {% if user.is_authenticated %}
+            Hello {{ user.username }}!
+            <!-- Utilises the data gathered from users/models.py by the home method in users/views.py to display a users points -->
+            {% for info in data %}
+                You current have {{ info.points_amount }} points!
+            {% endfor %}
+            Why not do some tasks to earn some more?
+        {% else %}
+            Welcome to CtrlFreaks! Please Sign In!
+        {% endif %}
+    </p>
+    <hr class="my-4">
+    <p class="lead">
+    <!-- User is shown either a sign in or logout button depending on whether they're logged in or not -->
+        <form id="frm_logout" method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        </form>
+        {% if user.is_authenticated %}
+            <form> <a class="btn btn-primary btn-lg" href="javascript:$('#frm_logout').submit();" >Logout</a> </form>
+        {% else %}
+            <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Sign in</a>
+        {% endif %}
+    </p>
+</div>
+
+{% endblock content %}
