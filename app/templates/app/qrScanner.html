@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qrScanner</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        #reader {
+            width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+        .result {
+            background-color: green;
+            color: #fff;
+            padding: 20px;
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+        #reader__scan_region {
+            background: white;
+        }
+    </style>
+</head>
+<body>
+<h1>QR Scanner</h1>
+<div class="row">
+    <div id="reader"></div>
+</div>
+<div id="result"></div>
+<script src="https://rawgit.com/cozmo/jsQR/master/dist/jsQR.js"></script>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script>
+    // Used to start scanning
+    Html5Qrcode.getCameras().then(devices => {
+        if (devices && devices.length) {
+            var cameraId = devices[0].id;
+        }
+    }).catch(err => {
+        // handle err
+    });
+    const html5QrCode = new Html5Qrcode("reader");
+    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+    // Check if the decoded text starts with "http://" or "https://"
+    if (decodedText.startsWith("http://") || decodedText.startsWith("https://")) {
+        // If it does, directly assign it to window.location.href
+        window.location.href = decodedText;
+    } else {
+        // If not, prepend "http://" before assigning
+        window.location.href = "http://" + decodedText;
+    }
+};
+    const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+    //For thr back camera
+    html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+    // Select back camera or fail with `OverconstrainedError`.
+    html5QrCode.start({ facingMode: { exact: "environment"} }, config, qrCodeSuccessCallback);
+    html5QrCode.stop().then((ignore) => {
+        // QR Code scanning is stopped.
+    }).catch((err) => {
+        // Stop failed, handle it.
+    });
+</script>
+
+</body>
+</html>
