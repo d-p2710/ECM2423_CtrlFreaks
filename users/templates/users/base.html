@@ -26,9 +26,14 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ml-auto">
+                        <!--
+                        Elements on the navbar which are extended to other templates, and links them to their relevant pages/actions
+                        Form line is to allow the logout button on the navbar to actually log users out
+                         -->
+                        <form id="frm_logout" method="post" action="{% url 'logout' %}">{% csrf_token %}</form>
                         {% if user.is_authenticated %}
                         <a href="{% url 'users-profile' %}" class="nav-item nav-link">Profile</a>
-                        <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+                        <form><a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();" >Logout</a> </form>
                         {% else %}
                         <a href="{% url 'login' %}" class="nav-item nav-link">Sign in</a>
                         {% endif %}

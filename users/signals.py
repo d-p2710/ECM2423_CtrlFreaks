@@ -4,6 +4,7 @@ from django.dispatch import receiver
 
 from .models import Profile
 
+# Allows for account information (user and profile) updates to be created or saved
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):

@@ -3,11 +3,23 @@ from django.contrib import messages
 from django.views import View
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
+from django.template import loader
+from django.http import HttpResponse
 
+from .models import Profile
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 
+# Backend functionality for page views
+
 def home(request):
-    return render(request, 'users/home.html')
+    # Allows the home page to grab the profile information for a user
+    # No longer spits out an error message when the user isn't logged in
+    marker = request.user.id
+    data = Profile.objects.filter(user=marker).values
+    context = {
+        'data': data
+    }
+    return render(request, 'users/home.html', context)
 
 class RegisterView(View):
     form_class = RegisterForm
@@ -15,11 +27,11 @@ class RegisterView(View):
     template_name = 'users/register.html'
 
     def dispatch(self, request, *args, **kwargs):
-        # will redirect to the home page if a user tries to access the register page while logged in
+        # Redirects to the home page if a user tries to access the register page while logged in
         if request.user.is_authenticated:
             return redirect(to='/')
 
-        # else process dispatch as it otherwise normally would
+        # Otherwise work as normal
         return super(RegisterView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
@@ -46,13 +58,14 @@ class CustomLoginView(LoginView):
         remember_me = form.cleaned_data.get('remember_me')
 
         if not remember_me:
-            # set session expiry to 0 seconds. So it will automatically close the session after the browser is closed.
+            # Session expiry set to 0 seconds so it will automatically close the session after the browser is closed.
             self.request.session.set_expiry(0)
 
             # Set session as modified to force data updates/cookie to be saved.
             self.request.session.modified = True
 
-        # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
+        # Otherwise browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in
+        # settings.py
         return super(CustomLoginView, self).form_valid(form)
 
 
@@ -76,3 +89,14 @@ def profile(request):
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
     return render(request, 'users/profile.html', {'user_form': user_form, 'profile_form': profile_form})
+
+# Extraneous code, but provides a template for allowing view methods to grab profile information from the active user
+#@login_required
+#def get_data(request):
+#    username = request.user.username
+#    data = Profile.objects.filter(username=username).values_list('points_amount')
+#    template = loader.get_template('home.html')
+#    context = {
+#        'points': data
+#    }
+#    return HttpResponse(template.render(context, request))

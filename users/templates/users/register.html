@@ -24,6 +24,7 @@
                                 </button>
                             </div>
                             {% endif %}
+                            <!-- Requests info required for user object creation. Required inputs can be changed in users/forms.py -->
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -75,6 +76,7 @@
                     </div>
                     <div class="card-footer text-center">
                         <div class="small">
+                            <!-- Allows users with accounts to redirect to the login page -->
                             <a href="{% url 'login' %}">Have an account? Go to Sign in</a>
                         </div>
                     </div>
