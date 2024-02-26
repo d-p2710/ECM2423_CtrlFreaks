@@ -32,8 +32,15 @@
         }
 
         #map, #qrScanner {
-            height: 100%;
+            flex: 1;
             width: 100%; 
+            object-fit: contain;
+        }
+        
+        #reader, video {
+            display: flex;
+            max-width: 100%;
+            max-height: 100%;
         }
 
         #qrScanner {
@@ -70,7 +77,7 @@
     </div>
     <div id="qrScannerButton" onclick="toggleQRScanner()">
         {% load static %}
-        <img src="{% static 'app/static/qr-code-scan-svgrepo-com-2.svg' %}" alt="QR Scanner">
+        <img src="{% static 'app/images/qr-code-scan-svgrepo-com.svg' %}" alt="QR Scanner">
     </div>
 </div>
 <script>
@@ -112,17 +119,19 @@
 
     function toggleQRScanner() {
         const qrScannerDiv = document.getElementById('qrScanner');
-
+        const mapDiv = document.getElementById('map');
         if (!isScannerOpen) {
-            qrScannerDiv.style.display = 'block';
             map.style.height = '50%';
+            qrScannerDiv.style.display = 'block';
+            qrScannerDiv.style.height = '50%';
             isScannerOpen = true;
             startQRScanner(); // Start QR scanner when opening
         } else {
+            mapDiv.style.height = '100%';
             qrScannerDiv.style.display = 'none';
+            qrScannerDiv.style.height = '0';
             isScannerOpen = false;
             stopQRScanner(); // Stop QR scanner when closing
-            map.style.height = '100%';
         }
     }
     
