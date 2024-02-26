@@ -1,0 +1,40 @@
+body {
+    font-family: "Outfit";
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+h1 {
+    background-color: #77b192;
+    margin-top: 0;
+    margin-bottom: -10px;
+    padding: 20px 20px 20px 10px;
+}
+
+h2.Side {
+    margin-right: 10px;
+    float: right;
+}
+
+h2 {
+    margin-left: 10px;
+}
+
+p {
+    margin-left: 10px;
+}
+
+img {
+    margin-left: 10px;
+}
