@@ -4,16 +4,9 @@ body {
     margin: 0px 0px 0px 0px;
 }
 
-a {
+.qr a {
     text-decoration: none;
 }
-
-a:link, a:visited {
-    text-decoration: none;
-    color: black;
-}
-
-
 
 h1 {
     background-color: #77b192;
@@ -43,29 +36,29 @@ img {
 .topnav {
     background-color: #77b192;
     overflow: hidden;
-  }
+}
   
   /* Style the links inside the navigation bar */
-  .topnav a {
+.topnav a {
     float: left;
     color: #f2f2f2;
     text-align: center;
     padding: 40px 20px 40px 20px;
     text-decoration: none;
     font-size: 17px;
-  }
+}
   
   /* Change the color of links on hover */
-  .topnav a:hover {
+.topnav a:hover {
     background-color: #ddd;
     color: black;
-  }
+}
   
   /* Add a color to the active/current link */
-  .topnav a.active {
+.topnav a.active {
     background-color: #4b7b76;
     color: white;
-  }
+}
 
 
 .carousel-container {
