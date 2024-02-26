@@ -23,6 +23,7 @@
         {% csrf_token %}
         </form>
         {% if user.is_authenticated %}
+            <a class="btn btn-primary btn-lg" href="#" role="button"> Activities </a>
             <form> <a class="btn btn-primary btn-lg" href="javascript:$('#frm_logout').submit();" >Logout</a> </form>
         {% else %}
             <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Sign in</a>
