@@ -23,18 +23,32 @@
 
     </p>
 </body>
-<div class="carousel-container">
-    <div class="carousel-slide1">
-        <img src="{% static 'app/images/recycling.jpg' %}" alt="Recycling">
-    </div>
-    <div class="carousel-slide2">
-        <img src="{% static 'app/images/meals.jpg' %}" alt="Meals">
-    </div>
-    <div class="carousel-slide3">
-        <img src="{% static 'app/images/wed.jpg' %}" alt="wed">
-    </div>
-    <div class="carousel-slide">4</div>
-    <div class="carousel-slide">5</div>
-    <div class="carousel-slide">6</div>
-</div>
+<div>
+    <img class="mySlides" src="{% static 'app/images/recycling.jpg' %}">
+    <img class="mySlides" src="{% static 'app/images/wed.jpg' %}">
+    <img class="mySlides" src="{% static 'app/images/meals.jpg' %}">
+
+    <button class="button display-left" onclick="plusDivs(-1)">&#10094</button>
+    <button class="button display-right" onclick="plusDivs(+1)">&#10095</button>
+
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementByClassName("mySlides");
+            if (n > x.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = x.length} ;
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex-1].style.display = "block";
+        }
+    </script>
+</div>div>
 </html>
