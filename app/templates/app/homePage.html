@@ -7,6 +7,7 @@
     <!-- Link to css and fonts -->
     <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
+    
 </head>
 <div class="topnav">
     <a class="active" href="/homePage">Home</a>
@@ -27,40 +28,50 @@
     <header>
         <h2><b>Challenges</b></h2>
     </header>
-    <p>Check out the challenges currently happening on campus!</p>
+    <p>Check out the challenges currently happening on campus by clicking on the images below!</p>
 
     <!-- SLideshow of images -->
-    <div class="w3-content w3-diplay-container">
-        <img class="mySlides" src="{% static 'app/images/recycling.jpg' %}" style="width:50%">
-        <div class="w3-display-bottomleft w3-container w3-padding-16 w3-black"><a href="#challenges">Recycling challenges</a></div>
-        <img class="mySlides" src="{% static 'app/images/wed.jpg' %}" style="width:50%">
-        <div class="w3-display-bottomleft w3-container w3-padding-16 w3-black"><a href="#challenges">World Environment Day</a></div>
-        <img class="mySlides" src="{% static 'app/images/meals.jpg' %}" style="width:50%">
-        <div class="w3-display-bottomleft w3-container w3-padding-16 w3-black"><a href="#challenges">£2 Campus Meals</a></div>
-    
-        <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094</button>
-        <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095</button>
-    </div>
+    <div class="w3-content w3-display-container" style="max-width:800px">
+        <a href="#recycling"><img class="mySlides" src="{% static 'app/images/recycling.jpg' %}" style="width: 50%"></a>
+        <a href="#wed"><img class="mySlides" src="{% static 'app/images/wed.jpg' %}" style="width: 50%"></a>
+        <a href="meals"><img class="mySlides" src="{% static 'app/images/meals.jpg' %}" style="width: 50%"></a>
+        <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+          <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+          <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+          <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+        </div>
+      </div>
 
-    <!-- Javascript for slideshow -->
     <script>
         var slideIndex = 1;
         showDivs(slideIndex);
-            
+        
         function plusDivs(n) {
-            showDivs(slideIndex += n);
+          showDivs(slideIndex += n);
         }
-            
+        
+        function currentDiv(n) {
+          showDivs(slideIndex = n);
+        }
+        
         function showDivs(n) {
-            var i;
-            var x = document.getElementsByClassName("mySlides");
-            if (n > x.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = x.length}
-            for (i = 0; i < x.length; i++) {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("demo");
+          if (n > x.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
             x[i].style.display = "none";  
-            }
-            x[slideIndex-1].style.display = "block";  
+          }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" w3-white", "");
+          }
+          x[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " w3-white";
         }
     </script>
+
 </body>
 </html>
