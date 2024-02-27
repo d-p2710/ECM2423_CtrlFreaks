@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'quiz/results.css' %}">
+  </head>
+  <body>
+    <h1>{{ quiz.title }}</h1>
+    {% for question in quiz.question_set.all %}
+        <div class="question-block">
+            <h2>{{forloop.counter}}. {{ question.text }}</h2>
+            <ul>
+                {% for answer in question.answer_set.all %}
+                    {% if answer.id in user_answers %}
+                        <span class="user-selected">
+                    {% else %}
+                    <span class="user-did-not-select">
+                    {% endif %}
+                        {% if answer.is_correct %}
+                            <li class="correct">
+                        {% else %}
+                            <li class="incorrect">
+                        {% endif %}
+                            {{ answer.text }}
+                        </li>
+                    </span>
+                {% endfor %}
+            </ul>
+    {% endfor %}
+  </body>
+</html>

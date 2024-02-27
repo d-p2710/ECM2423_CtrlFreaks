@@ -1,0 +1,16 @@
+.question-block {
+    margin: 20px;
+    background: #FAFAFA;
+}
+
+.user-selected {
+    font-weight: bold;
+}
+
+.correct {
+    color: #124d37;
+}
+
+.incorrect {
+    color: #a01d2c;
+}
