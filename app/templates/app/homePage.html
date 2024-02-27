@@ -8,11 +8,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
 </head>
 <div class="topnav">
-    <a class="active" href="/homePage">Home</a>
-    <a href="/profile">Profile</a>
-    <a href="#challenges">Challenges</a>
-    <a href="#activites">Activites</a>
-    <a href="#logout">Log Out</a>
+    <a class="active" href="{% url 'home' %}">Home</a>
+    <a href="{% url 'profile' %}" class="nav-item nav-link">Profile</a>
+    <a href="{% url 'game_map' %}" class="nav-item nav-link">Challenges</a>
+    <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
+        <button type="submit">Log Out</button>
+    </form>
 </div>
 
 <body>
