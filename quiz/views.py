@@ -44,4 +44,5 @@ def results(request, quiz_id):
                 score += 10
             elif correct_answers / question.answer_set.filter(is_correct=True).count() > 0.7:
                 score += 5
+                
     return HttpResponse("Results page - work in progress")

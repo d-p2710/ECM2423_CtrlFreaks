@@ -10,11 +10,13 @@
     <form id="question-set" action="{% url 'quiz:results' quiz.id %}" method="post">
       {% csrf_token %}
       {% for question in quiz.question_set.all %}
+     <!--
         {% if forloop.first %}
           <div class="question-panel" style="visibility: visible;">
         {% else %}
           <div class="question-panel" style="visibility: hidden;">
         {% endif %}
+          --> 
           <fieldset>
             <legend><h1>{{ question.text }}</h1></legend>
             {% if question.question_type == "SIN" %}
