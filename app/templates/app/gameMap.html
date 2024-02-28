@@ -65,7 +65,24 @@
             width: 50px; 
             height: auto;
         }
+        h1 {
+            text-align: center;
+        }
+        #reader {
+            width: 500px;
+            margin: auto;
+            text-align: center;
+        }
         
+        .result {
+            background-color: green;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        #reader__scan_region {
+            background: white;
+        }
     </style>
 </head>
 <body>
@@ -81,7 +98,7 @@
     </div>
 </div>
 <script>
-    
+    //
     // Sets the bounds of the map to Exeter
     let bounds = [[-3.534948, 50.714066],[-3.518578, 50.733385]]
     
@@ -93,6 +110,13 @@
         center: [-74.5, 40], // starting position [lng, lat]
         zoom: 5 // starting zoom
     });
+
+    {% for marker in markers %}
+    new mapboxgl.Marker()
+        .setLngLat([{{ marker.longitude }}, {{ marker.latitude }}])
+        .addTo(map);
+    {% endfor %}
+
     map.fitBounds(bounds, {padding: 20});
     navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
@@ -109,8 +133,6 @@
         console.error('Error getting user location:', error);
     });
 
-    // Get QR scanner button
-    const qrScannerButton = document.getElementById('qr-scanner');
     // Get QR scanner div
     const qrScannerDiv = document.getElementById('qrScanner');
 
@@ -125,13 +147,13 @@
             qrScannerDiv.style.display = 'block';
             qrScannerDiv.style.height = '50%';
             isScannerOpen = true;
-            startQRScanner(); // Start QR scanner when opening
+            startQRScanner();
         } else {
             mapDiv.style.height = '100%';
             qrScannerDiv.style.display = 'none';
             qrScannerDiv.style.height = '0';
             isScannerOpen = false;
-            stopQRScanner(); // Stop QR scanner when closing
+            stopQRScanner();
         }
     }
     
@@ -139,7 +161,7 @@
         // Used to start scanning
         Html5Qrcode.getCameras().then(devices => {
             if (devices && devices.length) {
-                let cameraId = devices[0].id;
+                var cameraId = devices[0].id;
             }
         }).catch(err => {
             // handle err
@@ -147,7 +169,7 @@
         const html5QrCode = new Html5Qrcode("reader");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             // Check if the decoded text starts with "http://" or "https://"
-            if (decodedText.startsWith("https://") || decodedText.startsWith("https://")) {
+            if (decodedText.startsWith("http://") || decodedText.startsWith("https://")) {
                 // If it does, directly assign it to window.location.href
                 window.location.href = decodedText;
             } else {
@@ -160,8 +182,13 @@
         html5QrCode.start({facingMode: "environment"}, config, qrCodeSuccessCallback);
         // Select back camera or fail with `OverconstrainedError`.
         html5QrCode.start({facingMode: {exact: "environment"}}, config, qrCodeSuccessCallback);
+        html5QrCode.stop().then((ignore) => {
+            // QR Code scanning is stopped.
+        }).catch((err) => {
+            // Stop failed, handle it.
+        });
     }
-    
+
     function stopQRScanner(){
         const html5QrCode = new Html5Qrcode("reader");
         html5QrCode.stop().then((ignore) => {
@@ -170,11 +197,6 @@
             // Stop failed, handle it.
         });
     }
-    
-    // Event listener for QR scanner button
-    qrScannerButton.addEventListener('click', function() {
-        toggleQRScanner();
-    });
     
 </script>
 </body>
