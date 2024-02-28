@@ -132,5 +132,5 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 14
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/app/images')
+MEDIA_URL = '/images/'

@@ -20,14 +20,24 @@
                 <button type="submit">Log Out</button>
             </form>
         </div>
-        <h2><b>My Profile</b></h2>
-        <p>This is a dummy profile page perhaps
-        </p>
-        <h2>
-            {% for info in data %}
-            You current have {{ info.points_amount }} points!
-            {% endfor %}
-        </h2>
-    </header>
+        <!-- css formatted display -mm1224 -->
+        <div class="item-a">
+            <h2><b>My Profile</b></h2>
+            <p>This is a dummy profile page perhaps</p>
+        </div>
+        <div class="container">
+            <div class="item-b">
+                <h2><b>
+                    <!-- profile data (avatar and points) display -->
+                    {% for info in data %}
+                    <img src="{{ request.user.profile.avatar.url }}" alt="default">
+                    You currently have {{ info.points_amount }} points!
+                    {% endfor %}
+                </b></h2>
+            </div>
+        </div>
+        
+
+        </header>
 </body>
 </html>
