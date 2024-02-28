@@ -1,16 +1,21 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'quiz/start.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
   </head>
   <body>
-    <h1>{{ quiz.title }}</h1>
-    <!-- COULD HAVE topic tags system with assigned colours -->
-    {% if quiz.topics %}
+    <fieldset>
+      <legend><h1 class="title">{{ quiz.title }}</h1></legend>     
+      <!-- COULD HAVE topic tags system with assigned colours -->
+      {% if quiz.topics %}
         <p>Topics: {{ quiz.topics }}</p>
-    {% endif %}        
-    <h3>This quiz has {{ quiz.question_set.count }} question(s)</h3>
-    <!-- Button redirects to first question in the quiz -->
-    <button onclick="window.location.href='{% url 'quiz:question' quiz.id 1 %}';">Start &rarr;</button>
+      {% endif %}        
+      <h3>This quiz has {{ quiz.question_set.count }} question(s)</h3>
+      <!-- Button redirects to first question in the quiz -->
+      <button class="button" onclick="window.location.href='{% url 'quiz:question' quiz.id 1 %}';">Start &rarr;</button>
+    </fieldset>
   </body>
 </html>

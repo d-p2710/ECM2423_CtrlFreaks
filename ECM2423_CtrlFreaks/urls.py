@@ -27,7 +27,7 @@ urlpatterns = [
     path('', include('app.urls')),
     path('users/', include('users.urls')),
     path('quiz/', include('quiz.urls')),
-    path('login/', CustomLoginView.as_view(redirect_authenticated_user=True, template_name='users/login.html',
+    path('', CustomLoginView.as_view(redirect_authenticated_user=True, template_name='users/login.html',
                                            authentication_form=LoginForm), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
 
