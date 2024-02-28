@@ -3,6 +3,8 @@ from PIL import Image
 from io import BytesIO
 import base64
 from users.models import Profile
+from app.models import Marker
+import qrcode
 
 def home_page(request):
     return render(request, 'app/homePage.html')
@@ -39,7 +41,11 @@ def geolocation_map(request):
 
 
 def game_map(request):
-    return render(request, 'app/gameMap.html')
+    markers = Marker.objects.all()
+    context = {
+        'markers': markers
+    }
+    return render(request, 'app/gameMap.html', context)
 
 def logout(request):
     if request == 'POST':

@@ -1,0 +1,32 @@
+{% extends "admin/change_form.html" %}
+
+{% block after_field_sets %}
+    {% if has_generated_qr %}
+        <h3>Generated QR Code:</h3>
+        <img id="qr-code-img" src="data:image/png;base64,{{ qr_image_base64 }}" alt="QR Code" readonly>
+        <div id="download-print-buttons">
+            <button onclick="downloadQR()">Download</button>
+            <button onclick="printQR()">Print</button>
+        </div>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}
+
+{% block admin_change_form_document_ready %}
+    {{ block.super }}
+    <script>
+        function downloadQR() {
+            const link = document.createElement('a');
+            link.href = document.getElementById('qr-code-img').src;
+            link.download = 'qr_code.png';
+            link.click();
+        }
+
+        function printQR() {
+            const imgSrc = document.getElementById('qr-code-img').src;
+            const imgWindow = window.open();
+            imgWindow.document.write(`<img src="${imgSrc}" alt="QR Code">`);
+            imgWindow.print();
+        }
+    </script>
+{% endblock %}
