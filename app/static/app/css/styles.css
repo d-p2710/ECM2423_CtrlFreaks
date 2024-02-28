@@ -1,0 +1,103 @@
+body {
+    font-family: "Outfit";
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+h1 {
+    background-color: #77b192;
+    margin-top: 0;
+    margin-bottom: -10px;
+    padding: 20px 20px 20px 10px;
+}
+
+h2.Side {
+    margin-right: 10px;
+    float: right;
+}
+
+h2 {
+    margin-left: 10px;
+}
+
+p {
+    margin-left: 10px;
+}
+
+img {
+    margin-left: 10px;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #77b192;
+    overflow: hidden;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #4b7b76;
+    color: white;
+  }
+
+
+.carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.carousel-slide {
+    flex: 1 0 30%;
+    scroll-snap-align: center;
+}
+
+
+@media (max-width: 600px) {
+    .carousel-slide {
+        flex: 1 0 90%;
+    }
+}
+
+.carousel-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carousel-container::-webkit-scrollbar-thumb {
+    background: #29Ab87;
+}
+
+.carousel-container::-webkit-scrollbar-track {
+    background: #b1b3b399;
+}
+
+.carousel-container::-webkit-scrollbar-track-piece:start {
+    background: #29ab87;
+}
