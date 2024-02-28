@@ -132,5 +132,7 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 14
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
+QUIZ_REDIRECT_URL = 'home'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
