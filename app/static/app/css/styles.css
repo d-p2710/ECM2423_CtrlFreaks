@@ -1,3 +1,4 @@
+/*ar919*/
 body {
     font-family: "Outfit";
     padding: 0px;
@@ -39,6 +40,9 @@ img {
     margin-left: 10px;
 }
 
+/*mm1224*/
+/* Navigation bar styling*/
+
 /* Add a black background color to the top navigation */
 .topnav {
     background-color: #77b192;
@@ -67,7 +71,42 @@ img {
     color: white;
   }
 
+/* Centralisation for profile page */
 
+/*header*/
+.item-a {
+    grid-area: head;
+}
+
+/*central column*/
+.item-b {
+    grid-area: main;
+    place-self: centre;
+    justify-self: center;
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+    }
+
+    text-align: center;
+}
+
+/*container for grid*/
+.container {
+    display: grid;
+    grid-template-columns: [c1] 1fr [c2] 2fr [c3] 1fr;
+    grid-template-rows: [r1] 50px [r2] 1fr [r3] 1fr;
+
+    grid-template-areas: 
+    "head head head"
+    "sideLt main sideRt"
+    "sideLb main sideRb";
+}
+
+  /*ar919*/
 .carousel-container {
     display: flex;
     overflow-x: auto;
