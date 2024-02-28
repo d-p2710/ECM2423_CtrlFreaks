@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.contrib import messages
 from django.views import View
 from django.contrib.auth.views import LoginView
@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.http import HttpResponse
 
-from .models import Profile
+from .models import Profile, Avatar, AvatarPart
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 
 # Backend functionality for page views
@@ -42,11 +42,22 @@ class RegisterView(View):
         form = self.form_class(request.POST)
 
         if form.is_valid():
-            form.save()
+            created_user = form.save()
+            
+            # zj274 create new default avatar object to link to profile
+            default_part_types = ["colour", "mouth", "eyes"]
+            default_parts = []
+            for part_type in default_part_types:
+                part = get_list_or_404(AvatarPart, part_type=part_type, is_default_img=True)[0]
+                default_parts.append(part)
+            new_avatar = Avatar(profile=get_object_or_404(Profile, user=created_user),
+                                colour=default_parts[0],
+                                mouth=default_parts[1],
+                                eyes=default_parts[2])
+            new_avatar.save()
 
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}')
-
             return redirect(to='login')
 
         return render(request, self.template_name, {'form': form})
