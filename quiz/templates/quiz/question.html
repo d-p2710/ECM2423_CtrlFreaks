@@ -1,35 +1,56 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'quiz/question.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
   </head>
   <body>
-    <form>
+    <form id="question-set" action="{% url 'quiz:results' quiz.id %}" method="post">
       {% csrf_token %}
-      <fieldset>
-        <legend><h1>{{ question.text }}</h1></legend>
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-        {% if question.question_type == "SIN" %}
-          {% for answer in question.answer_set.all %}
-            <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}">
-            <label for="answer{{ forloop.counter }}">{{ answer.text }}</label><br>
-          {% endfor %}
+      {% for question in quiz.question_set.all %}
+        {% if forloop.first %}
+          <div class="question-panel" style="visibility: visible;">
         {% else %}
-          {% for answer in question.answer_set.all %}
-          <input type="checkbox" name="answer{{ forloop.counter }}" value="{{ answer.id }}">
-          <label for="answer{{ forloop.counter }}">{{ answer.text }}</label><br>
-          {% endfor %}
+          <div class="question-panel" style="visibility: hidden;">
         {% endif %}
-      </fieldset>
+          <fieldset>
+            <legend><h1>{{ question.text }}</h1></legend>
+            {% if question.question_type == "SIN" %}
+              <!-- Radio button answers are posted in the format "question.id=answer.id" -->
+              {% for answer in question.answer_set.all %}
+                <div class="answer-{{ forloop.counter }}">
+                  <label class="container1">
+                    <input type="radio" name="{{ answer.question.id }}" value="{{ answer.id }}"/>
+                    <span class="checkmark1"></span>
+                    <label for="{{ answer.question.id }}">{{ answer.text }}</label><br>
+                  </label>
+                </div>
+              {% endfor %}
+            {% else %}
+              <!-- Checkbox answers are posted in the format "question.id-[answer index]=answer.id" -->
+              {% for answer in question.answer_set.all %}
+                <div class="answer-{{ forloop.counter }}">
+                  <label class="container2">
+                    <input type="checkbox" name="{{ answer.question.id }}-{{ forloop.counter }}" value="{{ answer.id }}"/>
+                    <span class="checkmark2"></span>
+                    <label for="{{ answer.question.id }}-{{ forloop.counter }}">{{ answer.text }}</label><br>
+                  </label>
+                </div>
+                {% endfor %}
+            {% endif %}
+          </fieldset>
+          {% if forloop.last %}
+            <input type="submit" value="Results &rarr;"/>
+          {% endif %}
+        </div>
+      {% endfor %}
     </form>
-    <!-- Button redirects to first question in the quiz -->
-    <button onclick="window.location.href='{{ next_url }}';">
-      {% if next_url == "/quiz" %}
-        Results
-      {% else %}
-        Next
-      {% endif %}
-      &rarr;
-    </button>
+    <!-- Only display next button if there is more than one question -->
+    {% if quiz.question_set.all|length > 1 %}
+      <button class="buttons" id="next-q-button" onclick="nextQuestion();">Next &rarr;</button>
+    {% endif %}
   </body>
+  <script src="{% static 'quiz/questions.js' %}"></script>
 </html>
