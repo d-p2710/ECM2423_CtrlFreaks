@@ -94,6 +94,12 @@ img {
     text-align: center;
 }
 
+.shop {
+    grid-area: sideLt;
+    place-self: centre;
+    justify-self: center;
+}
+
 /*container for grid*/
 .container {
     display: grid;
