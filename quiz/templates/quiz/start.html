@@ -1,7 +1,10 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'quiz/start.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
   </head>
   <body>
     <h1>{{ quiz.title }}</h1>
@@ -11,6 +14,6 @@
     {% endif %}        
     <h3>This quiz has {{ quiz.question_set.count }} question(s)</h3>
     <!-- Button redirects to first question in the quiz -->
-    <button onclick="window.location.href='{% url 'quiz:questions' quiz.id %}';">Start &rarr;</button>
+    <button class="button" onclick="window.location.href='{% url 'quiz:question' quiz.id 1 %}';">Start &rarr;</button>
   </body>
 </html>

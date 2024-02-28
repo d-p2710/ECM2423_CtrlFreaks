@@ -3,7 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="{% static 'quiz/questions.css' %}">
+    <link rel="stylesheet" href="{% static 'quiz/question.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
   </head>
   <body>
     <form id="question-set" action="{% url 'quiz:results' quiz.id %}" method="post">
@@ -20,16 +21,22 @@
               <!-- Radio button answers are posted in the format "question.id=answer.id" -->
               {% for answer in question.answer_set.all %}
                 <div class="answer-{{ forloop.counter }}">
-                  <input type="radio" name="{{ answer.question.id }}" value="{{ answer.id }}"/>
-                  <label for="{{ answer.question.id }}">{{ answer.text }}</label><br>
+                  <label class="container1">
+                    <input type="radio" name="{{ answer.question.id }}" value="{{ answer.id }}"/>
+                    <span class="checkmark1"></span>
+                    <label for="{{ answer.question.id }}">{{ answer.text }}</label><br>
+                  </label>
                 </div>
               {% endfor %}
             {% else %}
               <!-- Checkbox answers are posted in the format "question.id-[answer index]=answer.id" -->
               {% for answer in question.answer_set.all %}
                 <div class="answer-{{ forloop.counter }}">
-                  <input type="checkbox" name="{{ answer.question.id }}-{{ forloop.counter }}" value="{{ answer.id }}"/>
-                  <label for="{{ answer.question.id }}-{{ forloop.counter }}">{{ answer.text }}</label><br>
+                  <label class="container2">
+                    <input type="checkbox" name="{{ answer.question.id }}-{{ forloop.counter }}" value="{{ answer.id }}"/>
+                    <span class="checkmark2"></span>
+                    <label for="{{ answer.question.id }}-{{ forloop.counter }}">{{ answer.text }}</label><br>
+                  </label>
                 </div>
                 {% endfor %}
             {% endif %}

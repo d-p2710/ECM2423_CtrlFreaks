@@ -4,10 +4,12 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="{% static 'quiz/results.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
   </head>
   <body>
-    <h1>{{ quiz.title }}</h1>
-    {% for question in quiz.question_set.all %}
+    <fieldset>
+        <legend><h1>{{ quiz.title }}</h1></legend>
+        {% for question in quiz.question_set.all %}
         <div class="question-block">
             <h2>{{forloop.counter}}. {{ question.text }}</h2>
             <ul>
@@ -28,5 +30,7 @@
                 {% endfor %}
             </ul>
     {% endfor %}
+    </fieldset>
+    <button class="home" href="#">Return to home page</button>
   </body>
 </html>

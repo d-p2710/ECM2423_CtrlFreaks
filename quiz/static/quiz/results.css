@@ -1,10 +1,45 @@
+body {
+    font-family: "Outfit";
+}
+
+.home {
+    margin-top: 5px;
+    margin-left: 2px;
+    cursor: pointer;
+    background-color: #4b7b76;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.home:hover {
+    color: rgb(206, 206, 206);
+}
+
+ul {
+    margin-bottom: 0px;
+    font-size: 18px;
+    list-style-type: circle;
+}
+
+h2 {
+    margin-top: 0px;
+}
+
 .question-block {
-    margin: 20px;
-    background: #FAFAFA;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    margin-top: 0px;
+    background: #bddbd6;
 }
 
 .user-selected {
     font-weight: bold;
+    list-style-type: disc;
 }
 
 .correct {
