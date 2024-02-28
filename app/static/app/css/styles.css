@@ -4,6 +4,10 @@ body {
     margin: 0px 0px 0px 0px;
 }
 
+img {
+    width: 100px;
+}
+
 a {
     text-decoration: none;
 }
@@ -12,8 +16,39 @@ a:link, a:visited {
     text-decoration: none;
     color: black;
 }
+ /*
+button[type=submit] {
+    background-color: #77b192;
+    overflow: hidden;
+    margin-top: 5px;
+    margin-left: 2px;
+    cursor: pointer;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+*/
 
+button[type=submit] {
+    background-color: #77b192;
+    overflow: hidden;
+    border: none;
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
 
+button[type=submit]:hover {
+    background-color: #ddd;
+    color: black;
+}
 
 h1 {
     background-color: #77b192;
