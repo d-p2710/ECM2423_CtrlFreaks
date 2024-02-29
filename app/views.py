@@ -2,14 +2,31 @@ from django.shortcuts import render
 from PIL import Image
 from io import BytesIO
 import base64
+from users.models import Profile, Avatar
+from django.http import HttpResponse
 
+#page views
 def home_page(request):
     return render(request, 'app/homePage.html')
 
 def profile(request):
-    return render(request, 'app/profilePage.html')
-# Create your views here.
+    marker = request.user.id
+    profile = Profile.objects.filter(user=marker)[0]
+    avatar = Avatar.objects.filter(profile=profile)[0]
+    context = {
+        'profile_data': profile,
+        'avatar_data': avatar,
+    }
+    return render(request, 'app/profilePage.html', context)
+    # return HttpResponse(avatar.colour.img_file.url)
 
+#avatar shop views
+# def avatar(request):
+#     marker = request.user.id
+#     if request.method == "POST":
+
+
+#QR views
 def qr_generator(request):
     context = {}
     if request.method == "POST":
@@ -23,6 +40,7 @@ def qr_generator(request):
         context['qr_image_base64'] = qr_image_base64
         context['variable'] = qr_text
     return render(request, 'app/qrGenerator.html', context=context)
+
 def qr_scanner(request):
     return render(request, 'app/qrScanner.html')
 
@@ -33,3 +51,9 @@ def geolocation_map(request):
 
 def game_map(request):
     return render(request, 'app/gameMap.html')
+
+#log in views
+def logout(request):
+    if request == 'POST':
+        logout(request)
+

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %} {% endblock %} </title>
+  <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
+</head>
+<div class="topnav">
+  <a class="active" href="/homePage">Home</a>
+  <a href="{% url 'profile' %}" class="nav-item nav-link">Profile</a>
+  <a href="#challenges">Challenges</a>
+  <a href="#activites">Activites</a>
+  <form id="frm_logout" method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();" >Log Out</a> </form>
+</div>

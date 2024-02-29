@@ -10,16 +10,73 @@
 <body>
     <header>
         <div class="topnav">
-            <a href="/homePage">Home</a>
+            <a href="{% url 'home' %}">Home</a>
             <a class="active" href="/profile">My Profile</a>
-            <a href="#challenges">Challenges</a>
-            <a href="#QRScanner">QR</a>
-            <a href="#logout">Log Out</a>
+            <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
+                <button type="submit">Log Out</button>
+            </form>
         </div>
-        <h2><b>My Profile</b></h2>
-        <p>This is a dummy profile page perhaps
-        </p>
-        <h2>Needs formatting, inputting functionality</h2>
-    </header>
+        <!-- css formatted display -mm1224 -->
+        <div class="item-a">
+            <h2><b>My Profile</b></h2>
+        </div>
+        <div class="container">
+            <div class="item-b">
+                <div class="avatar">
+                    <img class="avatar-colour" src="{{ avatar_data.colour.img_file.url }}" alt="default">
+                    <img class="avatar-outline" src="/images/outline.png">
+                    <img class="avatar-mouth" src="{{ avatar_data.mouth.img_file.url }}" alt="default">
+                    <img class="avatar-eyes" src="{{ avatar_data.eyes.img_file.url }}" alt="default">
+                    {% if avatar_data.headwear %}
+                        <img class="avatar-headwear" src="{{ avatar_data.headwear.img_file.url }}" alt="default">
+                    {% endif %}
+                    {% if avatar_data.accessory %}
+                        <img class="avatar-accessory" src="{{ avatar_data.accessory.img_file.url }}" alt="default">
+                    {% endif %}
+                </div>
+                <h2><b>
+                    <!-- profile data (avatar and points) display -->
+                    <!-- <img src="{{ avatar_data.colour.img_file.url }}" alt="default"> -->
+                    You currently have {{ profile_data.points_amount }} points!
+                </b></h2>
+            </div>
+        </div>
+        
+        <div class="shop">
+            <script>
+
+                function updateAvatarPreview(part, filename) {
+                    document.getElementById("avatar-preview-" + part).src = "emoji-assets/" + part + "/" + filename + ".png";
+                }
+
+                class TabSwitcher {
+                    constructor(currentTab) {
+                        this.currentTab = currentTab;
+                    }
+                    switchTabAuto(tab) {
+                        document.getElementById(this.currentTab).style.visibility = "hidden";
+                        document.getElementById(tab).style.visibility = "visible";
+                        this.currentTab = tab;
+                    }
+
+                    switchTabManual(currentTab, newTab) {
+                        // used when tab switch has been triggered by reload/a different script
+                        // as this.currentTab becomes de-synced
+                        document.getElementById(currentTab).style.visibility = "hidden";
+                        document.getElementById(newTab).style.visibility = "visible";
+                        this.currentTab = newTab;
+                    }
+                }
+
+                let avatarBuilder = new TabSwitcher("avatar-eyes-tab");
+                let pairsGame = new TabSwitcher("start-screen");
+                let leaderboard = new TabSwitcher("total");
+
+            </script>
+        </div>
+        </header>
 </body>
 </html>

@@ -1,3 +1,4 @@
+/*ar919*/
 body {
     font-family: "Outfit";
     padding: 0px;
@@ -13,7 +14,26 @@ a:link, a:visited {
     color: black;
 }
 
+button[type=submit] {
+    background-color: #77b192;
+    overflow: hidden;
+    border: none;
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
 
+button[type=submit]:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+img {
+    width: 100px;
+}
 
 h1 {
     background-color: #77b192;
@@ -38,6 +58,9 @@ p {
 img {
     margin-left: 10px;
 }
+
+/*mm1224*/
+/* Navigation bar styling*/
 
 /* Add a black background color to the top navigation */
 .topnav {
@@ -67,7 +90,83 @@ img {
     color: white;
   }
 
+/* Centralisation for profile page */
 
+/*header*/
+.item-a {
+    grid-area: head;
+}
+
+/*central column*/
+.item-b {
+    grid-area: main;
+    place-self: centre;
+    justify-self: center;
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+    }
+
+    text-align: center;
+}
+
+/* zj274 */
+.avatar {
+    display: grid;
+}
+
+.avatar > img {
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+.avatar-colour {
+    z-index: 1;
+}
+
+.avatar-outline {
+    z-index: 2;
+}
+
+.avatar-mouth {
+    z-index: 3;
+}
+
+.avatar-eyes {
+    z-index: 4;
+}
+
+.avatar-headwear {
+    z-index: 5;
+}
+
+.avatar-accessory {
+    z-index: 6;
+}
+/* end zj274 */
+
+.shop {
+    grid-area: sideLt;
+    place-self: centre;
+    justify-self: center;
+}
+
+/*container for grid*/
+.container {
+    display: grid;
+    grid-template-columns: [c1] 1fr [c2] 2fr [c3] 1fr;
+    grid-template-rows: [r1] 50px [r2] 1fr [r3] 1fr;
+
+    grid-template-areas: 
+    "head head head"
+    "sideLt main sideRt"
+    "sideLb main sideRb";
+}
+
+  /*ar919*/
 .carousel-container {
     display: flex;
     overflow-x: auto;
