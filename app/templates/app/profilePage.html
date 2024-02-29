@@ -12,8 +12,7 @@
         <div class="topnav">
             <a href="{% url 'home' %}">Home</a>
             <a class="active" href="/profile">My Profile</a>
-            <a href="{% url 'game_map' %}" class="nav-item nav-link">Challenges</a>
-            <a href="{% url 'qr_scanner' %}" class="nav-item nav-link">QR</a>
+            <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
@@ -23,7 +22,6 @@
         <!-- css formatted display -mm1224 -->
         <div class="item-a">
             <h2><b>My Profile</b></h2>
-            <p>This is a dummy profile page perhaps</p>
         </div>
         <div class="container">
             <div class="item-b">
