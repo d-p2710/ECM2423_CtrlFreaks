@@ -21,7 +21,7 @@ button[type=submit] {
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 40px 20px 40px 20px;
+    padding: 42px 20px 40px 20px;
     text-decoration: none;
     font-size: 17px;
 }
@@ -152,6 +152,13 @@ img {
     grid-area: sideLt;
     place-self: centre;
     justify-self: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.shop > img {
+    height: 200px;
+    width: 200px;
 }
 
 /*container for grid*/

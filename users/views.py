@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import loader
 from django.http import HttpResponse
 
-from .models import Profile, Avatar, AvatarPart
+from .models import Profile, Avatar, Item, OwnedItem
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 
 # Backend functionality for page views
@@ -45,15 +45,20 @@ class RegisterView(View):
             created_user = form.save()
             
             # zj274 create new default avatar object to link to profile
-            default_part_types = ["colour", "mouth", "eyes"]
-            default_parts = []
-            for part_type in default_part_types:
-                part = get_list_or_404(AvatarPart, part_type=part_type, is_default_img=True)[0]
-                default_parts.append(part)
-            new_avatar = Avatar(profile=get_object_or_404(Profile, user=created_user),
-                                colour=default_parts[0],
-                                mouth=default_parts[1],
-                                eyes=default_parts[2])
+            default_categories = ["colour", "mouth", "eyes"]
+            default_items = []
+            for category in default_categories:
+                item = get_list_or_404(Item, category=category, is_default_img=True)[0]
+                default_items.append(item)
+            user_profile = get_object_or_404(Profile, user=created_user)
+            new_avatar = Avatar(profile=user_profile,
+                                colour=default_items[0],
+                                mouth=default_items[1],
+                                eyes=default_items[2])
+            # create objects to represent user's item (part) ownership
+            for item in default_items:
+                new_owned_item = OwnedItem(profile=user_profile, item=item)
+                new_owned_item.save()
             new_avatar.save()
 
             username = form.cleaned_data.get('username')

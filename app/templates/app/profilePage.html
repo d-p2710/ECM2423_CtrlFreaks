@@ -27,7 +27,7 @@
             <div class="item-b">
                 <div class="avatar">
                     <img class="avatar-colour" src="{{ avatar_data.colour.img_file.url }}" alt="default">
-                    <img class="avatar-outline" src="/images/outline.png">
+                    <!-- <img class="avatar-outline" src="/images/outline.png"> -->
                     <img class="avatar-mouth" src="{{ avatar_data.mouth.img_file.url }}" alt="default">
                     <img class="avatar-eyes" src="{{ avatar_data.eyes.img_file.url }}" alt="default">
                     {% if avatar_data.headwear %}
@@ -44,8 +44,12 @@
                 </b></h2>
             </div>
         </div>
-        
+
         <div class="shop">
+            {% for item in all_items %}
+                <img class="shop item" src="{{ item.img_file.url }}" alt="shop_item">
+            {% endfor %}
+
             <script>
 
                 function updateAvatarPreview(part, filename) {

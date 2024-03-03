@@ -2,7 +2,7 @@ from django.shortcuts import render
 from PIL import Image
 from io import BytesIO
 import base64
-from users.models import Profile, Avatar
+from users.models import Profile, Avatar, Item, OwnedItem
 from django.http import HttpResponse
 
 #page views
@@ -10,12 +10,25 @@ def home_page(request):
     return render(request, 'app/homePage.html')
 
 def profile(request):
+
+    def sortItemsByType(item_list):
+        # TODO function that takes list of items and returns dictionary,
+        # of those items, sorted by part_type / category
+        items_dict = {"colour":[], "mouth":[], "eyes":[], "headwear":[], "accessory":[]}
+        for item in item_list:
+            # if item.part_type
+            pass
+
     marker = request.user.id
     profile = Profile.objects.filter(user=marker)[0]
     avatar = Avatar.objects.filter(profile=profile)[0]
+    all_items = Item.objects.all()
+    owned_item_objects = OwnedItem.objects.filter(profile=profile)
     context = {
         'profile_data': profile,
         'avatar_data': avatar,
+        'all_items': all_items,
+        # 'owned_items': owned_items
     }
     return render(request, 'app/profilePage.html', context)
     # return HttpResponse(avatar.colour.img_file.url)
