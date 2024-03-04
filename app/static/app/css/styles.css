@@ -6,10 +6,6 @@ body {
     width: 100%;
 }
 
-.shop::after {
-    content: "desktop view"
-}
-
 a {
     text-decoration: none;
 }
