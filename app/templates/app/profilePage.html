@@ -3,9 +3,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
-    <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
+    <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
+    <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'app/css/styles_mobile.css' %}" />
+    <link rel="stylesheet" media="screen and (min-width:641px)" href="{% static 'app/css/styles.css' %}" />
 </head>
 <body>
     <header>
@@ -32,9 +35,13 @@
                     <img class="avatar eyes" src="{{ avatar_data.eyes.img_file.url }}" alt="default">
                     {% if avatar_data.headwear %}
                         <img class="avatar headwear" src="{{ avatar_data.headwear.img_file.url }}" alt="default">
+                    {% else %}
+                    <img class="avatar headwear" src="">
                     {% endif %}
                     {% if avatar_data.accessory %}
                         <img class="avatar accessory" src="{{ avatar_data.accessory.img_file.url }}" alt="default">
+                    {% else %}
+                        <img class="avatar accessory" src="">
                     {% endif %}
                 </div>
                 <h2><b>
@@ -73,94 +80,38 @@
                 </div>
 
                 <div class="tabs">
-                    <div class="colour" id="shop-colour-tab" style="visibility: visible;">
-                        {% for item in shop_items.colour %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
-                        {% endfor %}
-                    </div>
-                    <div class="mouth" id="shop-mouth-tab">
-                        {% for item in shop_items.mouth %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
-                        {% endfor %}
-                    </div>
-                    <div class="eyes" id="shop-eyes-tab">
-                        {% for item in shop_items.eyes %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
-                        {% endfor %}
-                    </div>
-                    <div class="headwear" id="shop-headwear-tab">
-                        {% for item in shop_items.headwear %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
-                        {% endfor %}
-                    </div>
-                    <div class="accessory" id="shop-accessory-tab">
-                        {% for item in shop_items.accessory %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
-                        {% endfor %}
-                    </div>
+                    {% for category, item_list in all_items.items %}
+                        <div class="{{ category }}" id="shop-{{ category }}-tab">
+                            {% for item in item_list %}
+                                {% if item.id in owned_item_ids %}
+                                    <label class="owned item">
+                                        <input type="radio" name="avatar-{{ category }}"
+                                            onclick="updateAvatarDisplay('{{ category}}', '{{ item.img_file.url }}');"/>
+                                        <img src="{{ item.img_file.url }}">
+                                {% else %}
+                                    <label class="unowned item">
+                                        <input type="radio" name="avatar-{{ category }}" class="unowned item"
+                                            onclick="updateAvatarDisplay('{{ category}}', '{{ item.img_file.url }}');"/>
+                                        <img src="{{ item.img_file.url }}">
+                                {% endif %}
+                            </label>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-            
-            <div class="wardrobe">
-                <div class="tab-buttons">
-                    <label>
-                        <input type="radio" name="tab" class="colour-tab-button" checked="checked"
-                               onclick="wardrobe.switchTabAuto('wardrobe-colour-tab')"/>
-                        <img src="/images/colour_tab_icon.png">
-                    </label>
-                    <label>
-                        <input type="radio" name="tab" class="mouth-tab-button"
-                               onclick="wardrobe.switchTabAuto('wardrobe-mouth-tab')"/>
-                        <img src="/images/mouth_tab_icon.png">
-                    </label>
-                    <label>
-                        <input type="radio" name="tab" class="eyes-tab-button"
-                               onclick="wardrobe.switchTabAuto('wardrobe-eyes-tab')"/>
-                        <img src="/images/eyes_tab_icon.png">
-                    </label>
-                    <label>
-                        <input type="radio" name="tab" class="headwear-tab-button"
-                               onclick="shop.switchTabAuto('wardrobe-headwear-tab')"/>
-                        <img src="/images/eyes_tab_icon.png">
-                    </label>
-                    <label>
-                        <input type="radio" name="tab" class="accessory-tab-button"
-                               onclick="shop.switchTabAuto('wardrobe-accessory-tab')"/>
-                        <img src="/images/eyes_tab_icon.png">
-                    </label>
-                </div>
-
-                <div class="tabs">
-                    <div class="colour" id="wardrobe-colour-tab" style="visibility: visible;">
-                        {% for item in owned_items.colour %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
-                        {% endfor %}
-                    </div>
-                    <div class="mouth" id="wardrobe-mouth-tab">
-                        {% for item in owned_items.mouth %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
-                        {% endfor %}
-                    </div>
-                    <div class="eyes" id="wardrobe-eyes-tab">
-                        {% for item in owned_items.eyes %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
-                        {% endfor %}
-                    </div>
-                    <div class="headwear" id="wardrobe-headwear-tab">
-                        {% for item in owned_items.headwear %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
-                        {% endfor %}
-                    </div>
-                    <div class="accessory" id="wardrobe-accessory-tab">
-                        {% for item in owned_items.accessory %}
-                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>  
         </div>
     </header>
     <script>
+        function initChecked() {
+
+        }
+        function updateAvatarDisplay(category, img_file_path) {
+            // swap images in frontend display to reflect changes to avatar
+            area = document.querySelector(".avatar."+category);
+            console.log(area);
+            area.src = img_file_path;
+        }
         class TabSwitcher {
             constructor(currentTab) {
                 this.currentTab = currentTab;

@@ -3,11 +3,10 @@ body {
     font-family: "Outfit";
     padding: 0px;
     margin: 0px 0px 0px 0px;
-    width: 100%;
 }
 
 .shop::after {
-    content: "desktop view"
+    content: "mobile view"
 }
 
 a {
@@ -50,6 +49,7 @@ img {
 .topnav {
     background-color: #77b192;
     overflow: hidden;
+    width: 100%;
 }
 
 /* Style the links inside the navigation bar */
@@ -92,7 +92,7 @@ button[type=submit]:hover {
     color: black;
 }
 
-/* Centralisation for profile page */
+Centralisation for profile page
 
 /*header*/
 .item-a {
@@ -146,9 +146,9 @@ button[type=submit]:hover {
 }
 
 .shop {
-    grid-area: sideLt;
+    /* grid-area: sideLt;
     align-self: centre;
-    justify-self: center; 
+    justify-self: center;  */
     display: block; 
     margin-left: 20px;
 }
@@ -235,52 +235,15 @@ button[type=submit]:hover {
 .unowned::after {
     content: "$100";
 }
-
 /* end zj274 */
 
-/*container for grid*/
+
 .container {
     display: grid;
-    grid-template-columns: [c1] 1fr [c2] 2fr [c3] 1fr;
-    grid-template-rows: [r1] 50px [r2] 1fr [r3] 1fr;
+    grid-template-columns: [c1] 1fr;
+    grid-template-rows: [r1] 50px [r2] 1fr;
 
     grid-template-areas: 
-    "head head head"
-    "sideLt main sideRt"
-    "sideLb main sideRb";
-}
-
-  /*ar919*/
-.carousel-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-}
-
-.carousel-slide {
-    flex: 1 0 30%;
-    scroll-snap-align: center;
-}
-
-
-@media (max-width: 600px) {
-    .carousel-slide {
-        flex: 1 0 90%;
-    }
-}
-
-.carousel-container::-webkit-scrollbar {
-    height: 8px;
-}
-
-.carousel-container::-webkit-scrollbar-thumb {
-    background: #29Ab87;
-}
-
-.carousel-container::-webkit-scrollbar-track {
-    background: #b1b3b399;
-}
-
-.carousel-container::-webkit-scrollbar-track-piece:start {
-    background: #29ab87;
+    "head"
+    "main";
 }
