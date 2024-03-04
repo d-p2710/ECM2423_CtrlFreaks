@@ -12,26 +12,28 @@ def home_page(request):
 def profile(request):
 
     def sortItemsByType(item_list):
-        # TODO function that takes list of items and returns dictionary,
-        # of those items, sorted by part_type / category
+        # take list of items, return dictionary sorted by category
         items_dict = {"colour":[], "mouth":[], "eyes":[], "headwear":[], "accessory":[]}
         for item in item_list:
-            # if item.part_type
-            pass
+            items_dict[item.category].append(item)
+        return items_dict
 
     marker = request.user.id
-    profile = Profile.objects.filter(user=marker)[0]
-    avatar = Avatar.objects.filter(profile=profile)[0]
-    all_items = Item.objects.all()
-    owned_item_objects = OwnedItem.objects.filter(profile=profile)
+    profile = Profile.objects.get(user=marker)
+    avatar = Avatar.objects.get(profile=profile)
+    all_items = sortItemsByType(Item.objects.all())
+    owned_item_ids = []
+    owned_item_relations = OwnedItem.objects.filter(profile=profile)
+    for relation in owned_item_relations:
+        owned_item_ids.append(relation.item.id)
     context = {
         'profile_data': profile,
         'avatar_data': avatar,
         'all_items': all_items,
-        # 'owned_items': owned_items
+        'owned_item_ids': owned_item_ids,
     }
     return render(request, 'app/profilePage.html', context)
-    # return HttpResponse(avatar.colour.img_file.url)
+    # return HttpResponse(sortItemsByType(owned_item_list)["colour"][0].img_file.url)
 
 #avatar shop views
 # def avatar(request):

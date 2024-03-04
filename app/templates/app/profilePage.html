@@ -26,15 +26,15 @@
         <div class="container">
             <div class="item-b">
                 <div class="avatar">
-                    <img class="avatar-colour" src="{{ avatar_data.colour.img_file.url }}" alt="default">
+                    <img class="avatar colour" src="{{ avatar_data.colour.img_file.url }}" alt="default">
                     <!-- <img class="avatar-outline" src="/images/outline.png"> -->
-                    <img class="avatar-mouth" src="{{ avatar_data.mouth.img_file.url }}" alt="default">
-                    <img class="avatar-eyes" src="{{ avatar_data.eyes.img_file.url }}" alt="default">
+                    <img class="avatar mouth" src="{{ avatar_data.mouth.img_file.url }}" alt="default">
+                    <img class="avatar eyes" src="{{ avatar_data.eyes.img_file.url }}" alt="default">
                     {% if avatar_data.headwear %}
-                        <img class="avatar-headwear" src="{{ avatar_data.headwear.img_file.url }}" alt="default">
+                        <img class="avatar headwear" src="{{ avatar_data.headwear.img_file.url }}" alt="default">
                     {% endif %}
                     {% if avatar_data.accessory %}
-                        <img class="avatar-accessory" src="{{ avatar_data.accessory.img_file.url }}" alt="default">
+                        <img class="avatar accessory" src="{{ avatar_data.accessory.img_file.url }}" alt="default">
                     {% endif %}
                 </div>
                 <h2><b>
@@ -43,44 +43,137 @@
                     You currently have {{ profile_data.points_amount }} points!
                 </b></h2>
             </div>
+            <div class="shop">
+                <div class="tab-buttons">
+                    <label>
+                        <input type="radio" name="tab" class="colour-tab-button" checked="checked"
+                               onclick="shop.switchTabAuto('shop-colour-tab')"/>
+                        <img src="/images/colour_tab_icon.png">
+                    </label>
+                    <label>
+                        <input type="radio" name="tab" class="mouth-tab-button"
+                                onclick="shop.switchTabAuto('shop-mouth-tab')"/>
+                        <img src="/images/mouth_tab_icon.png">
+                    </label>
+                    <label>
+                        <input type="radio" name="tab" class="eyes-tab-button"
+                               onclick="shop.switchTabAuto('shop-eyes-tab')"/>
+                        <img src="/images/eyes_tab_icon.png">
+                    </label>
+                    <label>
+                        <input type="radio" name="tab" class="headwear-tab-button"
+                               onclick="shop.switchTabAuto('shop-headwear-tab')"/>
+                        <img src="/images/eyes_tab_icon.png">
+                    </label>
+                    <label>
+                        <input type="radio" name="tab" class="accessory-tab-button"
+                               onclick="shop.switchTabAuto('shop-accessory-tab')"/>
+                        <img src="/images/eyes_tab_icon.png">
+                    </label>
+                </div>
+
+                <div class="tabs">
+                    <div class="colour" id="shop-colour-tab" style="visibility: visible;">
+                        {% for item in shop_items.colour %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
+                        {% endfor %}
+                    </div>
+                    <div class="mouth" id="shop-mouth-tab">
+                        {% for item in shop_items.mouth %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
+                        {% endfor %}
+                    </div>
+                    <div class="eyes" id="shop-eyes-tab">
+                        {% for item in shop_items.eyes %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
+                        {% endfor %}
+                    </div>
+                    <div class="headwear" id="shop-headwear-tab">
+                        {% for item in shop_items.headwear %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
+                        {% endfor %}
+                    </div>
+                    <div class="accessory" id="shop-accessory-tab">
+                        {% for item in shop_items.accessory %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="shop item">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wardrobe">
+                <div class="tab-buttons">
+                    <label>
+                        <input type="radio" name="tab" class="colour-tab-button" checked="checked"
+                               onclick="wardrobe.switchTabAuto('wardrobe-colour-tab')"/>
+                        <img src="/images/colour_tab_icon.png">
+                    </label>
+                    <label>
+                        <input type="radio" name="tab" class="mouth-tab-button"
+                               onclick="wardrobe.switchTabAuto('wardrobe-mouth-tab')"/>
+                        <img src="/images/mouth_tab_icon.png">
+                    </label>
+                    <label>
+                        <input type="radio" name="tab" class="eyes-tab-button"
+                               onclick="wardrobe.switchTabAuto('wardrobe-eyes-tab')"/>
+                        <img src="/images/eyes_tab_icon.png">
+                    </label>
+                    <label>
+                        <input type="radio" name="tab" class="headwear-tab-button"
+                               onclick="shop.switchTabAuto('wardrobe-headwear-tab')"/>
+                        <img src="/images/eyes_tab_icon.png">
+                    </label>
+                    <label>
+                        <input type="radio" name="tab" class="accessory-tab-button"
+                               onclick="shop.switchTabAuto('wardrobe-accessory-tab')"/>
+                        <img src="/images/eyes_tab_icon.png">
+                    </label>
+                </div>
+
+                <div class="tabs">
+                    <div class="colour" id="wardrobe-colour-tab" style="visibility: visible;">
+                        {% for item in owned_items.colour %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
+                        {% endfor %}
+                    </div>
+                    <div class="mouth" id="wardrobe-mouth-tab">
+                        {% for item in owned_items.mouth %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
+                        {% endfor %}
+                    </div>
+                    <div class="eyes" id="wardrobe-eyes-tab">
+                        {% for item in owned_items.eyes %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
+                        {% endfor %}
+                    </div>
+                    <div class="headwear" id="wardrobe-headwear-tab">
+                        {% for item in owned_items.headwear %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
+                        {% endfor %}
+                    </div>
+                    <div class="accessory" id="wardrobe-accessory-tab">
+                        {% for item in owned_items.accessory %}
+                            <img class="item" src="{{ item.img_file.url }}" alt="wardrobe item">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>  
         </div>
-
-        <div class="shop">
-            {% for item in all_items %}
-                <img class="shop item" src="{{ item.img_file.url }}" alt="shop_item">
-            {% endfor %}
-
-            <script>
-
-                function updateAvatarPreview(part, filename) {
-                    document.getElementById("avatar-preview-" + part).src = "emoji-assets/" + part + "/" + filename + ".png";
-                }
-
-                class TabSwitcher {
-                    constructor(currentTab) {
-                        this.currentTab = currentTab;
-                    }
-                    switchTabAuto(tab) {
-                        document.getElementById(this.currentTab).style.visibility = "hidden";
-                        document.getElementById(tab).style.visibility = "visible";
-                        this.currentTab = tab;
-                    }
-
-                    switchTabManual(currentTab, newTab) {
-                        // used when tab switch has been triggered by reload/a different script
-                        // as this.currentTab becomes de-synced
-                        document.getElementById(currentTab).style.visibility = "hidden";
-                        document.getElementById(newTab).style.visibility = "visible";
-                        this.currentTab = newTab;
-                    }
-                }
-
-                let avatarBuilder = new TabSwitcher("avatar-eyes-tab");
-                let pairsGame = new TabSwitcher("start-screen");
-                let leaderboard = new TabSwitcher("total");
-
-            </script>
-        </div>
-        </header>
+    </header>
+    <script>
+        class TabSwitcher {
+            constructor(currentTab) {
+                this.currentTab = currentTab;
+            }
+            switchTabAuto(tab) {
+                console.log(tab)
+                document.getElementById(this.currentTab).style.visibility = "hidden";
+                document.getElementById(tab).style.visibility = "visible";
+                this.currentTab = tab;
+            }
+        }
+        let shop = new TabSwitcher("shop-colour-tab");
+        let wardrobe = new TabSwitcher("shop-colour-tab");
+    </script>
 </body>
 </html>
