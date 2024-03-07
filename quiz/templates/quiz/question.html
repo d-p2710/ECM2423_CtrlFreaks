@@ -16,7 +16,7 @@
           <div class="question-panel" style="visibility: hidden;">
         {% endif %}
           <fieldset>
-            <legend><h1>{{ question.text }}</h1></legend>
+            <legend><h1>{{ question.text }} {{question.id}}</h1></legend>
             {% if question.question_type == "SIN" %}
               <!-- Radio button answers are posted in the format "question.id=answer.id" -->
               {% for answer in question.answer_set.all %}
@@ -49,7 +49,11 @@
     </form>
     <!-- Only display next button if there is more than one question -->
     {% if quiz.question_set.all|length > 1 %}
-      <button class="buttons" id="next-q-button" onclick="nextQuestion();">Next &rarr;</button>
+      {% if quiz.question_set.all|length >= question_next %}
+        <button class="button" onclick="window.location.href='{% url 'quiz:question' quiz.id question_next %}';">Next &rarr;</button>
+      {% else %}
+        <form> {% csrf_token %} <button class="button" onclick="window.location.href='{% url 'quiz:results' quiz.id %}';">Results &rarr;</button> </form>
+      {% endif %}
     {% endif %}
   </body>
   <script src="{% static 'quiz/questions.js' %}"></script>
