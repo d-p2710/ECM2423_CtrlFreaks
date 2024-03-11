@@ -2,7 +2,7 @@ body {
     font-family: "Outfit";
 }
 
-.button {
+.button, input[type="submit"] {
     margin-top: 5px;
     margin-left: 2px;
     cursor: pointer;

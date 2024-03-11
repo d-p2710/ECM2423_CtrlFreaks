@@ -19,9 +19,11 @@ def question(request, quiz_id, question_index):
 
     question_next = question_index + 1
     next_url = ""
+    is_last_question = False
     if question_next > quiz.question_set.count():
         # if on last question, set redirect to end screen
         next_url =  reverse("quiz:results", args=[quiz_id])
+        is_last_question = True
     else:
         next_url = reverse("quiz:question", args=(quiz_id, question_next))
 
@@ -29,7 +31,7 @@ def question(request, quiz_id, question_index):
         "question": question,
         "quiz": quiz,
         "next_url": next_url,
-        "question_next": question_next,
+        "is_last_question": is_last_question,
     }
 
     return render(request, "quiz/question.html", context)

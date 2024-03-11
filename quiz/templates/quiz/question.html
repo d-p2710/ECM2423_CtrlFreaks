@@ -7,54 +7,42 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
   </head>
   <body>
-    <form id="question-set" action="{% url 'quiz:results' quiz.id %}" method="post">
+    <form action="{% url 'quiz:results' quiz.id %}" method="post">
       {% csrf_token %}
-      {% for question in quiz.question_set.all %}
-        {% if forloop.first %}
-          <div class="question-panel" style="visibility: visible;">
-        {% else %}
-          <div class="question-panel" style="visibility: hidden;">
-        {% endif %}
-          <fieldset>
-            <legend><h1>{{ question.text }} {{question.id}}</h1></legend>
-            {% if question.question_type == "SIN" %}
-              <!-- Radio button answers are posted in the format "question.id=answer.id" -->
-              {% for answer in question.answer_set.all %}
-                <div class="answer-{{ forloop.counter }}">
-                  <label class="container1">
-                    <input type="radio" name="{{ answer.question.id }}" value="{{ answer.id }}"/>
-                    <span class="checkmark1"></span>
-                    <label for="{{ answer.question.id }}">{{ answer.text }}</label><br>
-                  </label>
-                </div>
+        <fieldset>
+          <legend><h1>{{ question.text }}</h1></legend>
+          {% if question.question_type == "SIN" %}
+            <!-- Radio button answers are posted in the format "question.id=answer.id" -->
+            {% for answer in question.answer_set.all %}
+              <div class="answer-{{ forloop.counter }}">
+                <label class="container1">
+                  <input type="radio" name="{{ answer.question.id }}" value="{{ answer.id }}"/>
+                  <span class="checkmark1"></span>
+                  <label for="{{ answer.question.id }}">{{ answer.text }}</label><br>
+                </label>
+              </div>
+            {% endfor %}
+          {% else %}
+            <!-- Checkbox answers are posted in the format "question.id-[answer index]=answer.id" -->
+            {% for answer in question.answer_set.all %}
+              <div class="answer-{{ forloop.counter }}">
+                <label class="container2">
+                  <input type="checkbox" name="{{ answer.question.id }}-{{ forloop.counter }}" value="{{ answer.id }}"/>
+                  <span class="checkmark2"></span>
+                  <label for="{{ answer.question.id }}-{{ forloop.counter }}">{{ answer.text }}</label><br>
+                </label>
+              </div>
               {% endfor %}
-            {% else %}
-              <!-- Checkbox answers are posted in the format "question.id-[answer index]=answer.id" -->
-              {% for answer in question.answer_set.all %}
-                <div class="answer-{{ forloop.counter }}">
-                  <label class="container2">
-                    <input type="checkbox" name="{{ answer.question.id }}-{{ forloop.counter }}" value="{{ answer.id }}"/>
-                    <span class="checkmark2"></span>
-                    <label for="{{ answer.question.id }}-{{ forloop.counter }}">{{ answer.text }}</label><br>
-                  </label>
-                </div>
-                {% endfor %}
-            {% endif %}
-          </fieldset>
-          {% if forloop.last %}
-            <input type="submit" value="Results &rarr;"/>
           {% endif %}
-        </div>
-      {% endfor %}
-    </form>
-    <!-- Only display next button if there is more than one question -->
-    {% if quiz.question_set.all|length > 1 %}
-      {% if quiz.question_set.all|length >= question_next %}
-        <button class="button" onclick="window.location.href='{% url 'quiz:question' quiz.id question_next %}';">Next &rarr;</button>
-      {% else %}
-        <form> {% csrf_token %} <button class="button" onclick="window.location.href='{% url 'quiz:results' quiz.id %}';">Results &rarr;</button> </form>
-      {% endif %}
-    {% endif %}
+        </fieldset>
+        {% if is_last_question %}
+          <input type="submit" value="Results &rarr;"/>
+          </div>
+          </form>
+        {% else %}
+          </div>
+          </form>
+          <button class="button" onclick="window.location.href='{{ next_url }}';">Next &rarr;</button>
+        {% endif %}
   </body>
-  <script src="{% static 'quiz/questions.js' %}"></script>
 </html>
