@@ -59,3 +59,4 @@ def results(request, quiz_id):
             elif correct_answers / question.answer_set.filter(is_correct=True).count() > 0.4:
                 score += 5
     return render(request, "quiz/results.html", {"quiz": quiz, "user_answers": answer_id_list})
+
