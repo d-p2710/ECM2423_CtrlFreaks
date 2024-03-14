@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <title>My Profile</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
     <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
     <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'app/css/styles_mobile.css' %}" />
@@ -29,25 +29,20 @@
         <div class="container">
             <div class="item-b">
                 <div class="avatar">
-                    <img class="avatar colour" src="{{ avatar_data.colour.img_file.url }}" alt="default">
-                    <!-- <img class="avatar-outline" src="/images/outline.png"> -->
-                    <img class="avatar mouth" src="{{ avatar_data.mouth.img_file.url }}" alt="default">
-                    <img class="avatar eyes" src="{{ avatar_data.eyes.img_file.url }}" alt="default">
-                    {% if avatar_data.headwear %}
-                        <img class="avatar headwear" src="{{ avatar_data.headwear.img_file.url }}" alt="default">
-                    {% else %}
-                    <img class="avatar headwear" src="">
-                    {% endif %}
-                    {% if avatar_data.accessory %}
-                        <img class="avatar accessory" src="{{ avatar_data.accessory.img_file.url }}" alt="default">
-                    {% else %}
-                        <img class="avatar accessory" src="">
-                    {% endif %}
+                    {% for category, item in selected_items.items %}
+                        {% if item %}
+                            <img class="avatar {{category}}" src="{{ item.img_file.url }}" alt="avatar {{ category }}">
+                        {% else %}
+                            <img class="avatar {{category}}" src="/images/blank_placeholder.png" alt="no item set">
+                        {% endif %}
+                    {% endfor %}
                 </div>
                 <h2><b>
                     <!-- profile data (avatar and points) display -->
                     <!-- <img src="{{ avatar_data.colour.img_file.url }}" alt="default"> -->
-                    You currently have {{ profile_data.points_amount }} points!
+                    You currently have 
+                    <span id=points_amount>{{ profile_data.points_amount }}</span>
+                    points!
                 </b></h2>
             </div>
             <div class="shop">
@@ -70,28 +65,39 @@
                     <label>
                         <input type="radio" name="tab" class="headwear-tab-button"
                                onclick="shop.switchTabAuto('shop-headwear-tab')"/>
-                        <img src="/images/eyes_tab_icon.png">
+                        <img src="/images/headwear_tab_icon.png">
                     </label>
                     <label>
                         <input type="radio" name="tab" class="accessory-tab-button"
                                onclick="shop.switchTabAuto('shop-accessory-tab')"/>
-                        <img src="/images/eyes_tab_icon.png">
+                        <img src="/images/accessory_tab_icon.png">
                     </label>
                 </div>
 
                 <div class="tabs">
                     {% for category, item_list in all_items.items %}
                         <div class="{{ category }}" id="shop-{{ category }}-tab">
+                            {% if category == "headwear" or category == "accessory" %}
+                                <!-- add button to remove headwear/accessory -->
+                                <label class="item">
+                                    <!-- checked by default, automatically overriden if an item has been selected -->
+                                    <input type="radio" name="avatar-{{ category }}" id="none" checked="checked"
+                                        onclick="updateAvatarSelection('{{ category}}', 'none','/images/blank_placeholder.png');"/>
+                                    <img src="/images/none_set.png">
+                                </label>
+                            {% endif %}
                             {% for item in item_list %}
                                 {% if item.id in owned_item_ids %}
                                     <label class="owned item">
-                                        <input type="radio" name="avatar-{{ category }}"
-                                            onclick="updateAvatarDisplay('{{ category}}', '{{ item.img_file.url }}');"/>
+                                        <input type="radio" name="avatar-{{ category }}" id="item-{{ item.id }}"
+                                            {% if item in selected_items.values %} checked="checked" {% endif %}
+                                            onclick="updateAvatarSelection('{{ category }}', '{{ item.id }}', '{{ item.img_file.url }}');"/>
                                         <img src="{{ item.img_file.url }}">
                                 {% else %}
                                     <label class="unowned item">
-                                        <input type="radio" name="avatar-{{ category }}" class="unowned item"
-                                            onclick="updateAvatarDisplay('{{ category}}', '{{ item.img_file.url }}');"/>
+                                        <input type="radio" name="avatar-{{ category }}" id="item-{{ item.id }}"
+                                            {% if item in selected_items.values %} checked="checked" {% endif %}
+                                            onclick="openShopPopup('{{ category }}', '{{ item.id }}', '{{ item.img_file.url }}');"/>
                                         <img src="{{ item.img_file.url }}">
                                 {% endif %}
                             </label>
@@ -99,25 +105,137 @@
                         </div>
                     {% endfor %}
                 </div>
+                <div id="shop-popup" style="visibility: hidden;">
+                    <span class="top-banner">
+                        <button onclick="closeWithoutBuying()">X</button>
+                    </span>
+                    <br>
+                    <img src="/images/blank_placeholder.png">
+                    <p id="item-price">$100</p>
+                    <button id="buy-button" onclick="buyAndClose()">Buy!</button>
+                </div>
             </div>
         </div>
     </header>
     <script>
-        function initChecked() {
+        function getCookie(name) {
+            // function provided by Django docs
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
 
+        const points_elem = document.querySelector("#points_amount");
+        // currently using points as coins, until coins are implemented
+        let coins = parseInt(points_elem.textContent);
+        
+        let selectedItemIds = {};
+        function initSelectedItems() {
+            // add IDs of all selected items (checked radio buttons) to dictionary
+            selectedItems = document.querySelectorAll(".item > [type=radio]:checked");
+            selectedItems.forEach(item => {
+                category = item.name.replace("avatar-", "");
+                selectedItemIds[category] = item.id.replace("item-", "");
+            });
         }
-        function updateAvatarDisplay(category, img_file_path) {
+        function updateAvatarPreview(category, imgSrc) {
             // swap images in frontend display to reflect changes to avatar
-            area = document.querySelector(".avatar."+category);
-            console.log(area);
-            area.src = img_file_path;
+            elem = document.querySelector(".avatar."+category);
+            elem.src = imgSrc;
         }
+        function updateAvatarSelection(category, itemId, imgSrc) {
+            // update selectedItems object
+            selectedItemIds[category] = itemId;
+            updateAvatarPreview(category, imgSrc);
+        }
+
+        const shopPopupElem = document.querySelector("#shop-popup");
+        let popupCategory = "";
+        let popupItemId = "";
+        function openShopPopup(category, itemId, imgSrc) {
+            popupCategory = category;
+            popupItemId = itemId;
+            // avoid showing popup item as selected (checked) until it has been bought
+            if (selectedItemIds[category] == "none") {
+                document.querySelector("."+category+" .item > [type=radio]").checked = true;
+            } else {
+                document.querySelector("#item-"+selectedItemIds[category]).checked = true;
+            }
+            // disable shop tab and item buttons when popup is active
+            document.querySelectorAll("[class$='tab-button'], .item > [type=radio]").forEach(tabButton => 
+                tabButton.disabled = true);
+            shopPopupElem.querySelector("img").src = imgSrc;
+            shopPopupElem.style.visibility = "visible";
+            // prevent purchase if user doesn't have required coins
+            if (coins < 1) {
+                shopPopupElem.querySelector("#buy-button").disabled = true;
+                shopPopupElem.querySelector("#buy-button").textContent = "Not enough coins!"
+            }
+            // show preview of item on avatar
+            updateAvatarPreview(category, imgSrc);
+        }
+        function closeShopPopup() {
+            // re-enable all shop buttons
+            document.querySelectorAll("[class$='tab-button'], .item > [type=radio]").forEach(tabButton => 
+                tabButton.disabled = false);
+            shopPopupElem.style.visibility = "hidden";
+        }
+        function buyAndClose() {
+            // save purchase via ajax request
+            fetch("{% url 'buyItem' %}", {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify(popupItemId),
+            });
+            updateAvatarSelection(popupCategory, popupItemId, document.querySelector("#item-"+popupItemId+"+ img").src);
+            coins--;
+            // show newly bought item as selected (checked)
+            document.querySelector("#item-"+selectedItemIds[popupCategory]).checked = true;
+            closeShopPopup();
+        }
+        function closeWithoutBuying() {
+            // revert changes made for preview
+            revertImgSrc = "/images/blank_placeholder.png";
+            if (selectedItemIds[popupCategory] != "none") {
+                revertImgSrc = document.querySelector("#item-"+selectedItemIds[popupCategory]+"+ img").src;
+            }
+            updateAvatarPreview(popupCategory, revertImgSrc);
+            closeShopPopup();
+        }
+
+        function saveAvatar() {
+            // post changes to avatar so they can be saved in the database
+            // format ajax request
+            fetch("{% url 'profile' %}", {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify(selectedItemIds),
+            });
+        }
+
         class TabSwitcher {
             constructor(currentTab) {
                 this.currentTab = currentTab;
             }
             switchTabAuto(tab) {
-                console.log(tab)
                 document.getElementById(this.currentTab).style.visibility = "hidden";
                 document.getElementById(tab).style.visibility = "visible";
                 this.currentTab = tab;
@@ -125,6 +243,9 @@
         }
         let shop = new TabSwitcher("shop-colour-tab");
         let wardrobe = new TabSwitcher("shop-colour-tab");
+
+        window.onload = () => {initSelectedItems()}
+        window.onunload = () => {saveAvatar()}
     </script>
 </body>
 </html>

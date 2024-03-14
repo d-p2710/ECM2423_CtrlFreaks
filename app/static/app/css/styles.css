@@ -6,10 +6,6 @@ body {
     width: 100%;
 }
 
-.shop::after {
-    content: "desktop view"
-}
-
 a {
     text-decoration: none;
 }
@@ -146,11 +142,14 @@ button[type=submit]:hover {
 }
 
 .shop {
+    position: relative;
     grid-area: sideLt;
     align-self: centre;
     justify-self: center; 
     display: block; 
     margin-left: 20px;
+    height: 382px;
+    width: 350px;
 }
 
 [type=radio] {
@@ -158,6 +157,14 @@ button[type=submit]:hover {
     opacity: 0;
     height: 0;
     width: 0;
+}
+
+[type=radio] + img {
+    cursor: pointer;
+}
+
+[type=radio]:disabled + img {
+    cursor: default;
 }
 
 .tab-buttons {
@@ -175,7 +182,6 @@ button[type=submit]:hover {
 .tab-buttons [type=radio] + img {
     background-color: #aaa;
     border-radius: 6px 6px 0 0;
-    cursor: pointer;
     padding: 0 19px;
     margin: 0;
 }
@@ -218,7 +224,6 @@ button[type=submit]:hover {
     /* background-color: #ddd; */
     border: 2px solid #f2f2f2;
     border-radius: 6px;
-    cursor: pointer;
     padding: 0 5px;
     margin: 0;
     height: 95px;
@@ -234,6 +239,46 @@ button[type=submit]:hover {
 
 .unowned::after {
     content: "$100";
+}
+
+#shop-popup {
+    position: relative;
+    bottom: 86%;
+    left: 18%;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    width: 60%;
+    background-color: white;
+    border-radius: 4px;
+}
+
+#shop-popup button {
+    cursor: pointer;
+}
+
+#shop-popup .top-banner {
+    display: block;
+    height: 28px;
+    width: 100%;
+    background-color: #77b192;
+    border-radius: 4px 4px 0 0;
+}
+
+#shop-popup > * {
+    margin: 0 auto 0 auto;
+}
+
+#shop-popup .top-banner > button {
+    float: right;
+}
+
+#shop-popup img {
+    height: 180px;
+    margin-top: -20%;
+    /* border: 2px solid #aaa; */
 }
 
 /* end zj274 */
