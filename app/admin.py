@@ -1,7 +1,6 @@
 from django.contrib import admin
 from app.models import Marker, QRCode
 from django.http import HttpResponse
-from PIL import Image
 from io import BytesIO
 import base64
 import qrcode
