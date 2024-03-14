@@ -1,0 +1,151 @@
+body {
+    display: block;
+    margin: 0;
+    font-family: "Outfit";
+}
+
+.home {
+    margin-top: 5px;
+    margin-left: 2px;
+    cursor: pointer;
+    background-color: #4b7b76;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.home:hover {
+    background-color: #c0c9e9;
+    color: #312621;
+}
+
+ul {
+    margin-bottom: 0px;
+    font-size: 18px;
+    list-style-type: circle;
+}
+
+h2 {
+    margin-top: 0px;
+}
+
+.question-block {
+    padding-left: 5px;
+    padding-bottom: 5px;
+    margin-top: 0px;
+    background: #bddbd6;
+}
+
+.user-selected {
+    font-weight: bold;
+    list-style-type: disc;
+}
+
+.correct {
+    color: #124d37;
+}
+
+.incorrect {
+    color: #a01d2c;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+button[type=submit] {
+    background-color: #77b192;
+    overflow: hidden;
+    border: none;
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+button[type=submit]:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+img {
+    width: 100px;
+}
+
+h11 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+h1 {
+    background-color: #77b192;
+    margin-top: 0;
+    margin-bottom: -10px;
+    padding: 20px 20px 20px 10px;
+}
+
+h2.Side {
+    margin-right: 10px;
+    float: right;
+}
+
+h2 {
+    margin-left: 10px;
+}
+
+p {
+    margin-left: 10px;
+}
+
+img {
+    margin-left: 10px;
+}
+
+/* mm1224 */
+
+.centre {
+    margin: 8px;
+}
+
+.topnav {
+    background-color: #77b192;
+    overflow: hidden;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #4b7b76;
+    color: white;
+  }
