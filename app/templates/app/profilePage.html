@@ -4,30 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Profile</title>
+    <title>Profile Page</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
     <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
     <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'app/css/styles_mobile.css' %}" />
     <link rel="stylesheet" media="screen and (min-width:641px)" href="{% static 'app/css/styles.css' %}" />
 </head>
 <body>
-    <header>
-        <div class="topnav">
-            <a href="{% url 'home' %}">Home</a>
-            <a class="active" href="/profile">My Profile</a>
-            <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
-            <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
-                <button type="submit">Log Out</button>
-            </form>
-        </div>
-        <!-- css formatted display -mm1224 -->
+    <div class="container">
         <div class="item-a">
-            <h2><b>My Profile</b></h2>
+            <div class="topnav">
+                <a href="{% url 'home' %}">Home</a>
+                <a class="active" href="/profile">Profile</a>
+                <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
+                    <button type="submit">Log Out</button>
+                </form>
+            </div>
         </div>
-        <div class="container">
-            <div class="item-b">
+    </div>
+    <!-- css formatted display -mm1224 -->
+    <header>
+        <h2><b>My Profile</b></h2>
+    </header>
+    <div class="container">
+        <div class="item-b">
                 <div class="avatar">
                     {% for category, item in selected_items.items %}
                         {% if item %}
