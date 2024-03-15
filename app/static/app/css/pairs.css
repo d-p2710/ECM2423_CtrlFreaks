@@ -1,0 +1,308 @@
+.game-container {
+    overflow: hidden;
+    display: grid;
+    background: #878791;
+    border-radius: 8px;
+    box-shadow: 5px 5px #CEFCFD;
+    height: 500px;
+    width: 80%;
+    max-width: 800px;
+    margin: 32px auto;
+}
+
+.game-container > * {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    height: inherit;
+}
+
+#start-screen {
+    visibility: visible;
+    padding: 24px;
+    text-align: center;
+    z-index: 5;
+}
+
+#start-screen h2 {
+    display: block;
+    background: blue;
+    border-radius: 3px;
+    width: 410px;
+    margin: 34px auto 42px auto;
+}
+
+
+#start-screen h4 {
+    border-left: 3px solid #ff62bb;
+    border-right: 3px solid #ff62bb;
+    border-radius: 3px;
+    font-size: 26px;
+    margin: 0 12px 42px 12px;
+}
+
+.start-info {
+    border-left: 3px solid #71fccf;
+    border-right: 3px solid #71fccf;
+    border-radius: 2px;
+    font-size: 24px;
+    margin: 24px 12px 0 12px;
+    padding: 0 3px;
+}
+
+.start-info > * {
+    margin: 0;
+}
+
+.start-info p:first-of-type {
+    padding-bottom: 16px;
+}
+
+.start-info p:last-of-type {
+    padding-bottom: 6px;
+}
+
+#start-screen button {
+    margin-top: 42px;
+}
+
+#difficulty-screen {
+    visibility: hidden;
+    display: block;
+    z-index: 4;
+}
+
+#difficulty-screen h1 {
+    text-align: center;
+    margin: 24px 0;
+}
+
+.gamemode {
+    height: 300px;
+    width: 50%;
+}
+
+#classic {
+    float: left;
+    background: #ff62bb;
+    border-bottom-left-radius: 8px;
+}
+
+#hardcore {
+    float: right;
+    background: #53b9ff;
+    border-bottom-right-radius: 8px;
+}
+
+.heading-section {
+    display: block;
+    height: 100px;
+    width: 320px;
+    margin: 0 12px;
+}
+
+.heading-section h2 {
+    float: right;
+    margin: 12px 24px 0 0;
+}
+
+#level-transition {
+    visibility: hidden;
+    display: block;
+    text-align: center;
+    z-index: 3;
+}
+
+#level-transition .screen-title {
+    display: block;
+    background: blue;
+    border-radius: 3px;
+    width: 320px;
+    margin: 34px auto 42px auto;
+}
+
+#level-transition h3 {
+    font-size: 32px;
+}
+
+#level-transition h4, .right-panel li{
+    font-size: 26px;
+}
+
+#level-transition h5 {
+    font-size: 20px;
+}
+
+#level-transition h3 {
+    margin: 0;
+}
+
+.left-panel, .right-panel {
+    height: 300px;
+}
+
+.left-panel {
+    float: left;
+    width: 55%;
+}
+
+.total-score-section {
+    border: 6px solid #71fccf;
+    border-radius: 4px;
+    width: 45%;
+    margin: 16px auto;
+    padding: 0 8px;
+}
+
+.total-score-section > * {
+    margin: 8px;
+}
+
+#total-score{
+    background: #0094fb;
+    margin-bottom: 12px;
+}
+
+.right-panel {
+    float: right;
+    width: 45%;
+    text-align: left;
+}
+
+.right-panel ul {
+    display: inline-block;
+    /* list-style-image: url("plus-bullet-point.png"); */
+}
+
+.right-panel li {
+    height: 26px;
+    padding: 0 0 8px 10px;
+}
+
+#level-total {
+    margin: 24px 0 0 36px;
+}
+
+#end-screen {
+    visibility: hidden;
+    text-align: center;
+    z-index: 2;
+}
+
+#end-screen h2 {
+    display: block;
+    background: blue;
+    border-radius: 3px;
+    font-size: 42px;
+    width: 500px;
+    margin: 34px auto 0 auto;
+    padding: 4px 8px;
+}
+
+#final-score {
+    display: block;
+    border: 5px solid #71fccf;
+    border-radius: 4px;
+    font-size: 60px;
+    width: 650px;
+    margin: 60px auto;
+    padding: 12px;
+}
+
+.end-screen-buttons {
+    display: block;
+    height: 100px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.end-screen-buttons > * {
+    float: left;
+    font-size: 18px;
+    margin: 0 3%;
+}
+
+#gameplay-screen {
+    overflow: hidden;
+    visibility: hidden;
+    display: flex;
+    justify-content: right;
+    z-index: 1;
+}
+
+#hud-sidebar {
+    flex-grow: 0;
+    flex-shrink: 0;
+    background: #53b9ff;
+    border-radius: 0 8px 8px 0;
+    text-align: center;
+    height: inherit;
+    width: 84px;
+    min-width: 84px;
+}
+
+#score, #attempts{
+    margin-bottom: 24px;
+}
+
+#time {
+    margin-bottom: 148px;
+}
+
+#cards-area {
+    flex-grow: 1;
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+    width: 600px;
+}
+
+#cards-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.card {
+    align-self: center;
+    justify-self: center;
+    flex-grow: 1;
+    display: grid;
+    border-radius: 4px;
+    height: 104px;
+    width: 82px;
+    margin: 8px;
+}
+
+.card > * {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    border-radius: inherit;
+    height: inherit;
+    width: inherit;
+}
+
+.card .back {
+    background: #ff62bb;
+    border: 1px solid white;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.card .back:hover {
+    transform: scale(110%);
+}
+
+.card .front {
+    visibility: hidden;
+    display: grid;
+    background: white;
+    z-index: 2;
+}
+
+.card .front > * {
+    align-self: center;
+    justify-self: center;
+    height:72px;
+    width: 72px;
+}

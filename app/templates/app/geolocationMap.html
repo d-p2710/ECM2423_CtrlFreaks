@@ -87,6 +87,22 @@
         zoom: 5 // starting zoom
     });
     map.fitBounds(bounds, {padding: 20});
+
+
+    fetch('get_markers')  
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            data.forEach(marker => {
+                new mapboxgl.Marker()
+                    .setLngLat([marker.longitude, marker.latitude])
+                    .addTo(map);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching markers:', error);
+        });
+
     navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
         

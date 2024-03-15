@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Pairs</title>
+    <link rel="stylesheet" href="{% static 'app/css/pairs.css' %}">
+</head>
+<body>
+<div id="main">
+    <div class="game-container">
+        <div id="start-screen">
+            <h2>Welcome to Pairs</h2>
+            <h4>Try to find the matching cards as quickly as possible!</h4>
+            <div class="start-info">
+                <p>
+                    As you progress, the difficulty will increase - look out for later levels where
+                    you'll have to find matching sets of 3 or 4.
+                </p>
+                <p>Aim to keep your number of attempts low for the best score!</p>
+            </div>
+            <button onclick="initNewGame();pairsGame.switchTabAuto('gameplay-screen')">Start the game</button>
+        </div>
+        <div id="level-transition">
+            <!-- Used to show score breakdown between levels -->
+            <h2 class="screen-title">Level Complete!</h2>
+            <div class="left-panel">
+                <div class="total-score-section">
+                    <h3>Total score:</h3>
+                    <h2 id="total-score">0</h2>
+                </div>
+                <h3 id="difficulty-warning"></h3>
+            </div>
+            <div class="right-panel">
+                <ul>
+                    <li id="base-points"></li><br>
+                    <li id="attempts-bonus"></li><br>
+                    <li id="time-bonus"></li>
+                </ul>
+                <h4 id="level-total"></h4>
+            </div>
+            <span id="level-transition-exit"><button onclick="currentGame.initLevel();
+                pairsGame.switchTabManual('level-transition', 'gameplay-screen')">Next level ></button></span>
+        </div>
+        <div id="end-screen">
+            <h2>Thanks for playing!</h2>
+            <h1 id="final-score"></h1>
+            <div class="end-screen-buttons">
+                <button onclick="initNewGame();pairsGame.switchTabAuto('gameplay-screen')">Play Again</button>
+<!--                <form id="score-poster" action="leaderboard.php" method="post">-->
+<!--                    <input type="hidden" id="score-summary" name="score-summary">-->
+<!--                    <input type="hidden" name="test-input" value="test-test">-->
+<!--                    <input type="submit" value="Submit to leaderboard">-->
+<!--                </form>-->
+            </div>
+        </div>
+        <div id="gameplay-screen">
+            <div id="cards-area">
+                <div id="cards-grid">
+                </div>
+            </div>
+            <div id="hud-sidebar">
+                <!-- Keep key information visible to the player -->
+                <h4>Score</h4>
+                <h3 id="score">0</h3>
+                <h4>Attempts</h4>
+                <h3 id="attempts">0</h3>
+                <h4>Time</h4>
+                <h3 id="time">0:00</h3>
+                <h4 id="level">Card Level: {{ card_level }}</h4>
+                <h4 id="numToMatch">Match: 2</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.cardLevel = {{ card_level }};
+    class TabSwitcher {
+        constructor(currentTab) {
+            this.currentTab = currentTab;
+        }
+        switchTabAuto(tab) {
+            document.getElementById(this.currentTab).style.visibility = "hidden";
+            document.getElementById(tab).style.visibility = "visible";
+            this.currentTab = tab;
+        }
+
+        switchTabManual(currentTab, newTab) {
+            // used when tab switch has been triggered by reload/a different script
+            // as this.currentTab becomes de-synced
+            document.getElementById(currentTab).style.visibility = "hidden";
+            document.getElementById(newTab).style.visibility = "visible";
+            this.currentTab = newTab;
+        }
+    }
+    let pairsGame = new TabSwitcher("pairsGame");
+</script>
+<script type="text/javascript" src="{% static 'app/js/pairs.js' %}"></script>
+{% if username %}
+<script>setAsRegistered()</script>
+{% endif %}
+</body>
+</html>

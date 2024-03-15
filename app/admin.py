@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Marker, QRCode
+from app.models import Marker, QRCode, CrosswordQuestion
 from django.http import HttpResponse
 from PIL import Image
 from io import BytesIO
@@ -9,6 +9,7 @@ import qrcode
 # Register your models here.
 admin.site.register(Marker)
 admin.site.register(QRCode)
+admin.site.register(CrosswordQuestion)
 
 class QRCodeAdmin(admin.ModelAdmin):
     readonly_fields = ['qr_image_base64']

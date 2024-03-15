@@ -111,7 +111,22 @@
         zoom: 5 // starting zoom
     });
 
-    {% for marker in markers %}
+    fetch('../getMarkers')  
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            data.forEach(marker => {
+                new mapboxgl.Marker()
+                    .setLngLat([marker.longitude, marker.latitude])
+                    .addTo(map);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching markers:', error);
+        });
+
+
+    {% for marker in Marker %}
     new mapboxgl.Marker()
         .setLngLat([{{ marker.longitude }}, {{ marker.latitude }}])
         .addTo(map);
