@@ -5,3 +5,8 @@ body {
 .btn-dark {
     background-color: #4b7b76;
 }
+
+.col-md-12 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
