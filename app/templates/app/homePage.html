@@ -27,9 +27,11 @@
     <header>
         <h2>Welcome!</h2>
     </header>
-    <div class="item-b">
-        <p>Click the QR code to go to the QR code scanner!</p>
-        <a href="{% url 'game_map' %}"><img src="{% static 'app/images/qr-code-scan-svgrepo-com.svg' %}" alt="QR Scanner"></a>
+    <div class="container">
+        <div class="item-c">
+            <p>Click the QR code to go to the QR code scanner!</p>
+            <a href="{% url 'game_map' %}"><img src="{% static 'app/images/qr-code-scan-svgrepo-com.svg' %}" alt="QR Scanner"></a>
+        </div>
     </div>
 </body>
 </html>
