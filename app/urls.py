@@ -7,6 +7,8 @@ from .views import *
 urlpatterns = [
     path('homePage/', views.home_page, name='home'),
     path('profile/', profile, name='profile'),
+    path('saveAvatar', views.save_avatar, name='saveAvatar'),
+    path('buyItem', views.buy_item, name='buyItem'),
     path('qr-generator/', views.qr_generator, name='qr_generator'),
     path('qr-scanner/', qr_scanner, name='qr_scanner'),
     path('geolocationMap/', views.geolocation_map, name='geolocation_map'),

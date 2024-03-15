@@ -1,24 +1,77 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from PIL import Image
 from io import BytesIO
 import base64
-from users.models import Profile, Avatar
+from users.models import Profile, Avatar, Item, OwnedItem
 from django.http import HttpResponse
+import json
 
 #page views
 def home_page(request):
     return render(request, 'app/homePage.html')
 
 def profile(request):
+
+    def sortItemsByType(item_list):
+        # take list of items, return dictionary sorted by category
+        items_dict = {"colour":[], "mouth":[], "eyes":[], "headwear":[], "accessory":[]}
+        for item in item_list:
+            items_dict[item.category].append(item)
+        return items_dict
+    
     marker = request.user.id
-    profile = Profile.objects.filter(user=marker)[0]
-    avatar = Avatar.objects.filter(profile=profile)[0]
-    context = {
-        'profile_data': profile,
-        'avatar_data': avatar,
-    }
-    return render(request, 'app/profilePage.html', context)
-    # return HttpResponse(avatar.colour.img_file.url)
+    profile = Profile.objects.get(user=marker)
+    avatar = Avatar.objects.get(profile=profile)
+    if request.method == "GET":
+        all_items = sortItemsByType(Item.objects.all())
+        owned_item_ids = []
+        owned_item_relations = OwnedItem.objects.filter(profile=profile)
+        for relation in owned_item_relations:
+            owned_item_ids.append(relation.item.id)
+        seleted_items = {"colour": avatar.colour,
+                         "mouth": avatar.mouth,
+                         "eyes": avatar.eyes, 
+                         "headwear": avatar.headwear,
+                         "accessory": avatar.accessory}
+        context = {
+            'profile_data': profile,
+            'avatar_data': avatar,
+            'all_items': all_items,
+            'owned_item_ids': owned_item_ids,
+            'selected_items': seleted_items,
+        }
+        return render(request, 'app/profilePage.html', context)
+    
+def save_avatar(request):
+    # this view is only for backend processing - it has no associated webpage
+    # save user's selected items to their profile avatar
+    if request.method == "POST":
+        data = json.load(request)
+        marker = request.user.id
+        profile = Profile.objects.get(user=marker)
+        avatar = Avatar.objects.get(profile=profile)
+        for category, item_id in data.items():
+            if item_id == "none":
+                setattr(avatar, category, None)
+            else:
+                setattr(avatar, category, Item.objects.get(id=item_id))
+        avatar.save()
+        return redirect(to='profile')
+
+def buy_item(request):
+    # this view is only for backend processing - it has no associated webpage
+    # create OwnedItem instances and deduct coins in reponse to ajax requests
+    if request.method == "POST":
+        item_id = json.load(request)
+        marker = request.user.id
+        profile = Profile.objects.get(user=marker)
+        item = Item.objects.get(pk=item_id)
+        new_owned_item = OwnedItem(profile=profile, item=item)
+        new_owned_item.save()
+        profile.coins_amount -= item.price
+        profile.save()
+    return redirect(to='profile')
+
 
 #avatar shop views
 # def avatar(request):
