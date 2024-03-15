@@ -105,20 +105,29 @@ button[type=submit]:hover {
 
     img {
         display: block;
-        float: left;
+        float: none;
         margin-left: auto;
         margin-right: auto;
         width: 40%;
         text-size-adjust: auto;
     }
 
-    text-align: left;
+    text-align: center;
 }
 
 .item-c {
     grid-area: sideLt;
     place-self: centre;
     justify-self: center;
+
+    img {
+        display: block;
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        text-size-adjust: auto;
+        width: 80%;
+    }
 
     text-align: center;
 }
@@ -299,7 +308,6 @@ button[type=submit]:hover {
 
     grid-template-areas: 
     "top top top"
-    "t1 t2 t3"
     "sideLt main sideRt"
     "sideLb main sideRb";
 }
