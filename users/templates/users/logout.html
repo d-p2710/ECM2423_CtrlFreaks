@@ -1,15 +1,38 @@
 {% extends "users/base.html" %}
-{% block title %}Logout{% endblock title %}
+{% load static %}
+{% block title %} Logout {% endblock title %}
 {% block content %}
+
 <!-- Page displayed when a user logs out of their account -->
+<link rel="stylesheet" href="{% static 'users/logout.css' %}">
+<!--
 <div class="card" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">You have been logged out</h5>
         <p class="card-text">
             Thanks for your time, contact me for any comments or suggestions using my email address.
-        </p>
+        </p> -->
         <!-- Button to redirect users to the sign in page after logging out -->
-        <br><hr><a href="{% url 'login' %}" class="btn btn-primary">Sign in again</a>
+        <!-- <br><hr><a href="{% url 'login' %}" class="btn btn-primary">Sign in again</a>
+    </div>
+</div>
+-->
+<div class="form-content my-3 p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">You have been logged out</h5>
+                        <p class="card-text">
+                            Thanks for your time, contact me for any comments or suggestions using my email address.
+                        </p>
+                        <!-- Button to redirect users to the sign in page after logging out -->
+                        <br><hr><a href="{% url 'login' %}" class="col-md-12 btn btn-dark">Sign in again</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
