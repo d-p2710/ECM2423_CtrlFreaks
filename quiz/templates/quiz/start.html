@@ -3,7 +3,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'quiz/start.css' %}">
+    <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'quiz/start_mobile.css' %}" />
+    <link rel="stylesheet" media="screen and (min-width:641px)" href="{% static 'quiz/start.css' %}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
   </head>
   <header>

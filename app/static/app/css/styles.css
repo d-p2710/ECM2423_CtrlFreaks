@@ -22,6 +22,7 @@ h1 {
     padding: 20px 20px 20px 10px;
 }
 
+/* note: what is this used for?? */
 h2.Side {
     margin-right: 10px;
     float: right;
@@ -46,6 +47,7 @@ img {
 .topnav {
     background-color: #77b192;
     overflow: hidden;
+    cursor: pointer;
 }
 
 /* Style the links inside the navigation bar */
@@ -92,7 +94,7 @@ button[type=submit]:hover {
 
 /*header*/
 .item-a {
-    grid-area: head;
+    grid-area: top;
 }
 
 /*central column*/
@@ -106,7 +108,16 @@ button[type=submit]:hover {
         margin-left: auto;
         margin-right: auto;
         width: 40%;
+        text-size-adjust: auto;
     }
+
+    text-align: center;
+}
+
+.item-c {
+    grid-area: sideLt;
+    place-self: centre;
+    justify-self: center;
 
     text-align: center;
 }
@@ -283,10 +294,11 @@ button[type=submit]:hover {
 .container {
     display: grid;
     grid-template-columns: [c1] 1fr [c2] 2fr [c3] 1fr;
-    grid-template-rows: [r1] 50px [r2] 1fr [r3] 1fr;
+    grid-template-rows: [r1] 50px [r2] 40px [r3] 1fr [r4] 1fr;
 
     grid-template-areas: 
-    "head head head"
+    "top top top"
+    "t1 t2 t3"
     "sideLt main sideRt"
     "sideLb main sideRb";
 }
