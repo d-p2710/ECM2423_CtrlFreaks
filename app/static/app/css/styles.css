@@ -105,9 +105,10 @@ button[type=submit]:hover {
 
     img {
         display: block;
+        float: left;
         margin-left: auto;
         margin-right: auto;
-        width: 40%;
+        width: 20%;
         text-size-adjust: auto;
     }
 
