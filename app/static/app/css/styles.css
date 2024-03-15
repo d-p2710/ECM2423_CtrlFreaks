@@ -55,7 +55,7 @@ img {
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 40px 20px 40px 20px;
+    padding: 40px 20px 41px 20px;
     text-decoration: none;
     font-size: 17px;
 }
@@ -105,13 +105,14 @@ button[type=submit]:hover {
 
     img {
         display: block;
+        float: left;
         margin-left: auto;
         margin-right: auto;
         width: 40%;
         text-size-adjust: auto;
     }
 
-    text-align: center;
+    text-align: left;
 }
 
 .item-c {

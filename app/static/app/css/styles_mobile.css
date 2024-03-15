@@ -38,6 +38,23 @@ img {
     margin-left: 10px;
 }
 
+/*central column*/
+.item-b {
+    grid-area: main;
+    place-self: centre;
+    justify-self: center;
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        text-size-adjust: auto;
+    }
+
+    text-align: center;
+}
+
 /*mm1224*/
 /* Navigation bar styling*/
 
@@ -53,7 +70,7 @@ img {
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 40px 20px 40px 20px;
+    padding: 40px 20px 41px 20px;
     text-decoration: none;
     font-size: 17px;
 }
