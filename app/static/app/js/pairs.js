@@ -22,9 +22,31 @@ levelVariables = [
 ];
 
 // leave "normal" out of set because it's too similar to "long" and might lead to confusion for the player
-let eyesSet = ["dot", "default", "confused"];
-let mouthSet = ["uwu"];
-let skinSet = ["earth", "pink", "purple", "sky_blue", "turquoise", "default_green"];
+let eyesSet = [];
+let mouthSet = [];
+let colourSet = [];
+
+// Fetch image URLs for each type from Django views
+fetch('/workspaces/ECM2423_CtrlFreaks/users/get_images_by_type/eyes')
+  .then(response => response.json())
+  .then(data => {
+    // Populate eyesSet with received image URLs
+    eyesSet = data.image_urls;
+  });
+
+fetch('/workspaces/ECM2423_CtrlFreaks/users/get_images_by_type/mouth')
+  .then(response => response.json())
+  .then(data => {
+    // Populate mouthSet with received image URLs
+    mouthSet = data.image_urls;
+  });
+
+fetch('/workspaces/ECM2423_CtrlFreaks/users/get_images_by_type/colour')
+  .then(response => response.json())
+  .then(data => {
+    // Populate colourSet with received image URLs
+    colourSet = data.image_urls;
+  });
 
 const gameplayScreen = document.getElementById("gameplay-screen");
 const levelTransition = document.getElementById("level-transition");
@@ -69,7 +91,7 @@ class Game {
         index = Math.floor(Math.random() * 6);
         emoji += mouthSet[index] + "/";
         index = Math.floor(Math.random() * 3);
-        emoji += skinSet[index];
+        emoji += colourSet[index];
         return emoji;
     }
     updateScoreDisplay() {
@@ -146,7 +168,7 @@ class Game {
                 "\t<div class=\"front\" style=\"visibility: hidden\">\n" +
                 "\t\t<img class=\"stacked-emoji-eyes\" src=\"emoji-assets/eyes/" + card[0] + ".png\">\n" +
                 "\t\t<img class=\"stacked-emoji-mouth\" src=\"emoji-assets/mouth/" + card[1] + ".png\">\n" +
-                "\t\t<img class=\"stacked-emoji-skin\" src=\"emoji-assets/skin/" + card[2] + ".png\">\n" +
+                "\t\t<img class=\"stacked-emoji-skin\" src=\"emoji-assets/colour/" + card[2] + ".png\">\n" +
                 "\t</div>\n</div>";
             cardsGrid.appendChild(cardElem);
             numToPlace--;

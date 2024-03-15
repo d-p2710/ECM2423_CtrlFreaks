@@ -5,6 +5,8 @@ import base64
 from users.models import Profile, Avatar, Item, OwnedItem
 from django.http import HttpResponse
 import json
+from django.http import JsonResponse
+from users.models import Item 
 
 #page views
 def home_page(request):
@@ -116,3 +118,14 @@ def pairs_game(request):
     username = request.session.get('username')
     card_level = int(request.COOKIES.get('card_level', 1))
     return render(request, 'app/pairs.html', {'username': username, 'card_level': card_level})
+
+# getting the images from the user database
+def get_images_by_type(request, image_type):
+    # Query the database for images based on the given type
+    items = Item.objects.filter(category=image_type)
+    
+    # Create a dictionary to store image URLs
+    image_urls = [item.img_file.url for item in items]
+    
+    # Return the image URLs as JSON response
+    return JsonResponse({'image_urls': image_urls})
