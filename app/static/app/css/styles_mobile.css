@@ -208,9 +208,6 @@ button[type=submit]:hover {
     content: "Owned!";
 }
 
-.unowned::after {
-    content: "$100";
-}
 /* end zj274 */
 
 
