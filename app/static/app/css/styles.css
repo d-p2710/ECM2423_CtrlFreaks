@@ -22,6 +22,7 @@ h1 {
     padding: 20px 20px 20px 10px;
 }
 
+/* note: what is this used for?? */
 h2.Side {
     margin-right: 10px;
     float: right;
@@ -62,6 +63,7 @@ img {
 .topnav a:hover {
     background-color: #ddd;
     color: black;
+    cursor: pointer;
 }
 
 /* Add a color to the active/current link */
@@ -78,7 +80,7 @@ button[type=submit] {
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 42px 20px 40px 20px;
+    padding: 43px 20px 40px 20px;
     text-decoration: none;
     font-size: 17px;
 }
@@ -86,13 +88,14 @@ button[type=submit] {
 button[type=submit]:hover {
     background-color: #ddd;
     color: black;
+    cursor: pointer;
 }
 
 /* Centralisation for profile page */
 
 /*header*/
 .item-a {
-    grid-area: head;
+    grid-area: top;
 }
 
 /*central column*/
@@ -106,7 +109,16 @@ button[type=submit]:hover {
         margin-left: auto;
         margin-right: auto;
         width: 40%;
+        text-size-adjust: auto;
     }
+
+    text-align: center;
+}
+
+.item-c {
+    grid-area: sideLt;
+    place-self: centre;
+    justify-self: center;
 
     text-align: center;
 }
@@ -238,10 +250,11 @@ button[type=submit]:hover {
 .container {
     display: grid;
     grid-template-columns: [c1] 1fr [c2] 2fr [c3] 1fr;
-    grid-template-rows: [r1] 50px [r2] 1fr [r3] 1fr;
+    grid-template-rows: [r1] 50px [r2] 40px [r3] 1fr [r4] 1fr;
 
     grid-template-areas: 
-    "head head head"
+    "top top top"
+    "t1 t2 t3"
     "sideLt main sideRt"
     "sideLb main sideRb";
 }

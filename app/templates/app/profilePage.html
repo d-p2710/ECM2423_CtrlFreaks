@@ -4,57 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <title>Profile Page</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
     <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
     <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'app/css/styles_mobile.css' %}" />
     <link rel="stylesheet" media="screen and (min-width:641px)" href="{% static 'app/css/styles.css' %}" />
 </head>
 <body>
-    <header>
-        <div class="topnav">
-            <a href="{% url 'home' %}">Home</a>
-            <a class="active" href="/profile">My Profile</a>
-            <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
-            <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
-                <button type="submit">Log Out</button>
-            </form>
-        </div>
-        <!-- css formatted display -mm1224 -->
+    <div class="container">
         <div class="item-a">
-            <h2><b>My Profile</b></h2>
-        </div>
-        <div class="container">
-            <div class="item-b">
-                <div class="avatar">
-                    <img class="avatar colour" src="{{ avatar_data.colour.img_file.url }}" alt="default">
-                    <!-- <img class="avatar-outline" src="/images/outline.png"> -->
-                    <img class="avatar mouth" src="{{ avatar_data.mouth.img_file.url }}" alt="default">
-                    <img class="avatar eyes" src="{{ avatar_data.eyes.img_file.url }}" alt="default">
-                    {% if avatar_data.headwear %}
-                        <img class="avatar headwear" src="{{ avatar_data.headwear.img_file.url }}" alt="default">
-                    {% else %}
-                    <img class="avatar headwear" src="">
-                    {% endif %}
-                    {% if avatar_data.accessory %}
-                        <img class="avatar accessory" src="{{ avatar_data.accessory.img_file.url }}" alt="default">
-                    {% else %}
-                        <img class="avatar accessory" src="">
-                    {% endif %}
-                </div>
-                <h2><b>
-                    <!-- profile data (avatar and points) display -->
-                    <!-- <img src="{{ avatar_data.colour.img_file.url }}" alt="default"> -->
-                    You currently have {{ profile_data.points_amount }} points!
-                </b></h2>
+            <div class="topnav">
+                <a href="{% url 'home' %}">Home</a>
+                <a class="active" href="/profile">Profile</a>
+                <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
+                    <button type="submit">Log Out</button>
+                </form>
             </div>
+        </div>
+    </div>
+    <!-- css formatted display -mm1224 -->
+    <header>
+        <h2><b>My Profile</b></h2>
+    </header>
+    <div class="container">
+        <div class="item-b">
+            <div class="avatar">
+                <img class="avatar colour" src="{{ avatar_data.colour.img_file.url }}" alt="default">
+                <!-- <img class="avatar-outline" src="/images/outline.png"> -->
+                <img class="avatar mouth" src="{{ avatar_data.mouth.img_file.url }}" alt="default">
+                <img class="avatar eyes" src="{{ avatar_data.eyes.img_file.url }}" alt="default">
+                {% if avatar_data.headwear %}
+                    <img class="avatar headwear" src="{{ avatar_data.headwear.img_file.url }}" alt="default">
+                {% else %}
+                <img class="avatar headwear" src="">
+                {% endif %}
+                {% if avatar_data.accessory %}
+                    <img class="avatar accessory" src="{{ avatar_data.accessory.img_file.url }}" alt="default">
+                {% else %}
+                    <img class="avatar accessory" src="">
+                {% endif %}
+            </div>
+            <h2><b>
+                <!-- profile data (avatar and points) display -->
+                <!-- <img src="{{ avatar_data.colour.img_file.url }}" alt="default"> -->
+                You currently have {{ profile_data.points_amount }} points!
+            </b></h2>
+        </div>
+        <div class="item-c">
             <div class="shop">
                 <div class="tab-buttons">
                     <label>
                         <input type="radio" name="tab" class="colour-tab-button" checked="checked"
-                               onclick="shop.switchTabAuto('shop-colour-tab')"/>
+                                onclick="shop.switchTabAuto('shop-colour-tab')"/>
                         <img src="/images/colour_tab_icon.png">
                     </label>
                     <label>
@@ -64,17 +68,17 @@
                     </label>
                     <label>
                         <input type="radio" name="tab" class="eyes-tab-button"
-                               onclick="shop.switchTabAuto('shop-eyes-tab')"/>
+                                onclick="shop.switchTabAuto('shop-eyes-tab')"/>
                         <img src="/images/eyes_tab_icon.png">
                     </label>
                     <label>
                         <input type="radio" name="tab" class="headwear-tab-button"
-                               onclick="shop.switchTabAuto('shop-headwear-tab')"/>
+                                onclick="shop.switchTabAuto('shop-headwear-tab')"/>
                         <img src="/images/eyes_tab_icon.png">
                     </label>
                     <label>
                         <input type="radio" name="tab" class="accessory-tab-button"
-                               onclick="shop.switchTabAuto('shop-accessory-tab')"/>
+                                onclick="shop.switchTabAuto('shop-accessory-tab')"/>
                         <img src="/images/eyes_tab_icon.png">
                     </label>
                 </div>
@@ -101,7 +105,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </div>
     <script>
         function initChecked() {
 

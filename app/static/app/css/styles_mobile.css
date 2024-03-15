@@ -46,6 +46,7 @@ img {
     background-color: #77b192;
     overflow: hidden;
     width: 100%;
+    max-height: 14%;
 }
 
 /* Style the links inside the navigation bar */
@@ -54,20 +55,23 @@ img {
     color: #f2f2f2;
     text-align: center;
     padding: 40px 20px 40px 20px;
+    max-width: fit-content;
+    max-height: 15px;
     text-decoration: none;
-    font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
+    font-size: x-small;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
     background-color: #4b7b76;
     color: white;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+    cursor: pointer;
 }
 
 
@@ -78,9 +82,9 @@ button[type=submit] {
     float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 42px 20px 40px 20px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: x-small;
+    padding: 43px 20px 40px 20px;
 }
 
 button[type=submit]:hover {

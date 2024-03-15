@@ -1,21 +1,38 @@
+<!DOCTYPE html>
 {% load static %}
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'quiz/start.css' %}">
+    <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'quiz/start_mobile.css' %}" />
+    <link rel="stylesheet" media="screen and (min-width:641px)" href="{% static 'quiz/start.css' %}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
   </head>
+  <header>
+    <div class="topnav">
+        <a href="{% url 'home' %}" class="nav-item nav-link" >Home</a>
+        <a href="{% url 'profile' %}" class="nav-item nav-link" >Profile</a>
+        <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
+            <button class="log_out" type="submit">Log Out</button>
+        </form>
+    </div>
+  </header>
   <body>
-    <fieldset>
-      <legend><h1 class="title">{{ quiz.title }}</h1></legend>     
-      <!-- COULD HAVE topic tags system with assigned colours -->
-      {% if quiz.topics %}
-        <p>Topics: {{ quiz.topics }}</p>
-      {% endif %}        
-      <h3>This quiz has {{ quiz.question_set.count }} question(s)</h3>
+    <div class="centre">
+      <fieldset>
+        <legend><h11 class="title">{{ quiz.title }}</h11></legend>
+        <!-- COULD HAVE topic tags system with assigned colours -->
+        {% if quiz.topics %}
+          <p>Topics: {{ quiz.topics }}</p>
+        {% endif %}        
+        <h3>This quiz has {{ quiz.question_set.count }} question(s)</h3>
+      </fieldset>
       <!-- Button redirects to first question in the quiz -->
       <button class="button" onclick="window.location.href='{% url 'quiz:question' quiz.id 1 %}';">Start &rarr;</button>
-    </fieldset>
+    </div>
   </body>
 </html>

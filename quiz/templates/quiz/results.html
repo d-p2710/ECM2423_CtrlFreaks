@@ -3,34 +3,52 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'quiz/results.css' %}">
+    <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'quiz/results_mobile.css' %}" />
+    <link rel="stylesheet" media="screen and (min-width:641px)" href="{% static 'quiz/results.css' %}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
   </head>
+  <header>
+    <div class="topnav">
+        <a href="{% url 'home' %}" class="nav-item nav-link" >Home</a>
+        <a href="{% url 'profile' %}" class="nav-item nav-link" >Profile</a>
+        <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
+            <button type="submit">Log Out</button>
+        </form>
+    </div>
+  </header>
+  </header>
   <body>
-    <fieldset>
-        <legend><h1>{{ quiz.title }}</h1></legend>
-        {% for question in quiz.question_set.all %}
-        <div class="question-block">
-            <h2>{{forloop.counter}}. {{ question.text }}</h2>
-            <ul>
-                {% for answer in question.answer_set.all %}
-                    {% if answer.id in user_answers %}
-                        <span class="user-selected">
-                    {% else %}
-                    <span class="user-did-not-select">
-                    {% endif %}
-                        {% if answer.is_correct %}
-                            <li class="correct">
+    <div class="centre">
+        <fieldset>
+            <legend><h11>{{ quiz.title }}</h11></legend>
+            {% for question in quiz.question_set.all %}
+            <div class="question-block">
+                <h2>{{forloop.counter}}. {{ question.text }}</h2>
+                <ul>
+                    {% for answer in question.answer_set.all %}
+                        {% if answer.id in user_answers %}
+                            <span class="user-selected">
                         {% else %}
-                            <li class="incorrect">
+                        <span class="user-did-not-select">
                         {% endif %}
-                            {{ answer.text }}
-                        </li>
-                    </span>
-                {% endfor %}
-            </ul>
-    {% endfor %}
-    </fieldset>
-    <button class="home" onclick="window.location.href='{% url "home" %}'">Return to home page</button>
+                            {% if answer.is_correct %}
+                                <li class="correct">
+                            {% else %}
+                                <li class="incorrect">
+                            {% endif %}
+                                {{ answer.text }}
+                            </li>
+                        </span>
+                    {% endfor %}
+                </ul>
+        {% endfor %}
+        </fieldset>
+        <button class="home" onclick="window.location.href='{% url "home" %}'">Return to home page</button>
+    </div>
   </body>
 </html>

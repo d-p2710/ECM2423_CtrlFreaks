@@ -3,26 +3,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
     <link rel="stylesheet" href="{% static 'app/css/styles.css' %}">
+    <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'app/css/styles_mobile.css' %}" />
+    <link rel="stylesheet" media="screen and (min-width:641px)" href="{% static 'app/css/styles.css' %}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
 </head>
-<div class="topnav">
-    <a class="active" href="{% url 'home' %}">Home</a>
-    <a href="{% url 'profile' %}" class="nav-item nav-link">Profile</a>
-    <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
-    <form class="log_out" method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
-        <button class="log_out" type="submit">Log Out</button>
-    </form>
-</div>
 
 <body>
+    <div class="container">
+        <div class="item-a">
+            <div class="topnav">
+                <a class="active" href="{% url 'home' %}">Home</a>
+                <a href="{% url 'profile' %}" class="nav-item nav-link">Profile</a>
+                <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
+                <form class="log_out" method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
+                    <button class="log_out" type="submit">Log Out</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <header>
-        <h2>QR Code Scanner</h2>
+        <h2>Welcome!</h2>
     </header>
-    <p>Click the QR code to go to the QR code scanner!</p>
-    <a href="{% url 'game_map' %}"><img src="{% static 'app/images/qr-code-scan-svgrepo-com.svg' %}" alt="QR Scanner"></a>
+    <div class="item-b">
+        <p>Click the QR code to go to the QR code scanner!</p>
+        <a href="{% url 'game_map' %}"><img src="{% static 'app/images/qr-code-scan-svgrepo-com.svg' %}" alt="QR Scanner"></a>
+    </div>
 </body>
 </html>

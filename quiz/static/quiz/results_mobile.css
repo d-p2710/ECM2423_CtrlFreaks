@@ -2,6 +2,7 @@ body {
     display: block;
     margin: 0;
     font-family: "Outfit";
+    text-size-adjust: auto;
 }
 
 .home {
@@ -15,7 +16,7 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .home:hover {
@@ -25,12 +26,13 @@ body {
 
 ul {
     margin-bottom: 0px;
-    font-size: 18px;
+    font-size: 15px;
     list-style-type: circle;
 }
 
 h2 {
     margin-top: 0px;
+    font-size: medium;
 }
 
 .question-block {
@@ -71,12 +73,13 @@ button[type=submit] {
     text-align: center;
     padding: 43px 20px 40px 20px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: x-small;
 }
 
 button[type=submit]:hover {
     background-color: #ddd;
     color: black;
+    cursor: pointer;
 }
 
 img {
@@ -126,26 +129,27 @@ img {
 .topnav {
     background-color: #77b192;
     overflow: hidden;
-  }
+}
   
-  /* Style the links inside the navigation bar */
-  .topnav a {
+/* Style the links inside the navigation bar */
+.topnav a {
     float: left;
     color: #f2f2f2;
     text-align: center;
     padding: 40px 20px 40px 20px;
     text-decoration: none;
-    font-size: 17px;
-  }
-  
-  /* Change the color of links on hover */
-  .topnav a:hover {
+    font-size: x-small;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
     background-color: #ddd;
     color: black;
-  }
+    cursor: pointer;
+}
   
-  /* Add a color to the active/current link */
-  .topnav a.active {
+/* Add a color to the active/current link */
+.topnav a.active {
     background-color: #4b7b76;
     color: white;
-  }
+}
