@@ -265,7 +265,7 @@
         let wardrobe = new TabSwitcher("shop-colour-tab");
 
         window.onload = () => {initSelectedItems()}
-        window.onunload = () => {saveAvatar()}
+        window.onbeforeunload = () => {saveAvatar()}
     </script>
 </body>
 </html>
