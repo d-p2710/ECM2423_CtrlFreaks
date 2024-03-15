@@ -110,3 +110,9 @@ def logout(request):
     if request == 'POST':
         logout(request)
 
+# pairs card game
+def pairs_game(request):
+    # Example: Read session/cookie value
+    username = request.session.get('username')
+    card_level = int(request.COOKIES.get('card_level', 1))
+    return render(request, 'app/pairs.html', {'username': username, 'card_level': card_level})
