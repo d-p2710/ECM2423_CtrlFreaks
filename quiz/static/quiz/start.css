@@ -9,13 +9,12 @@ body {
     margin-top: 5px;
     margin-left: 2px;
     cursor: pointer;
-    padding: 10px;
     background-color: #4b7b76;
     border: none;
     color: white;
+    padding: 10px 10px;
     text-align: center;
     text-decoration: none;
-    font-size: medium;
     display: inline-block;
     font-size: 16px;
 }
