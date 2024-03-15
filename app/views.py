@@ -5,6 +5,9 @@ import base64
 from users.models import Profile, Avatar, Item, OwnedItem
 from django.http import HttpResponse
 import json
+from .models import Marker
+from django.http import HttpResponse
+from django.http import JsonResponse
 
 #page views
 def home_page(request):
@@ -110,3 +113,15 @@ def logout(request):
     if request == 'POST':
         logout(request)
 
+# For fetching markers 
+def get_markers(request):
+    markers = Marker.objects.all()
+    markers_data = [
+        {
+            "id": marker.id,
+            "latitude": marker.latitude,
+            "longitude": marker.longitude,
+        }
+        for marker in markers
+    ]
+    return JsonResponse(markers_data, safe=False)

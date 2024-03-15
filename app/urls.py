@@ -13,4 +13,5 @@ urlpatterns = [
     path('qr-scanner/', qr_scanner, name='qr_scanner'),
     path('geolocationMap/', views.geolocation_map, name='geolocation_map'),
     path('gameMap/', views.game_map, name='game_map'),
+    path('getMarkers/', views.get_markers, name='getMarkers'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
