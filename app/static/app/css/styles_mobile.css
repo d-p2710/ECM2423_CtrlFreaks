@@ -38,6 +38,23 @@ img {
     margin-left: 10px;
 }
 
+/*central column*/
+.item-b {
+    grid-area: main;
+    place-self: centre;
+    justify-self: center;
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        text-size-adjust: auto;
+    }
+
+    text-align: center;
+}
+
 /*mm1224*/
 /* Navigation bar styling*/
 
