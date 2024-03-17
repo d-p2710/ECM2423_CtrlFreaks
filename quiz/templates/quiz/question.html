@@ -11,9 +11,6 @@
         <a href="{% url 'home' %}" class="nav-item nav-link" >Home</a>
         <a href="{% url 'profile' %}" class="nav-item nav-link" >Profile</a>
         <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
-        {% if request.user.is_staff == True %}
-          <a href="{% url 'admin:index' %}">Admin</a>
-        {% endif %}
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
@@ -26,48 +23,72 @@
       <form id="question-set" action="{% url 'quiz:results' quiz.id %}" method="post">
         {% csrf_token %}
         {% for question in quiz.question_set.all %}
-          {% if forloop.first %}
-            <div class="question-panel" style="visibility: visible;">
-          {% else %}
-            <div class="question-panel" style="visibility: hidden;">
-          {% endif %}
-            <fieldset>
-              <legend><h1>{{ question.text }}</h1></legend>
-              {% if question.question_type == "SIN" %}
-                <!-- Radio button answers are posted in the format "question.id=answer.id" -->
-                {% for answer in question.answer_set.all %}
-                  <div class="answer-{{ forloop.counter }}">
-                    <label class="container1">
-                      <input type="radio" name="{{ answer.question.id }}" value="{{ answer.id }}"/>
-                      <span class="checkmark1"></span>
-                      <label for="{{ answer.question.id }}">{{ answer.text }}</label><br>
-                    </label>
-                  </div>
-                {% endfor %}
-              {% else %}
-                <!-- Checkbox answers are posted in the format "question.id-[answer index]=answer.id" -->
-                {% for answer in question.answer_set.all %}
-                  <div class="answer-{{ forloop.counter }}">
-                    <label class="container2">
-                      <input type="checkbox" name="{{ answer.question.id }}-{{ forloop.counter }}" value="{{ answer.id }}"/>
-                      <span class="checkmark2"></span>
-                      <label for="{{ answer.question.id }}-{{ forloop.counter }}">{{ answer.text }}</label><br>
-                    </label>
-                  </div>
-                  {% endfor %}
-              {% endif %}
-            </fieldset>
-            {% if forloop.last %}
-              <input type="submit" value="Results &rarr;"/>
+          <fieldset>
+            <legend><h1>{{ question.text }}</h1></legend>
+            {% if question.question_type == "SIN" %}
+              <!-- Radio button answers are posted in the format "question.id=answer.id" -->
+              {% for answer in question.answer_set.all %}
+                <div class="answer-{{ forloop.counter }}">
+                  <label class="container1">
+                    <input type="radio" name="{{ answer.question.id }}" value="{{ answer.id }}"/>
+                    <span class="checkmark1"></span>
+                    <label for="{{ answer.question.id }}">{{ answer.text }}</label><br>
+                  </label>
+                </div>
+              {% endfor %}
+            {% else %}
+              <!-- Checkbox answers are posted in the format "question.id-[answer index]=answer.id" -->
+              {% for answer in question.answer_set.all %}
+                <div class="answer-{{ forloop.counter }}">
+                  <label class="container2">
+                    <input type="checkbox" name="{{ answer.question.id }}-{{ forloop.counter }}" value="{{ answer.id }}"/>
+                    <span class="checkmark2"></span>
+                    <label for="{{ answer.question.id }}-{{ forloop.counter }}">{{ answer.text }}</label><br>
+                  </label>
+                </div>
+              {% endfor %}
             {% endif %}
-          </div>
+          </fieldset>
         {% endfor %}
+        <input type="submit" onclick="postAnswers()" value="Results &rarr;"/>
       </form>
-      <!-- Only display next button if there is more than one question -->
-      {% if quiz.question_set.all|length > 1 %}
-        <button class="buttons" id="next-q-button" onclick="nextQuestion();">Next &rarr;</button>
-      {% endif %}
+      <!-- <iframe name='formresponse' style="visibility: hidden; width:0; height:0;"></frame> -->
     </div>
   </body>
-  <script src="{% static 'quiz/questions.js' %}"></script>
+  <script>
+    function getCookie(name) {
+        // function provided by Django docs
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function postAnswers() {
+        // retrieve all selected answers from form
+        console.log("entered post block")
+        answers_data = {};
+        answers = document.querySelectorAll("#question-set :checked");
+        answers.forEach(answer => {
+            answers_data[answer.name] = answer.value;
+        });
+        fetch("{% url 'quiz:postAnswers' %}", {
+              method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify(answers_data),
+          });
+    }
+  </script>
 </html>
