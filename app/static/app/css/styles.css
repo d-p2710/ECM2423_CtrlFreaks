@@ -303,8 +303,8 @@ button[type=submit]:hover {
     "sideLb main sideRb";
 }
 
-  /*ar919*/
-.carousel-container {
+  /* ar919 */
+/* .carousel-container {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -336,4 +336,4 @@ button[type=submit]:hover {
 
 .carousel-container::-webkit-scrollbar-track-piece:start {
     background: #29ab87;
-}
+} */
