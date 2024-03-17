@@ -141,7 +141,7 @@ button[type=submit]:hover {
 .avatar > img {
     grid-row-start: 1;
     grid-column-start: 1;
-    height: 180px;
+    height: 90px;
     margin-bottom: -30%;
 }
 
@@ -165,6 +165,8 @@ button[type=submit]:hover {
     z-index: 5;
 }
 
+
+
 .top3 {
     display: flex;
     flex-direction: row;
@@ -174,6 +176,8 @@ button[type=submit]:hover {
     align-content: center;
     width: 200%;
     overflow: visible;
+    text-align: center;
+    font-size: small;
 }
 
 .top3 > * {

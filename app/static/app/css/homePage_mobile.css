@@ -3,6 +3,7 @@ body {
     font-family: "Outfit";
     padding: 0px;
     margin: 0px 0px 0px 0px;
+    width: 100%;
 }
 
 a {
@@ -21,6 +22,7 @@ h1 {
     padding: 20px 20px 20px 10px;
 }
 
+/* note: what is this used for?? */
 h2.Side {
     margin-right: 10px;
     float: right;
@@ -31,6 +33,10 @@ h2 {
 }
 
 p {
+    margin-left: 10px;
+}
+
+img {
     margin-left: 10px;
 }
 
@@ -87,8 +93,19 @@ button[type=submit]:hover {
     color: black;
 }
 
+/* formatting page layout */
+.item-b{
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        text-size-adjust: auto;
+    }
 
-/* zj274 */
+}
+
+/* zj274 with scaling edits by mm1224*/
 .avatar {
     display: grid;
 }
@@ -96,6 +113,8 @@ button[type=submit]:hover {
 .avatar > img {
     grid-row-start: 1;
     grid-column-start: 1;
+    height: 90px;
+    margin-bottom: -30%;
 }
 
 .colour {
@@ -118,104 +137,40 @@ button[type=submit]:hover {
     z-index: 5;
 }
 
-.shop {
-    /* grid-area: sideLt;
-    align-self: centre;
-    justify-self: center;  */
-    display: block; 
-    margin-left: auto;
-    margin-right: auto;
-    height: 350px;
-    width: 350px; 
-}
-
-[type=radio] {
-    position: absolute;
-    opacity: 0;
-    height: 0;
-    width: 0;
-}
-
-.tab-buttons {
-    display: block;
-    height: 32px;
-    width: 350px;
-}
-
-.tab-buttons > * {
-    float: left;
-    height: 32px;
-    margin: 0;
-}
-
-.tab-buttons [type=radio] + img {
-    background-color: #aaa;
-    border-radius: 6px 6px 0 0;
-    cursor: pointer;
-    padding: 0 19px;
-    margin: 0;
-}
-
-.tab-buttons [type=radio]:checked + img {
-    background-color: #4b7b76;
-}
-
-.tabs {
-    display: grid;
-    background-color: #f7f7f7;
-    border-radius: 0 0 6px 6px;
-}
-
-.tabs > * {
-    grid-row-start: 1;
-    grid-column-start: 1;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    visibility: hidden;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2px;
-    height: 350px;
-    width: 350px;  
-}
-
-.tabs > :first-child {
-    visibility: visible;
-}
-
-.item {
-    background-color: #f7f7f7;
-    border-radius: 6px;
+.top3 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: end;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    overflow: visible;
     text-align: center;
-    padding: 0;
+    font-size: small;
 }
 
-.item > [type=radio] + img {
-    /* background-color: #ddd; */
-    border: 2px solid #f2f2f2;
-    border-radius: 6px;
-    cursor: pointer;
-    padding: 0 5px;
+.top3 > * {
+    float: left;
+    flex-shrink: 1;
     margin: 0;
-    height: 95px;
 }
 
-.item > [type=radio]:checked + img {
-    border:2px solid #29Ab87;
+.podium {
+    text-align: center;
 }
 
-.owned::after {
-    content: "Owned!";
+#first .podium {
+    background-color: gold;
+    padding-top: 40%;
 }
 
-/* end zj274 */
-
-
-.container {
-    display: block;
+#second .podium {
+    background-color: silver;
+    padding-top: 10%;
 }
 
-.container > * {
-    margin-left: auto;
-    margin-right: auto;
+#third .podium {
+    background-color: #9d631c;
+    padding-top: 2%;
 }
