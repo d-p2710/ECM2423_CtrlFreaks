@@ -114,7 +114,7 @@
         zoom: 5 // starting zoom
     });
 
-    # Fetches the markers from th DB & creates a marker pin on the Map
+     {% comment %} Fetches the markers from th DB & creates a marker pin on the Map {% endcomment %}
     fetch('../getMarkers')  
         .then(response => response.json())
         .then(data => {
@@ -130,11 +130,11 @@
         });
 
 
-    {% for marker in Marker %}
+    {% comment %} {% for marker in Marker %}
     new mapboxgl.Marker()
         .setLngLat([{{ marker.longitude }}, {{ marker.latitude }}])
         .addTo(map);
-    {% endfor %}
+    {% endfor %} {% endcomment %}
     
     map.fitBounds(bounds, {padding: 20});
     navigator.geolocation.getCurrentPosition(position => {
