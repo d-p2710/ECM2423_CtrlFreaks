@@ -312,37 +312,28 @@ button[type=submit]:hover {
     "sideLb main sideRb";
 }
 
-  /*ar919*/
-.carousel-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+/* ar919 */
+table {
+    width: 50%;
+    border-collapse: collapse;
+    border: 1px solid;
 }
 
-.carousel-slide {
-    flex: 1 0 30%;
-    scroll-snap-align: center;
+td {
+    text-align: center;
 }
 
-
-@media (max-width: 600px) {
-    .carousel-slide {
-        flex: 1 0 90%;
-    }
+tr {
+    background-color: #ddd;
+}
+tr:hover {
+    background-color: #bddbd6;
 }
 
-.carousel-container::-webkit-scrollbar {
-    height: 8px;
+table, th, td {
+    border-bottom: 1px solid #adadad;
 }
 
-.carousel-container::-webkit-scrollbar-thumb {
-    background: #29Ab87;
-}
-
-.carousel-container::-webkit-scrollbar-track {
-    background: #b1b3b399;
-}
-
-.carousel-container::-webkit-scrollbar-track-piece:start {
-    background: #29ab87;
+th {
+    background-color: #c0c9e9;
 }
