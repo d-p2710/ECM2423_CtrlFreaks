@@ -17,6 +17,9 @@
                 <a href="{% url 'home' %}">Home</a>
                 <a class="active" href="/profile">Profile</a>
                 <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
+                {% if request.user.is_staff == True %}
+                    <a href="{% url 'admin:index' %}">Admin</a>
+                {% endif %}
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
