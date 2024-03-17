@@ -47,6 +47,11 @@
                 </ul>
         {% endfor %}
         </fieldset>
+        <h2>You gained:</h2>
+        <ul>
+            <li>{{ points }} points!</li>
+            <li>{{ coins }} coins!</li>
+        </ul>
         <button class="home" onclick="window.location.href='{% url "home" %}'">Return to home page</button>
     </div>
   </body>

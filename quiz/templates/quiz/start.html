@@ -32,7 +32,7 @@
         <h3>This quiz has {{ quiz.question_set.count }} question(s)</h3>
       </fieldset>
       <!-- Button redirects to first question in the quiz -->
-      <button class="button" onclick="window.location.href='{% url 'quiz:question' quiz.id 1 %}';">Start &rarr;</button>
+      <button class="button" onclick="window.location.href='{% url 'quiz:question' quiz.id %}';">Start &rarr;</button>
     </div>
   </body>
 </html>
