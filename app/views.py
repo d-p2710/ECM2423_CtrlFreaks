@@ -11,7 +11,27 @@ from django.http import JsonResponse
 
 #page views
 def home_page(request):
-    return render(request, 'app/homePage.html')
+    # fetch 10 profiles with highest points
+    leaderboard_profiles = Profile.objects.order_by("-points_amount")[:10]
+    leaderboard_data = {}
+    # format leaderboard profiles
+    for i in range(leaderboard_profiles.count()):
+        if leaderboard_profiles[i].points_amount > 0:
+            leaderboard_data["no"+str(i+1)] = {"username": leaderboard_profiles[i],
+                                            "points":leaderboard_profiles[i].points_amount,
+                                            "avatar": Avatar.objects.get(profile=leaderboard_profiles[i])}
+        else:
+            continue
+    
+    leaderboard_length = len(leaderboard_data)
+    if leaderboard_length < 10:
+        # pad results if less than 10 profiles were retrieved/have earned any points
+        for i in range(leaderboard_length, 10):
+            leaderboard_data["no"+str(i+1)] = {"username": "-",
+                                           "points":"-",
+                                           "avatar": None}
+    context = {"leaderboard_data": leaderboard_data}
+    return render(request, 'app/homePage.html', context)
 
 def profile(request):
 
