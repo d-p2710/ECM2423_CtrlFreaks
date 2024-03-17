@@ -302,38 +302,3 @@ button[type=submit]:hover {
     "sideLt main sideRt"
     "sideLb main sideRb";
 }
-
-  /* ar919 */
-/* .carousel-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-}
-
-.carousel-slide {
-    flex: 1 0 30%;
-    scroll-snap-align: center;
-}
-
-
-@media (max-width: 600px) {
-    .carousel-slide {
-        flex: 1 0 90%;
-    }
-}
-
-.carousel-container::-webkit-scrollbar {
-    height: 8px;
-}
-
-.carousel-container::-webkit-scrollbar-thumb {
-    background: #29Ab87;
-}
-
-.carousel-container::-webkit-scrollbar-track {
-    background: #b1b3b399;
-}
-
-.carousel-container::-webkit-scrollbar-track-piece:start {
-    background: #29ab87;
-} */

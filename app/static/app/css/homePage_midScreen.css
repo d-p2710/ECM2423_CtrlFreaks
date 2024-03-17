@@ -221,3 +221,29 @@ button[type=submit]:hover {
     "sideLt mt mt sideRt"
     "sideLb mb mb sideRb";
 }
+
+/* ar919 leaderboard table */
+table {
+    width: 500px;
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+td {
+    text-align: center;
+}
+
+tr {
+    background-color: #ddd;
+}
+tr:hover {
+    background-color: #bddbd6;
+}
+
+table, th, td {
+    border-bottom: 1px solid #adadad;
+}
+
+th {
+    background-color: #c0c9e9;
+}

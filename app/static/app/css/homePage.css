@@ -30,6 +30,7 @@ h2.Side {
 
 h2 {
     margin-left: 10px;
+    font-size: xx-large;
 }
 
 p {
@@ -131,6 +132,8 @@ button[type=submit]:hover {
     grid-area: mb;
     place-self: center;
     text-align: center;
+
+    
 }
 
 /* zj274 */
@@ -216,4 +219,30 @@ button[type=submit]:hover {
     "t1 t2 t3 t4"
     "sideLt mt mt sideRt"
     "sideLb mb mb sideRb";
+}
+
+/* ar919 leaderboard table */
+table {
+    width: 700px;
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+td {
+    text-align: center;
+}
+
+tr {
+    background-color: #ddd;
+}
+tr:hover {
+    background-color: #bddbd6;
+}
+
+table, th, td {
+    border-bottom: 1px solid #adadad;
+}
+
+th {
+    background-color: #c0c9e9;
 }

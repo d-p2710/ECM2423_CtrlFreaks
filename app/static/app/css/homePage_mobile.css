@@ -174,3 +174,30 @@ button[type=submit]:hover {
     background-color: #9d631c;
     padding-top: 2%;
 }
+
+/* ar919 leaderboard table */
+table {
+    width: 50%;
+    border-collapse: collapse;
+    border: 1px solid;
+    margin: auto;
+}
+
+td {
+    text-align: center;
+}
+
+tr {
+    background-color: #ddd;
+}
+tr:hover {
+    background-color: #bddbd6;
+}
+
+table, th, td {
+    border-bottom: 1px solid #adadad;
+}
+
+th {
+    background-color: #c0c9e9;
+}
