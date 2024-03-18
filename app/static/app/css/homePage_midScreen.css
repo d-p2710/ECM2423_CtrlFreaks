@@ -30,7 +30,6 @@ h2.Side {
 
 h2 {
     margin-left: 10px;
-    font-size: xx-large;
 }
 
 p {
@@ -132,8 +131,6 @@ button[type=submit]:hover {
     grid-area: mb;
     place-self: center;
     text-align: center;
-
-
 }
 
 /* zj274 */
@@ -144,7 +141,7 @@ button[type=submit]:hover {
 .avatar > img {
     grid-row-start: 1;
     grid-column-start: 1;
-    height: 180px;
+    height: 90px;
     margin-bottom: -30%;
 }
 
@@ -168,6 +165,8 @@ button[type=submit]:hover {
     z-index: 5;
 }
 
+
+
 .top3 {
     display: flex;
     flex-direction: row;
@@ -177,6 +176,8 @@ button[type=submit]:hover {
     align-content: center;
     width: 200%;
     overflow: visible;
+    text-align: center;
+    font-size: small;
 }
 
 .top3 > * {
@@ -223,7 +224,7 @@ button[type=submit]:hover {
 
 /* ar919 leaderboard table */
 table {
-    width: 700px;
+    width: 500px;
     border-collapse: collapse;
     border: 1px solid;
 }
