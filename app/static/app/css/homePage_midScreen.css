@@ -1,0 +1,249 @@
+/*ar919*/
+body {
+    font-family: "Outfit";
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    background-color: #77b192;
+    margin-top: 0;
+    margin-bottom: -10px;
+    padding: 20px 20px 20px 10px;
+}
+
+/* note: what is this used for?? */
+h2.Side {
+    margin-right: 10px;
+    float: right;
+}
+
+h2 {
+    margin-left: 10px;
+}
+
+p {
+    margin-left: 10px;
+}
+
+img {
+    margin-left: 10px;
+}
+
+/*mm1224*/
+/* Navigation bar styling*/
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #77b192;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #4b7b76;
+    color: white;
+}
+
+
+button[type=submit] {
+    background-color: #77b192;
+    overflow: hidden;
+    border: none;
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 42px 20px 40px 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+button[type=submit]:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Centralisation for profile page */
+
+/*header*/
+.item-a {
+    grid-area: top;
+}
+
+/*central column*/
+.item-b {
+    grid-column-start: c1;
+    grid-column-end: c3;
+    grid-row-start: r3;
+    grid-row-end: r4;
+    place-self: centre;
+    justify-self: center;
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        text-size-adjust: auto;
+    }
+
+    text-align: center;
+}
+
+.item-c {
+    grid-column-start: c3;
+    grid-column-end: c4;
+    grid-row-start: r3;
+    grid-row-end: r4;
+
+    justify-self: centre;
+    text-align: center;
+}
+
+.item-d {
+    grid-area: mb;
+    place-self: center;
+    text-align: center;
+}
+
+/* zj274 */
+.avatar {
+    display: grid;
+}
+
+.avatar > img {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    height: 90px;
+    margin-bottom: -30%;
+}
+
+.colour {
+    z-index: 1;
+}
+
+.mouth {
+    z-index: 2;
+}
+
+.eyes {
+    z-index: 3;
+}
+
+.headwear {
+    z-index: 4;
+}
+
+.accessory {
+    z-index: 5;
+}
+
+
+
+.top3 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: end;
+    justify-content: center;
+    align-content: center;
+    width: 200%;
+    overflow: visible;
+    text-align: center;
+    font-size: small;
+}
+
+.top3 > * {
+    float: left;
+    flex-shrink: 1;
+    margin: 0;
+}
+
+.podium {
+    text-align: center;
+}
+
+#first .podium {
+    background-color: gold;
+    padding-top: 40%;
+}
+
+#second .podium {
+    background-color: silver;
+    padding-top: 10%;
+}
+
+#third .podium {
+    background-color: #9d631c;
+    padding-top: 2%;
+}
+
+/* end zj274 */
+
+/*container for grid*/
+.container {
+    display: grid;
+    grid-template-columns: [c1] 25% [c2] 25% [c3] 25% [c4] 25%;
+    grid-template-rows: [r1] 50px [r2] 40px [r3] 1fr [r4] 1fr;
+
+    row-gap: 20px;
+
+    grid-template-areas: 
+    "top top top top"
+    "t1 t2 t3 t4"
+    "sideLt mt mt sideRt"
+    "sideLb mb mb sideRb";
+}
+
+/* ar919 leaderboard table */
+table {
+    width: 500px;
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+td {
+    text-align: center;
+}
+
+tr {
+    background-color: #ddd;
+}
+tr:hover {
+    background-color: #bddbd6;
+}
+
+table, th, td {
+    border-bottom: 1px solid #adadad;
+}
+
+th {
+    background-color: #c0c9e9;
+}
