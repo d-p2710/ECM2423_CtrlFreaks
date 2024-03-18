@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'quiz.apps.QuizConfig',
     'app.apps.AppConfig',
+    'wordsearch'
 ]
 
 MIDDLEWARE = [

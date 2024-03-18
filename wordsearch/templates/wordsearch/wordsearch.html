@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Search</title>
+    <style>
+        main{
+            display: flex;
+            align-content: center;
+        }
+        #canvas {
+            display: flex;
+            float: left;
+        }
+
+        .letters{
+            margin-right: 20px;
+        }
+
+        canvas {
+            border: 1px solid black;
+        }
+
+        #legend {
+            margin-top: 20px;
+            float: right;
+        }
+
+    </style>
+</head>
+<body>
+<div id="main">
+    <div id="canvas">
+        <div class="letters">
+            <canvas id="a" width="800" height="800"></canvas>
+        </div>
+    </div>
+    <div id="legend">
+        <div class="words"></div>
+    </div>
+</div>
+</body>
+<script>
+    const gridData= "{{grid|escapejs}}"
+    const legendData= "{{legend|escapejs}}"
+
+    // Function to display the word search grid
+    function displayGrid() {
+        const canvasElements = document.querySelectorAll('.letters canvas');
+        let gridRows = gridData.trim().split('\n');
+        gridRows.forEach((row, rowIndex) => {
+            const columns = row.trim().split(' ');
+            columns.forEach((letter, columnIndex) => {
+                const canvas = canvasElements[rowIndex * columns.length + columnIndex];
+                const ctx = canvas.getContext('2d');
+                ctx.font = '20px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(letter.toUpperCase(), canvas.width / 2, canvas.height / 2);
+            });
+        });
+    }
+
+    // Function to display the legend
+    function displayLegend() {
+        const legendDiv = document.getElementById('legend');
+        legendDiv.innerText = legendData;
+    }
+
+    // Call functions to display grid and legend when the page loads
+    window.onload = function() {
+        displayGrid();
+        displayLegend();
+    };
+
+</script>
+</html>
