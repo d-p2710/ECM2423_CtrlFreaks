@@ -30,6 +30,7 @@ h2.Side {
 
 h2 {
     margin-left: 10px;
+    font-size: xx-large;
 }
 
 p {
@@ -99,7 +100,10 @@ button[type=submit]:hover {
 
 /*central column*/
 .item-b {
-    grid-area: sideLt;
+    grid-column-start: c1;
+    grid-column-end: c3;
+    grid-row-start: r3;
+    grid-row-end: r4;
     place-self: centre;
     justify-self: center;
 
@@ -115,11 +119,21 @@ button[type=submit]:hover {
 }
 
 .item-c {
-    grid-area: sideLt;
-    place-self: centre;
-    justify-self: center;
+    grid-column-start: c3;
+    grid-column-end: c4;
+    grid-row-start: r3;
+    grid-row-end: r4;
 
+    justify-self: centre;
     text-align: center;
+}
+
+.item-d {
+    grid-area: mb;
+    place-self: center;
+    text-align: center;
+
+
 }
 
 /* zj274 */
@@ -160,12 +174,14 @@ button[type=submit]:hover {
     flex-wrap: nowrap;
     align-items: end;
     justify-content: center;
-    width: 50%;
-    overflow: hidden;
+    align-content: center;
+    width: 200%;
+    overflow: visible;
 }
 
 .top3 > * {
     float: left;
+    flex-shrink: 1;
     margin: 0;
 }
 
@@ -193,47 +209,40 @@ button[type=submit]:hover {
 /*container for grid*/
 .container {
     display: grid;
-    grid-template-columns: [c1] 1fr [c2] 2fr [c3] 1fr;
+    grid-template-columns: [c1] 25% [c2] 25% [c3] 25% [c4] 25%;
     grid-template-rows: [r1] 50px [r2] 40px [r3] 1fr [r4] 1fr;
 
+    row-gap: 20px;
+
     grid-template-areas: 
-    "top top top"
-    "t1 t2 t3"
-    "sideLt main sideRt"
-    "sideLb main sideRb";
+    "top top top top"
+    "t1 t2 t3 t4"
+    "sideLt mt mt sideRt"
+    "sideLb mb mb sideRb";
 }
 
-  /*ar919*/
-.carousel-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+/* ar919 leaderboard table */
+table {
+    width: 700px;
+    border-collapse: collapse;
+    border: 1px solid;
 }
 
-.carousel-slide {
-    flex: 1 0 30%;
-    scroll-snap-align: center;
+td {
+    text-align: center;
 }
 
-
-@media (max-width: 600px) {
-    .carousel-slide {
-        flex: 1 0 90%;
-    }
+tr {
+    background-color: #ddd;
+}
+tr:hover {
+    background-color: #bddbd6;
 }
 
-.carousel-container::-webkit-scrollbar {
-    height: 8px;
+table, th, td {
+    border-bottom: 1px solid #adadad;
 }
 
-.carousel-container::-webkit-scrollbar-thumb {
-    background: #29Ab87;
-}
-
-.carousel-container::-webkit-scrollbar-track {
-    background: #b1b3b399;
-}
-
-.carousel-container::-webkit-scrollbar-track-piece:start {
-    background: #29ab87;
+th {
+    background-color: #c0c9e9;
 }
