@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Page</title>
-    <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'app/css/styles_mobile.css' %}" />
-    <link rel="stylesheet" media="screen and (min-width:641px)" href="{% static 'app/css/homePage.css' %}" />
+    <link rel="stylesheet" media="screen and (max-width: 640px)" href="{% static 'app/css/homePage_mobile.css' %}" />
+    <link rel="stylesheet" media="screen and (min-width:641px) and (max-width:1139px)" href="{% static 'app/css/homePage_midScreen.css' %}" />
+    <link rel="stylesheet" media="screen and (min-width:1140px)" href="{% static 'app/css/homePage.css' %}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
 </head>
 <body>
@@ -16,6 +17,9 @@
                 <a class="active" href="{% url 'home' %}">Home</a>
                 <a href="{% url 'profile' %}" class="nav-item nav-link">Profile</a>
                 <a href="{% url 'game_map' %}" class="nav-item nav-link">Activites</a>
+                {% if request.user.is_staff == True %}
+                    <a href="{% url 'admin:index' %}">Admin</a>
+                {% endif %}
                 <form class="log_out" method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <!--<a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();">Log Out</a>-->
@@ -27,84 +31,94 @@
     <header>
         <h2>Welcome!</h2>
     </header>
-    <div class="item-b">
-        <p>Click the QR code to go to the QR code scanner!</p>
-        <a href="{% url 'game_map' %}"><img src="{% static 'app/images/qr-code-scan-svgrepo-com.svg' %}" alt="QR Scanner"></a>
-    </div>
-    <div class="top3">
-        <!-- only display if data could be found for 3 or more users -->
-        {% if leaderboard_data|length > 2 %}
-            <div id="second">
-                <div class="avatar">
-                    <img src="{{leaderboard_data.no2.avatar.colour.img_file.url}}"class="colour">
-                    <img src="{{leaderboard_data.no2.avatar.mouth.img_file.url}}"class="mouth">
-                    <img src="{{leaderboard_data.no2.avatar.eyes.img_file.url}}"class="eyes">
-                    {% if leaderboard_data.no2.avatar.headwear %}
-                        <img src="{{leaderboard_data.no2.avatar.headwear.img_file.url}}"class="headwear">
+    <div class="container">
+        <div class="item-b">
+            <p>Click the QR code to go to the QR code scanner!</p>
+            <a href="{% url 'game_map' %}"><img src="{% static 'app/images/qr-code-scan-svgrepo-com.svg' %}" alt="QR Scanner"></a>
+        </div>
+        <br>
+        <div class="item-c">
+            <div class="top3-box">
+                <div class="top3">
+                    <!-- only display if data could be found for 3 or more users -->
+                    {% if leaderboard_data|length > 2 %}
+                        <div id="second">
+                            <div class="avatar">
+                                <img src="{{leaderboard_data.no2.avatar.colour.img_file.url}}"class="colour">
+                                <img src="{{leaderboard_data.no2.avatar.mouth.img_file.url}}"class="mouth">
+                                <img src="{{leaderboard_data.no2.avatar.eyes.img_file.url}}"class="eyes">
+                                {% if leaderboard_data.no2.avatar.headwear %}
+                                    <img src="{{leaderboard_data.no2.avatar.headwear.img_file.url}}"class="headwear">
+                                {% endif %}
+                                {% if leaderboard_data.no2.avatar.accessory %}
+                                    <img src="{{leaderboard_data.no2.avatar.accessory.img_file.url}}"class="accessory">
+                                {% endif %}
+                            </div>
+                            <div class="podium">
+                                <h2>{{ leaderboard_data.no2.username }}</h2>
+                                <h2>{{ leaderboard_data.no2.points }}</h2>
+                                <br>
+                            </div>
+                        </div>
+                        <div id="first">
+                            <div class="avatar">
+                                <img src="{{leaderboard_data.no1.avatar.colour.img_file.url}}"class="colour">
+                                <img src="{{leaderboard_data.no1.avatar.mouth.img_file.url}}"class="mouth">
+                                <img src="{{leaderboard_data.no1.avatar.eyes.img_file.url}}"class="eyes">
+                                {% if leaderboard_data.no1.avatar.headwear %}
+                                    <img src="{{leaderboard_data.no1.avatar.headwear.img_file.url}}"class="headwear">
+                                {% endif %}
+                                {% if leaderboard_data.no1.avatar.accessory %}
+                                    <img src="{{leaderboard_data.no1.avatar.accessory.img_file.url}}"class="accessory">
+                                {% endif %}
+                            </div>
+                            <div class="podium">
+                                <h2>{{ leaderboard_data.no1.username }}</h2>
+                                <h2>{{ leaderboard_data.no1.points }}</h2>
+                                <br>
+                            </div>
+                        </div>
+                        <div id="third">
+                            <div class="avatar">
+                                <img src="{{leaderboard_data.no3.avatar.colour.img_file.url}}"class="colour">
+                                <img src="{{leaderboard_data.no3.avatar.mouth.img_file.url}}"class="mouth">
+                                <img src="{{leaderboard_data.no3.avatar.eyes.img_file.url}}"class="eyes">
+                                {% if leaderboard_data.no3.avatar.headwear %}
+                                    <img src="{{leaderboard_data.no3.avatar.headwear.img_file.url}}"class="headwear">
+                                {% endif %}
+                                {% if leaderboard_data.no3.avatar.accessory %}
+                                    <img src="{{leaderboard_data.no3.avatar.accessory.img_file.url}}"class="accessory">
+                                {% endif %}
+                            </div>
+                            <div class="podium">
+                                <h2>{{ leaderboard_data.no3.username }}</h2>
+                                <h2>{{ leaderboard_data.no3.points }}</h2>
+                                <br>
+                            </div>
+                        </div>
                     {% endif %}
-                    {% if leaderboard_data.no2.avatar.accessory %}
-                        <img src="{{leaderboard_data.no2.avatar.accessory.img_file.url}}"class="accessory">
-                    {% endif %}
-                </div>
-                <div class="podium">
-                    <h2>{{ leaderboard_data.no2.username }}</h2>
-                    <h2>{{ leaderboard_data.no2.points }}</h2>
-                    <br>
                 </div>
             </div>
-            <div id="first">
-                <div class="avatar">
-                    <img src="{{leaderboard_data.no1.avatar.colour.img_file.url}}"class="colour">
-                    <img src="{{leaderboard_data.no1.avatar.mouth.img_file.url}}"class="mouth">
-                    <img src="{{leaderboard_data.no1.avatar.eyes.img_file.url}}"class="eyes">
-                    {% if leaderboard_data.no1.avatar.headwear %}
-                        <img src="{{leaderboard_data.no1.avatar.headwear.img_file.url}}"class="headwear">
-                    {% endif %}
-                    {% if leaderboard_data.no1.avatar.accessory %}
-                        <img src="{{leaderboard_data.no1.avatar.accessory.img_file.url}}"class="accessory">
-                    {% endif %}
-                </div>
-                <div class="podium">
-                    <h2>{{ leaderboard_data.no1.username }}</h2>
-                    <h2>{{ leaderboard_data.no1.points }}</h2>
-                    <br>
-                </div>
+        </div>
+        <br>
+        <div class="item-d">
+            <div class="leaderboard">
+                <table>
+                    <tr>
+                    <th></th>
+                    <th>Username</th>
+                    <th>Points</th>
+                    </tr>
+                    {% for user_data in leaderboard_data.values %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ user_data.username }}</td>
+                            <td>{{ user_data.points }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
             </div>
-            <div id="third">
-                <div class="avatar">
-                    <img src="{{leaderboard_data.no3.avatar.colour.img_file.url}}"class="colour">
-                    <img src="{{leaderboard_data.no3.avatar.mouth.img_file.url}}"class="mouth">
-                    <img src="{{leaderboard_data.no3.avatar.eyes.img_file.url}}"class="eyes">
-                    {% if leaderboard_data.no3.avatar.headwear %}
-                        <img src="{{leaderboard_data.no3.avatar.headwear.img_file.url}}"class="headwear">
-                    {% endif %}
-                    {% if leaderboard_data.no3.avatar.accessory %}
-                        <img src="{{leaderboard_data.no3.avatar.accessory.img_file.url}}"class="accessory">
-                    {% endif %}
-                </div>
-                <div class="podium">
-                    <h2>{{ leaderboard_data.no3.username }}</h2>
-                    <h2>{{ leaderboard_data.no3.points }}</h2>
-                    <br>
-                </div>
-            </div>
-        {% endif %}
-    </div>
-    <div class="leaderboard">
-        <table>
-            <tr>
-              <th></th>
-              <th>Username</th>
-              <th>Points</th>
-            </tr>
-            {% for user_data in leaderboard_data.values %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ user_data.username }}</td>
-                    <td>{{ user_data.points }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+        </div>
     </div>
 </body>
 </html>
