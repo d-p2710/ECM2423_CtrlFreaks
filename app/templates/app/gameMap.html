@@ -182,6 +182,7 @@
             
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then((stream) => {
+                    video: {facingMode: { exact: "environment" },
                     html5QrCode.start(
                         config,
                         qrCodeSuccessCallback,
