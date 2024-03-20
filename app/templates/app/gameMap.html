@@ -32,45 +32,26 @@
         }
 
         #map, #qrScanner {
-            display: flex;
             flex: 1;
             width: 100%; 
             object-fit: contain;
-            align-items: center;
-            justify-content: center;
+        }
+        
+        #reader, video {
+            display: flex;
+            max-width: 100%;
+            max-height: 100%;
         }
 
         #qrScanner {
-            display: flex;
-            flex-direction: column;
+            display: none;
             position: absolute;
             top: 0;
             right: 0;
+            background-color: #fff;
             z-index: 999;
             padding: 20px;
-            align-items: center;
-            justify-content:center; 
-            background-color: #9BD0AD;
         }
-
-        
-        #reader video {
-            display: flex;
-            flex-direction: inline;
-            width: 100%;
-            height: 100%;
-            border-radius: 30px;
-        }
-        
-        #reader {
-            width: 80%;
-            height: 80%;
-            margin: auto;
-            text-align: center;
-            border-radius: 20px;
-            background-color: white;
-        }
-        
         
         #qrScannerButton {
             position: absolute;
@@ -78,22 +59,22 @@
             left: 20px;
             z-index: 1000;
             cursor: pointer;
+            min-width: 50px;
+            display: block;
         }
         
         #qrScannerButton img {
-            width: 50px; 
+            max-width: 90px;
+            min-width: 50px;
             height: auto;
         }
-
         h1 {
             text-align: center;
         }
-
         #reader {
             width: 500px;
             margin: auto;
             text-align: center;
-            justify-content: center;
         }
         
         .result {
@@ -112,7 +93,7 @@
     <div id='map'></div>
     <div id="qrScanner" style="display: none">
         <div id="reader"></div>
-        {% comment %} <div id="result"></div> {% endcomment %}
+        <div id="result"></div>
     </div>
     <div id="qrScannerButton" onclick="toggleQRScanner()">
         {% load static %}
@@ -133,6 +114,7 @@
         zoom: 5 // starting zoom
     });
 
+     {% comment %} Fetches the markers from th DB & creates a marker pin on the Map {% endcomment %}
     fetch('../getMarkers')  
         .then(response => response.json())
         .then(data => {
@@ -146,14 +128,7 @@
         .catch(error => {
             console.error('Error fetching markers:', error);
         });
-
-
-    {% for marker in Marker %}
-    new mapboxgl.Marker()
-        .setLngLat([{{ marker.longitude }}, {{ marker.latitude }}])
-        .addTo(map);
-    {% endfor %}
-
+    
     map.fitBounds(bounds, {padding: 20});
     navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
@@ -181,7 +156,7 @@
         const mapDiv = document.getElementById('map');
         if (!isScannerOpen) {
             map.style.height = '50%';
-            qrScannerDiv.style.display = 'flex';
+            qrScannerDiv.style.display = 'block';
             qrScannerDiv.style.height = '50%';
             isScannerOpen = true;
             startQRScanner();
@@ -195,31 +170,25 @@
     }
     
     function startQRScanner() {
-        // Used to start scanning
-        navigator.mediaDevices
-            .getUserMedia({video: true})
-            .then((stream) => {
-                videoElement.srcObject = stream; // Assign the stream to the video element
-                videoElement.play();
-                html5QrCode.start(
-                    videoElement, // Pass the video element to the QR code scanner
-                    { fps: 10, qrbox: { width: 250, height: 250 } },
-                    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-                    // Check if the decoded text starts with "http://" or "https://"
-                    if (decodedText.startsWith("http://") || decodedText.startsWith("https://")) {
-                        // If it does, directly assign it to window.location.href
-                        window.location.href = decodedText;
-                    } else {
-                        // If not, prepend "https://" before assigning
-                        window.location.href = "https://" + decodedText;
-                    }
-                };
-                );
-            })
-            .catch((err) => {
-                console.error('Error accessing camera:', err);
-            });
+        // Ask for permission to access camers to fix android bug 
+        navigator.permissions.query({ name: 'camera' })
+        .then(permissionStatus => {
+            if (permissionStatus.state === 'granted') {
+            // User has already granted permission
+            // Proceed with camera access
+            } else if (permissionStatus.state === 'prompt') {
+            // Permission hasn't been granted yet, prompt the user
+            return navigator.mediaDevices.getUserMedia({ video: true });
+            } else {
+            // Permission has been denied or is unavailable
+            console.error('Camera access denied');
+            }
+        })
+        .catch(error => {
+            console.error('Error requesting camera access:', error);
+        });
 
+        // Used to start scanning
         Html5Qrcode.getCameras().then(devices => {
             if (devices && devices.length) {
                 var cameraId = devices[0].id;
@@ -227,7 +196,6 @@
         }).catch(err => {
             // handle err
         });
-        
         const html5QrCode = new Html5Qrcode("reader");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             // Check if the decoded text starts with "http://" or "https://"
@@ -250,16 +218,6 @@
             // Stop failed, handle it.
         });
     }
-
-    const videoElement = document.querySelector('#reader video');
-    videoElement.style.width = '100%'; // Set width to 100%
-    videoElement.style.height = '100%'; // Set height to 100%
-    videoElement.style.objectFit = 'contain';
-    videoElement.style.borderRadius = '30px';
-    videoElement.style.margin = 'auto';
-    videoElement.style.padding = '20px';
-    videoElement.style.backgroundColor = 'white';
-    videoElement.style.display = 'flex';
 
     function stopQRScanner(){
         const html5QrCode = new Html5Qrcode("reader");
