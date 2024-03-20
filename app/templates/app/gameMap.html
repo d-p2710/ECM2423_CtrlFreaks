@@ -204,7 +204,16 @@
                 html5QrCode.start(
                     videoElement, // Pass the video element to the QR code scanner
                     { fps: 10, qrbox: { width: 250, height: 250 } },
-                    qrCodeSuccessCallback
+                    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                    // Check if the decoded text starts with "http://" or "https://"
+                    if (decodedText.startsWith("http://") || decodedText.startsWith("https://")) {
+                        // If it does, directly assign it to window.location.href
+                        window.location.href = decodedText;
+                    } else {
+                        // If not, prepend "https://" before assigning
+                        window.location.href = "https://" + decodedText;
+                    }
+                };
                 );
             })
             .catch((err) => {
