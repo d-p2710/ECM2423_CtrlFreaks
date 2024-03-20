@@ -1,0 +1,259 @@
+/*ar919*/
+body {
+    font-family: "Outfit";
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    background-color: #77b192;
+    margin-top: 0;
+    margin-bottom: -10px;
+    padding: 20px 20px 20px 10px;
+}
+
+h2.Side {
+    margin-right: 10px;
+    float: right;
+}
+
+h2 {
+    margin-left: 10px;
+}
+
+p {
+    margin-left: 10px;
+}
+
+img {
+    margin-left: 10px;
+}
+
+/*central column*/
+.item-b {
+    grid-area: main;
+    place-self: centre;
+    justify-self: center;
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        text-size-adjust: auto;
+    }
+
+    text-align: center;
+}
+
+.item-c {
+    grid-area: main;
+    place-self: centre;
+    justify-self: center;
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        text-size-adjust: auto;
+    }
+
+    text-align: center;
+}
+
+/*mm1224*/
+/* Navigation bar styling*/
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #77b192;
+    overflow: hidden;
+    width: 100%;
+    max-height: 14%;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 20px 41px 20px;
+    max-height: 15px;
+    text-decoration: none;
+    font-size: x-small;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+    cursor: pointer;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #4b7b76;
+    color: white;
+}
+
+
+button[type=submit] {
+    background-color: #77b192;
+    overflow: hidden;
+    border: none;
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 42px 20px 40px 20px;
+    text-decoration: none;
+    font-size: x-small;
+}
+
+button[type=submit]:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* zj274 */
+.avatar {
+    display: grid;
+}
+
+.avatar > img {
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+.colour {
+    z-index: 1;
+}
+
+.mouth {
+    z-index: 2;
+}
+
+.eyes {
+    z-index: 3;
+}
+
+.headwear {
+    z-index: 4;
+}
+
+.accessory {
+    z-index: 5;
+}
+
+.shop {
+    /* grid-area: sideLt;
+    align-self: centre;
+    justify-self: center;  */
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    width: 300px; 
+}
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.tab-buttons {
+    display: block;
+    height: 32px;
+    width: 300px;
+}
+
+.tab-buttons > * {
+    float: left;
+    height: 32px;
+    margin: 0;
+}
+
+.tab-buttons [type=radio] + img {
+    background-color: #aaa;
+    /* this does the curved top corners */
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    /* this ensures tabs fit in the screen-width */
+    padding: 0 14px;
+    margin: 0;
+}
+
+.tab-buttons [type=radio]:checked + img {
+    background-color: #4b7b76;
+}
+
+.tabs {
+    display: grid;
+    background-color: #f7f7f7;
+    border-radius: 0 0 6px 6px;
+}
+
+.tabs > * {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    visibility: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    height: 300px;
+    width: 300px;  
+}
+
+.tabs > :first-child {
+    visibility: visible;
+}
+
+.item {
+    background-color: #f7f7f7;
+    border-radius: 6px;
+    text-align: center;
+    padding: 0;
+}
+
+.item > [type=radio] + img {
+    /* background-color: #ddd; */
+    border: 2px solid #f2f2f2;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0 5px;
+    margin: 0;
+    height: 85px;
+}
+
+.item > [type=radio]:checked + img {
+    border:2px solid #29Ab87;
+}
+
+.owned::after {
+    content: "Owned!";
+}
+
+/* end zj274 */
+
+
+.container {
+    display: block;
+}
+
+.container > * {
+    margin-left: auto;
+    margin-right: auto;
+}

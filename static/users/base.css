@@ -19,15 +19,23 @@ html, body {
     overflow-y: scroll;
 }
 
+/* #overlay{
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35)); 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    min-height: 100%; 
+    z-index: 1;
+} */
+
 #overlay{
     background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.35)); 
     background-repeat: no-repeat; 
     background-size: cover; 
-    width: 100%; 
-    height: 100%;
-    position: fixed;
-    top: 0; 
-    left: 0;
+    width: 100%; /* Cover entire width of the page */
+    height: 100%; /* Cover entire height of the page */
+    position: fixed; /* Fixed position so it covers the entire viewport */
+    top: 0; /* Align to the top of the viewport */
+    left: 0; /* Align to the left of the viewport */
     z-index: 1;
 }
 
@@ -48,14 +56,15 @@ html, body {
     overflow: auto;
 }
 
+.col-md-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 
 /* Styles for phones */
 @media (max-width: 768px) {
-    .col-md-6 {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
     /* Adjusting the position of the container */
     #container {
         margin-top: 70px; /* Increase the top margin to move the container up */
@@ -78,16 +87,16 @@ html, body {
     }
 
     .image-container img {
-        position: absolute; 
-        top: 0; 
-        left: 0; 
+        position: absolute; /* Set image position to absolute */
+        top: 0; /* Position image at the top */
+        left: 0; /* Position image at the left */
         justify-items: center;
         align-items: center;
-        width: 100%; 
-        height: auto; 
+        width: 100%; /* Ensure image fills container width */
+        height: auto; /* Maintain aspect ratio */
     }
 
-  
+    /* Adjust z-index to control stacking order */
     .image-container img:first-child {
         z-index: 0; 
         height: 25dvh;
@@ -96,14 +105,14 @@ html, body {
     }
 
     .image-container img:last-child {
-        z-index: 1; 
+        z-index: 1; /* Bring the last image to the bottom */
         height: 12dvh;
         width: auto;
-        left: 35%; 
-        transform: translate(-50%); 
+        left: 35%; /* Position the left edge of the second image at the horizontal center of the container */
+        transform: translate(-50%); /* Move the second image back by half its width and height to center it */
         position: absolute;
-        top: 30%; 
-        animation: bounce 1s infinite alternate; 
+        top: 30%; /* Adjust this value to adjust initial position */
+        animation: bounce 1s infinite alternate; /* Adjust timing and animation type as needed */
     }
 
     @keyframes bounce {
@@ -117,8 +126,8 @@ html, body {
 
     /* Centering the login form */
     .card {
-        margin: 0 auto; 
-        max-width: 80%; 
+        margin: 0 auto; /* Center the login form horizontally */
+        max-width: 80%; /* Reduce the maximum width of the login form */
         overflow: scroll;
 
     }
@@ -127,91 +136,12 @@ html, body {
 
 /* Styles for laptops */
 @media (min-width: 769px) {
-    .scroll{
-        justify-content: center;
-        height: 100%;
-
-    }
-
     #overlay {
         background-size: contain;
     }
 
-    #container {
-        margin-top: 70px; 
-        display: flex;
-        flex-direction: row;
-    }
-
-    .col-md-6 {
-        display: block;
-        flex-direction: row;
-        justify-content: center;
-    }
-    
-
-    .image-container {
-        height: 70vh;
-        width: auto;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .image-container {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%; 
-    }
-
-    .image-container img {
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        justify-items: center;
-        align-items: center;
-        width: 100%; 
-        height: auto; 
-    }
-
-
-    .image-container img:first-child {
-        z-index: 0; 
-        height: 55dvh;
-        width: auto;
-        position: relative;
-    }
-
     .image-container img:last-child {
-        z-index: 1; 
-        height: 32dvh;
-        width: auto;
-        left: 35%; 
-        transform: translate(-50%);
-        position: absolute;
-        top: 30%; 
-        animation: bounce 1s infinite alternate; 
-    }
-
-    @keyframes bounce {
-        0% {
-            transform: translateY(0);
-        }
-        100% {
-            transform: translateY(-50px); 
-        }
-        }
-
-    .card {
-        margin: 0 auto; 
-        min-width: 100%; 
-        overflow: scroll;
-
-    }
-
-    .col-lg-5 {
-        flex: none;
-        max-width: max-content;
+        height: 30dvh;
+        top: 320px;
     }
 }
