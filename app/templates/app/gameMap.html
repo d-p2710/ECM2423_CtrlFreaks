@@ -197,12 +197,18 @@
     function startQRScanner() {
         // Used to start scanning
         navigator.mediaDevices
-            .getUserMedia(videoElement)
+            .getUserMedia({video: true})
             .then((stream) => {
-                /* use the stream */
+                videoElement.srcObject = stream; // Assign the stream to the video element
+                videoElement.play();
+                html5QrCode.start(
+                    videoElement, // Pass the video element to the QR code scanner
+                    { fps: 10, qrbox: { width: 250, height: 250 } },
+                    qrCodeSuccessCallback
+                );
             })
             .catch((err) => {
-                /* handle the error */
+                console.error('Error accessing camera:', err);
             });
 
         Html5Qrcode.getCameras().then(devices => {
