@@ -119,3 +119,20 @@ def profile(request):
 #        'points': data
 #    }
 #    return HttpResponse(template.render(context, request))
+
+def login(request):
+    context = {
+        'welcome_message': 'Welcome to',
+        'page_title': 'SustainaSlime'
+    }
+    return render(request, 'login.html', context)
+
+def register(request):
+    context = {
+        'welcome_message': 'Register now',
+        'page_title': ''
+    }
+    return render(request, 'register.html', context)
+
+def logout(request):
+    return render(request, 'logout.html')
