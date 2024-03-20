@@ -14,78 +14,54 @@
     <!--Font awesome icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
+    
+
+
+
     <title>{% block title %} {% endblock %} </title>
 </head>
-<body style="overflow: auto;">
-    <nav id="navbar" class="navbar navbar-expand-md navbar-light " style="background-color: #83c49c;">
-        <a href="/" class="navbar-brand">
-            <img src="{% static 'users/home-03-svgrepo-com.png' %}" alt="Home" class="svg-icon" style="width: 2rem; height: 2rem;">
-        </a>
-        
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ml-auto">
-                <!--
-                Elements on the navbar which are extended to other templates, and links them to their relevant pages/actions
-                Form line is to allow the logout button on the navbar to actually log users out
-                -->
-                <form id="frm_logout" method="post" action="{% url 'logout' %}">{% csrf_token %}</form>
-                {% if user.is_authenticated %}
-                <a href="{% url 'users-profile' %}" class="nav-item nav-link">Profile</a>
-                <form><a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();" >Logout</a> </form>
-                {% else %}
-                <a href="{% url 'login' %}" class="nav-item nav-link">Sign in</a>
-                {% endif %}
+<body>
+<div class="container p-3 my-3">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-md navbar-light " style="background-color: #f0f5f5">
+                <a href="/" class="navbar-brand">Home</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <!--
+                        Elements on the navbar which are extended to other templates, and links them to their relevant pages/actions
+                        Form line is to allow the logout button on the navbar to actually log users out
+                         -->
+                        <form id="frm_logout" method="post" action="{% url 'logout' %}">{% csrf_token %}</form>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'users-profile' %}" class="nav-item nav-link">Profile</a>
+                        <form><a class="nav-item nav-link" href="javascript:$('#frm_logout').submit();" >Logout</a> </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="nav-item nav-link">Sign in</a>
+                        {% endif %}
 
-            </div>
-        </div>
-    </nav>
-    <div class="bg-overlay" id="overlay">
-        <div class="scroll">
-            <div class="row h-100 align-items-center" id="container" style="overflow-y: scroll;">
-                <div class="col-md-6">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4>Welcome to</h4>
-                                <h2>SustainaSlime</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 image-container">
-                                <img src="{% static 'users/sustainaslime_background.png' %}" class="img-fluid mx-auto d-block rounded-circle" alt="Image">
-                                <img src="{% static 'users/default.png' %}" class="img-fluid mx-auto d-block">
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <!--Any flash messages pop up in any page because this is the base template-->
-                                {% if messages %}
-                                <div class="alert alert-dismissible" role="alert">
-                                    {% for message in messages %}
-                                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                                    {% endfor %}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                {% endif %}
-                                {% block content %}{% endblock %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </nav>
+            <!--Any flash messages pop up in any page because this is the base template-->
+            {% if messages %}
+            <div class="alert alert-dismissible" role="alert">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            {% endif %}
+            {% block content %}{% endblock %}
         </div>
     </div>
 </div>
-</div>
+
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
