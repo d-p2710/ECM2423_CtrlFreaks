@@ -4,11 +4,18 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'users/register.css' %}">
+<style>
+    h4, h2 {
+        color: transparent; 
+        displayed: none;
+        height: 0;
+    }
+</style>
 <div class="form-content my-3 p-3">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-7">
-                <div class="card shadow-lg border-0 rounded-lg mt-0 mb-5">
+                <div class="card overflow-auto shadow-lg border-0 rounded-lg mt-0 mb-5" style"width=80%">
                     <div class="card-header justify-content-center">
                         <h3 class="font-weight-light my-4 text-center">Create Account</h3>
                     </div>

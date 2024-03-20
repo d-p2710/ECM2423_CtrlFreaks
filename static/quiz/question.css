@@ -1,0 +1,214 @@
+body {
+    display: block;
+    margin: 0;
+    font-family: "Outfit";
+}
+
+
+.button {
+    margin-top: 5px;
+    margin-left: 2px;
+    cursor: pointer;
+    background-color: #4b7b76;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.container2 {
+    background-color: #bddbd6;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container2 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark2 {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: 21px;
+    width: 21px;
+    background-color: #eee;
+}
+
+.container2:hover input ~ .checkmark2 {
+    background-color: #ccc;
+}
+
+.container2 input:checked ~ .checkmark2 {
+    background-color: #4b7676;
+}
+
+.checkmark2:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container2 input:checked ~ .checkmark2:after {
+    display: block;
+}
+
+.container2 .checkmark2:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.container1 {
+    background-color: #bddbd6;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
+.container1 input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark1 {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: 21px;
+    width: 21px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.container1:hover input ~ .checkmark1 {
+    background-color: #ccc;
+}
+
+.container1 input:checked ~ .checkmark1 {
+    background-color: #4b7676;
+}
+
+.checkmark1:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container1 input:checked ~ .checkmark1:after {
+    display: block;
+}
+
+.container1 .checkmark1:after {
+    top: 7px;
+    left: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+
+
+/* mm1224 */
+
+.centre {
+    margin: 8px;
+}
+
+button[type=submit] {
+    background-color: #77b192;
+    overflow: hidden;
+    border: none;
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+button[type=submit]:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+input[type=submit] {
+    background-color: #4b7b76;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: medium;
+    cursor: pointer;
+    margin-top: 7px;
+    margin-left: 3px;
+}
+
+input[type=submit]:hover {
+    background-color: #C0C9E9;
+    color: #312621;
+}
+
+/* navigation bar */
+
+.topnav {
+    background-color: #77b192;
+    overflow: hidden;
+    margin-top: 0;
+    margin-left: 0;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 40px 20px 40px 20px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #4b7b76;
+    color: white;
+  }
