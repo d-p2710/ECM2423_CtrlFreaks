@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.urls import reverse
 import json
@@ -41,10 +42,12 @@ def calculate_score(results_dict):
                 score += 1
     return score
 
+@login_required
 def start(request, quiz_id):
     quiz = get_object_or_404(Quiz, pk=quiz_id)
     return render(request, "quiz/start.html", {"quiz": quiz})
 
+@login_required
 def question(request, quiz_id):
     # question_index starts at 1 for url readability
     quiz = get_object_or_404(Quiz, pk=quiz_id)
@@ -66,6 +69,7 @@ def post_answers(request):
         profile.save()
         return HttpResponse("success")
 
+@login_required
 def results(request, quiz_id):
     quiz = get_object_or_404(Quiz, pk=quiz_id)
     if request.method == "POST":
