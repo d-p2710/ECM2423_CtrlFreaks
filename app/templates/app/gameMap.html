@@ -212,6 +212,7 @@
         }).catch(err => {
             // handle err
         });
+        
         const html5QrCode = new Html5Qrcode("reader");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             // Check if the decoded text starts with "http://" or "https://"
