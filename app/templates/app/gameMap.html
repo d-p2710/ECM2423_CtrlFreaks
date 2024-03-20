@@ -170,34 +170,32 @@
     }
     
     function startQRScanner() {
-        // Ask for permission to access camers to fix android bug 
-        navigator.permissions.query({ name: 'camera' })
-        .then(permissionStatus => {
-            if (permissionStatus.state === 'granted') {
-            // User has already granted permission
-            // Proceed with camera access
-            } else if (permissionStatus.state === 'prompt') {
-            // Permission hasn't been granted yet, prompt the user
-            return navigator.mediaDevices.getUserMedia({ video: true });
-            } else {
-            // Permission has been denied or is unavailable
-            console.error('Camera access denied');
-            }
-        })
-        .catch(error => {
-            console.error('Error requesting camera access:', error);
-        });
-
-        // Used to start scanning
-        Html5Qrcode.getCameras().then(devices => {
-            if (devices && devices.length) {
-                var cameraId = devices[0].id;
-            }
-        }).catch(err => {
-            // handle err
-        });
         const html5QrCode = new Html5Qrcode("reader");
-        const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+    
+        html5QrCode.getCameras().then(devices => {
+            const cameraId = devices && devices.length ? devices[0].id : null;
+            const config = { 
+                fps: 10, 
+                qrbox: { width: 250, height: 250 }, 
+                cameraId: cameraId 
+            };
+            
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    html5QrCode.start(
+                        config,
+                        qrCodeSuccessCallback,
+                        videoErrorCallback
+                    );
+                })
+                .catch((err) => {
+                    console.error('Error accessing camera:', err);
+                });
+        }).catch(err => {
+            console.error('Error accessing camera:', err);
+        });
+    
+        function qrCodeSuccessCallback(decodedText, decodedResult) {
             // Check if the decoded text starts with "http://" or "https://"
             if (decodedText.startsWith("http://") || decodedText.startsWith("https://")) {
                 // If it does, directly assign it to window.location.href
@@ -206,18 +204,13 @@
                 // If not, prepend "https://" before assigning
                 window.location.href = "https://" + decodedText;
             }
-        };
-        const config = {fps: 10, qrbox: {width: 250, height: 250}};
-        //For thr back camera
-        html5QrCode.start({facingMode: "environment"}, config, qrCodeSuccessCallback);
-        // Select back camera or fail with `OverconstrainedError`.
-        html5QrCode.start({facingMode: {exact: "environment"}}, config, qrCodeSuccessCallback);
-        html5QrCode.stop().then((ignore) => {
-            // QR Code scanning is stopped.
-        }).catch((err) => {
-            // Stop failed, handle it.
-        });
+        }
+    
+        function videoErrorCallback(error) {
+            console.error('Error accessing camera:', error);
+        }
     }
+
 
     function stopQRScanner(){
         const html5QrCode = new Html5Qrcode("reader");
