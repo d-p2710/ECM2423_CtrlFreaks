@@ -16,12 +16,17 @@ class Profile(models.Model):
 # zj274
 # Create database models for storing and fetching avatar images
 class Item(models.Model):
+    COLOUR = "colour"
+    MOUTH = "mouth"
+    EYES = "eyes"
+    HEADWEAR = "headwear"
+    ACCESSORY = "accessory"
     CATEGORIES = {
-        "colour": "Colour",
-        "mouth": "Mouth",
-        "eyes": "Eyes",
-        "headwear": "Headwear",
-        "accessory": "Accessory",
+        COLOUR: "Colour",
+        MOUTH: "Mouth",
+        EYES: "Eyes",
+        HEADWEAR: "Headwear",
+        ACCESSORY: "Accessory",
     }
     name = models.CharField(max_length=200)
     category = models.CharField(max_length=200, choices=CATEGORIES)
