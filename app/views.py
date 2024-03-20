@@ -3,6 +3,7 @@ from PIL import Image
 from io import BytesIO
 import base64
 from users.models import Profile, Avatar, Item, OwnedItem
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 import json
 from .models import Marker
@@ -10,6 +11,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 #page views
+@login_required
 def home_page(request):
     # fetch 10 profiles with highest points
     leaderboard_profiles = Profile.objects.order_by("-points_amount")[:10]
@@ -32,7 +34,8 @@ def home_page(request):
                                            "avatar": None}
     context = {"leaderboard_data": leaderboard_data}
     return render(request, 'app/homePage.html', context)
-
+    
+@login_required
 def profile(request):
 
     def sortItemsByType(item_list):
@@ -103,6 +106,7 @@ def buy_item(request):
 
 
 #QR views
+@login_required
 def qr_generator(request):
     context = {}
     if request.method == "POST":
@@ -117,14 +121,15 @@ def qr_generator(request):
         context['variable'] = qr_text
     return render(request, 'app/qrGenerator.html', context=context)
 
+@login_required
 def qr_scanner(request):
     return render(request, 'app/qrScanner.html')
 
-
+@login_required
 def geolocation_map(request):
     return render(request, 'app/geolocationMap.html')
 
-
+@login_required
 def game_map(request):
     return render(request, 'app/gameMap.html')
 
