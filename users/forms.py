@@ -38,6 +38,7 @@ class RegisterForm(UserCreationForm):
                                                                   'data-toggle': 'password',
                                                                   'id': 'password',
                                                                   }))
+    terms = forms.BooleanField(required=True)
 
     class Meta:
         model = User

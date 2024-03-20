@@ -21,6 +21,9 @@ def home(request):
     }
     return render(request, 'users/home.html', context)
 
+def terms(request):
+    return render(request, 'users/terms.html')
+
 class RegisterView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
