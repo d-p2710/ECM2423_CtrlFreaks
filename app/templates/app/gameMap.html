@@ -32,26 +32,45 @@
         }
 
         #map, #qrScanner {
+            display: flex;
             flex: 1;
             width: 100%; 
             object-fit: contain;
-        }
-        
-        #reader, video {
-            display: flex;
-            max-width: 100%;
-            max-height: 100%;
+            align-items: center;
+            justify-content: center;
         }
 
         #qrScanner {
-            display: none;
+            display: flex;
+            flex-direction: column;
             position: absolute;
             top: 0;
             right: 0;
-            background-color: #fff;
             z-index: 999;
             padding: 20px;
+            align-items: center;
+            justify-content:center; 
+            background-color: #9BD0AD;
         }
+
+        
+        #reader video {
+            display: flex;
+            flex-direction: inline;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+        }
+        
+        #reader {
+            width: 80%;
+            height: 80%;
+            margin: auto;
+            text-align: center;
+            border-radius: 20px;
+            background-color: white;
+        }
+        
         
         #qrScannerButton {
             position: absolute;
@@ -65,13 +84,16 @@
             width: 50px; 
             height: auto;
         }
+
         h1 {
             text-align: center;
         }
+
         #reader {
             width: 500px;
             margin: auto;
             text-align: center;
+            justify-content: center;
         }
         
         .result {
@@ -90,7 +112,7 @@
     <div id='map'></div>
     <div id="qrScanner" style="display: none">
         <div id="reader"></div>
-        <div id="result"></div>
+        {% comment %} <div id="result"></div> {% endcomment %}
     </div>
     <div id="qrScannerButton" onclick="toggleQRScanner()">
         {% load static %}
@@ -159,7 +181,7 @@
         const mapDiv = document.getElementById('map');
         if (!isScannerOpen) {
             map.style.height = '50%';
-            qrScannerDiv.style.display = 'block';
+            qrScannerDiv.style.display = 'flex';
             qrScannerDiv.style.height = '50%';
             isScannerOpen = true;
             startQRScanner();
@@ -174,6 +196,15 @@
     
     function startQRScanner() {
         // Used to start scanning
+        navigator.mediaDevices
+            .getUserMedia(videoElement)
+            .then((stream) => {
+                /* use the stream */
+            })
+            .catch((err) => {
+                /* handle the error */
+            });
+
         Html5Qrcode.getCameras().then(devices => {
             if (devices && devices.length) {
                 var cameraId = devices[0].id;
@@ -203,6 +234,16 @@
             // Stop failed, handle it.
         });
     }
+
+    const videoElement = document.querySelector('#reader video');
+    videoElement.style.width = '100%'; // Set width to 100%
+    videoElement.style.height = '100%'; // Set height to 100%
+    videoElement.style.objectFit = 'contain';
+    videoElement.style.borderRadius = '30px';
+    videoElement.style.margin = 'auto';
+    videoElement.style.padding = '20px';
+    videoElement.style.backgroundColor = 'white';
+    videoElement.style.display = 'flex';
 
     function stopQRScanner(){
         const html5QrCode = new Html5Qrcode("reader");
