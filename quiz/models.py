@@ -9,11 +9,9 @@ class Quiz(models.Model):
         return self.title
 
 class Question(models.Model):
-    SINGLE_ANS = "SIN"
-    ONE_OR_MORE_ANS = "OOM"
     QUESTION_TYPES = {
-        SINGLE_ANS: "Single correct answer",
-        ONE_OR_MORE_ANS: "One or more correct answers",
+        "SIN": "Single correct answer",
+        "OOM": "One or more correct answers",
     }
     quiz = models.ForeignKey(Quiz, null=True, on_delete=models.SET_NULL)
     text = models.CharField(max_length=200)
