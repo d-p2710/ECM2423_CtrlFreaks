@@ -160,18 +160,31 @@ button[type=submit]:hover {
     text-align: center;
 }
 
+.podium > h2 {
+    align-self: flex-end;
+    font-size: medium;
+}
+
+.podium > img {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    height: 20px;
+    margin-top: 4%;
+    margin-bottom: -15%;
+}
+
 #first .podium {
-    background-color: gold;
+    background-color: #85afed;
     padding-top: 40%;
 }
 
 #second .podium {
-    background-color: silver;
+    background-color: #ed5f77;
     padding-top: 10%;
 }
 
 #third .podium {
-    background-color: #9d631c;
+    background-color: #d1d1d1;
     padding-top: 2%;
 }
 

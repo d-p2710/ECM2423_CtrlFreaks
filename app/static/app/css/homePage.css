@@ -189,19 +189,33 @@ button[type=submit]:hover {
     text-align: center;
 }
 
-#first .podium {
-    background-color: gold;
-    padding-top: 40%;
+.podium > h2 {
+    align-self: flex-end;
+    font-size: larger;
 }
 
+.podium > img {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    height: 60px;
+    margin-top: 2%;
+}
+
+#first .podium {
+    background-color: #85afed;
+    padding-top: 45%;
+}
+
+
+
 #second .podium {
-    background-color: silver;
-    padding-top: 10%;
+    background-color: #ed5f77;
+    padding-top: 15%;
 }
 
 #third .podium {
-    background-color: #9d631c;
-    padding-top: 2%;
+    background-color: #d1d1d1;
+    padding-top: 5%;
 }
 
 /* end zj274 */
