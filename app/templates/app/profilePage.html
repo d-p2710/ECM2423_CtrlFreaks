@@ -48,7 +48,7 @@
                     <!-- <img src="{{ avatar_data.colour.img_file.url }}" alt="default"> -->
                     You currently have: 
                     <span id=points_amount>{{ profile_data.points_amount }}</span> points<br>
-                    and <span id=coins_amount>{{ profile_data.coins_amount }}</span> coins!
+                    and <span id=coins_amount>{{ profile_data.coins_amount }}</span> sustainabills!
                 </b></h2>
             </div>
             <div class="shop">
@@ -105,7 +105,7 @@
                                             {% if item in selected_items.values %} checked="checked" {% endif %}
                                             onclick="openShopPopup('{{ category }}', '{{ item.id }}', '{{ item.img_file.url }}');"/>
                                         <img src="{{ item.img_file.url }}">
-                                        <span class="item-price">${{ item.price }}</span>
+                                        <span class="item-price"><img src="{% static 'app/images/sustainabills.png' %}" class="sustainabills" alt="sustainabills"> {{ item.price }}</span>
                                 {% endif %}
                             </label>
                             {% endfor %}
