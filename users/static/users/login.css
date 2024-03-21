@@ -1,58 +1,11 @@
-@font-face {
-    font-family: 'Balonku';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Balonku'), url("BalonkuRegular-la1w\ \(1\).otf") format('opentype');
+body {
+    background-color: #bddbd6;
 }
 
-@font-face {
-    font-family: 'Motely';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Motely'), url("motley-forces-font/MotleyForcesRegular-w1rZ3.ttf") format('truetype');
-}
-
-
-h4{
-    font-family: 'Motely';
-    color: rgb(71, 67, 67);
-    display: flex;
-    justify-content: center;
-}
-
-h2{
-    font-family: 'Balonku';
-    justify-content: center;
-    display: flex;
-    font-size: 3rem;
-    font-weight: 550;
-}
-
-@media screen and (max-height: 667px) {
-    .image-container{
-        display: none;
-    }
-   
-}
-
-
-@media screen and (max-width: 768px) {
-    /* #container{
-        margin-top: vh
-        margin-bottom 0vh;
-    } */
-
-    h1 {
-        font-size: 1.8em; /* Adjust font size for smaller screens */
-    }
-}
-
-@media screen and (max-width: 576px) {
-    h1 {
-        font-size: 1.5em; /* Further adjust font size for even smaller screens */
-    }
-}
-
+/* .container {
+    margin: 0;
+    padding: 0;
+} */
 
 .btn-dark {
     background-color: #4b7b76;
@@ -63,6 +16,43 @@ h2{
     padding-right: 0px;
 }
 
-.card {
-    border-radius: 2rem;
+.main-area {
+    position: relative;
+    display: block;
+    height: fit-content;
+    overflow: hidden;
+}
+
+.main-area > * {
+    position: relative;
+    float: left;
+}
+
+#floating-islands {
+    height: 450px;
+    width: 450px;
+    background: linear-gradient(#c0c9e9, #bddbd6);
+    border-radius: 50%;
+    margin: 2vh 4vw;
+}
+
+.col-lg-5 {
+    flex: none;
+    max-width: max-content;
+    margin-left: 10vw;
+}
+
+@keyframes slime-bounce {
+    100% {
+        transform: translateY(-70px);
+    }
+    }
+
+#bouncing-slime {
+    z-index: 2;
+    position: absolute;
+    left: 180px;
+    top: 180px;
+    height: 180px;
+    animation: slime-bounce 2s ease-out infinite alternate;
 }
